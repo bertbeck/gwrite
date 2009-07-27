@@ -269,7 +269,8 @@ class WebKitEdit(webkit.WebView):
         ## 更新 LaTex 公式的情况
         if key.startswith('_#uptex:'):
             id = key[8:]
-            latex = gtklatex.latex_dlg(value[8:])
+            latex = value[8:].replace('\\\\', '\\')
+            latex = gtklatex.latex_dlg(latex)
             if latex:
                 img = gtklatex.gif2base64(gtklatex.tex2gif(latex))
                 self.eval("""
