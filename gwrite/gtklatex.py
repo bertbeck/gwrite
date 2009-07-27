@@ -212,7 +212,7 @@ class LatexMathExpressionsEditor(gtk.Table):
         '''设置图像
         '''
         if not data:
-            return self.latex_image.set_from_stock(gtk.STOCK_DIALOG_ERROR, 6)
+            return self.latex_image.set_from_stock(gtk.STOCK_DIALOG_ERROR, 2)
         pix = gtk.gdk.PixbufLoader()
         pix.write(data)
         pix.close()
@@ -261,7 +261,7 @@ class LatexMathExpressionsEditor(gtk.Table):
         self.insert_latex_mark(self.latex_textview, mark)
         pass
 
-def latex_dlg(latex="E=MC^2", title=_("LaTeX math expressions"), parent=None):
+def latex_dlg(latex="", title=_("LaTeX math expressions"), parent=None):
     dlg = gtk.Dialog(title, parent, gtk.DIALOG_DESTROY_WITH_PARENT,
             (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
             gtk.STOCK_OK, gtk.RESPONSE_OK    ))
@@ -287,10 +287,10 @@ def tex2gif(tex, transparent=1):
     mimetex -d -s 7 '公式'
     '''
     if transparent: 
-        cmd = ['mimetex', '-d', '-s', '7', tex]
+        cmd = ['mimetex', '-d', '-s', '4', tex]
         pass
     else:
-        cmd = ['mimetex', '-d', '-o', '-s', '7', tex]
+        cmd = ['mimetex', '-d', '-o', '-s', '4', tex]
         pass
     i = subprocess.Popen(cmd, stdout=subprocess.PIPE)
     gif = i.communicate()[0]
@@ -306,7 +306,7 @@ def gif2base64(gif):
 def tex2html(tex):
     '''将 latex 数学公式转为 base64 内联图像
     '''
-    return '<img alt="mimetex:%s" onDblClick="if(uptex) uptex(this);" style="border: 0;" src="%s" />' % (stastr(tex), gif2base64(tex2gif(tex)))
+    return '<img alt="mimetex:%s" onDblClick="if(uptex) uptex(this);" style="vertical-align: middle; position: relative; top: -5pt; border: 0;" src="%s" />' % (stastr(tex), gif2base64(tex2gif(tex)))
 
 
 if __name__=="__main__":
