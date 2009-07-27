@@ -12,6 +12,7 @@ __revision__ = '0.1'
 import gtk, gobject
 import webkit
 import jswebkit
+import gtklatex
 import urllib2
 import os, errno
 import re
@@ -174,6 +175,7 @@ class WebKitEdit(webkit.WebView):
         self.connect("navigation-requested", self.on_navigation_requested)
         self.connect("new-window-policy-decision-requested", self.on_new_window_policy_decision_requested)
         self.connect_after("populate-popup", self.populate_popup)
+        self.connect("script-prompt", self.on_script_prompt)
         ##
         pass
 
@@ -259,6 +261,25 @@ class WebKitEdit(webkit.WebView):
         uri = urllib2.unquote(uri)
         os.spawnvp(os.P_NOWAIT, 'xdg-open', ['xdg-open', uri])
         return True
+
+    def on_script_prompt(self, view, WebKitWebFrame, key, value, gpointer):
+        '''处理 script-prompt 事件
+        '''
+        #-print key, value
+        ## 更新 LaTex 公式的情况
+        if key.startswith('_#uptex:'):
+            id = key[8:]
+            latex = gtklatex.latex_dlg(value[8:])
+            if latex:
+                img = gtklatex.gif2base64(gtklatex.tex2gif(latex))
+                self.eval("""
+                    img = document.getElementById('%s');
+                    img.alt = "mimetex:"+"%s";
+                    img.src='%s';
+                """ % (id, stastr(latex), stastr(img)))
+                return True
+            return True
+        return
 
     def on_navigation_requested(self, widget, WebKitWebFrame, WebKitNetworkRequest):
         '''处理点击链接事件
@@ -557,6 +578,20 @@ class WebKitEdit(webkit.WebView):
                 }
                 return dirhtml;
             };
+
+            function  randomChar(l)  {
+                var  x="0123456789qwertyuioplkjhgfdsazxcvbnm";
+                var  tmp="";
+                for(var  i=0;i<  l;i++)  {
+                    tmp  +=  x.charAt(Math.ceil(Math.random()*100000000)%x.length);
+                }
+                return  tmp;
+            }
+
+            function uptex(img){
+                img.id = 'mimetex_' + randomChar(5);
+                prompt("_#uptex:"+img.id, img.alt);
+            }
                         
             ;'''
         self.execute_script(cmd)
