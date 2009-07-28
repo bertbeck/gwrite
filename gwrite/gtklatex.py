@@ -19,10 +19,38 @@ try: import i18n
 except: from gettext import gettext as _
 
 latex_mark_list = [
-    ["√¯",    r" \sqrt {}"],
-    ["÷",     r" \frac {} {}"],    
-    ["∫",     r" \int "],
-    ["⋅",      r" \cdot "],
+    ["√¯",    r" \sqrt[] {%s}"],
+    ["∫",     r" \int^{}_{} "],
+    ["[ ]",    r"\[ %s \]"],
+    ["( )",    r"\( %s \)"],
+    ["{ }",    r"\{ %s \}"],
+    ["[≡]",    r"""
+\[
+   \begin{matrix}
+       a & b & c\\
+       c & e & f
+   \end{matrix}
+\]
+"""],
+    ["(≡)",    r"""    
+   \begin{pmatrix}
+       a & b & c\\
+       c & e & f
+   \end{pmatrix}
+"""],
+#    ["+",            r" + "],
+#    ["<big>-</big>", r" - "],
+    ["<b>⋅</b>",     r" \cdot "],
+    ["X",            r" \times "],
+    ["/",            r" / "],
+    ["<big><b>÷</b></big>", r" \frac { } { }"],
+
+    ["a<sup>n</sup>",     r"^{%s}"],
+    ["a<sub>n</sub>",     r"_{%s}"],
+
+    ["(<big> : </big>)",    r"{ } \choose { } "],
+    ["<big>(</big> x <big>)</big>",         r"\left( { %s } \right)"],
+
     [" ± ",   r" \pm "],
     [" ∓ ",    r" \mp "],
     [" ∨ ",   r" \lor" ],
@@ -30,19 +58,20 @@ latex_mark_list = [
     [" ≤ ",   r" \le "],
     [" ≥ ",   r" \ge "],
     [" ≡ ",   r" \equiv "],
+    ["mod",    r"{ } \bmod { } "],
     [" ∼ ",   r" \sim "],
     ["∥ ",    r" \parallel "],
     [" ⊥ ",   r" \perp "],
-    ["∞",     r" \infty "],
-    ["⨯",      r" \times "],
+    ["<big><big>∞</big></big>",     r" \infty "],
     [" ≪ ",   r" \ll "],
     [" ≫ ",   r" \gg "],
     [" ≃ ",    r" \simeq "],
     [" ≈ ",   r" \approx "],
     [" ≠ ",   r" \neq "],
     ["∠",     r" \angle "],
-    ["△",     r" \triangle "],
-    ["∑",     r" \sum "],
+    ["<big><b>△</b></big>",     r" \triangle "],
+    ["∑",     r" \sum_{ }^{ } "],
+    ["lim",    r"\lim_{  }"],
     ["⇒",     r" \Rightarrow "],
     ["⇔",     r" \Leftrightarrow "],
     ["∧",     r" \wedge "],
@@ -61,16 +90,23 @@ latex_mark_list = [
     ["↦",      r" \mapsto "],
     ["∏",     r" \prod "],
     ["○",     r" \circ "],
-#    ["sin",    r" \sin "],
-#    ["cos",    r" \cos "],
-#    ["tan",    r" \tan "],
-#    ["ctan",   r" \ctab "],
-#    ["asin",   r" \asin "],
-#    ["acos",   r" \acos "],
-#    ["atan",   r" \atan "],
-#    ["actan",  r" \actan "],
-#    ["log",    r" \log "],
-#    ["ln",     r" \ln "],
+
+    ["sin",    r" \sin "],
+    ["cos",    r" \cos "],
+    ["tan",    r" \tan "],
+    ["ctan",   r" \ctab "],
+    ["asin",   r" \asin "],
+    ["acos",   r" \acos "],
+    ["atan",   r" \atan "],
+    ["actan",  r" \actan "],
+    ["log",    r" \log "],
+    ["ln",     r" \ln "],
+
+    ["...", r"\cdots"],
+    [" <sub>...</sub> ", r"\ldots"],
+    [":", r"\vdots"],
+    ["<sup>.</sup>.<sub>.</sub>", r"\ddots"],
+
     ["α",     r" \alpha "],
     ["β",     r" \beta "],
     ["Γ",     r" \Gamma "],
@@ -156,6 +192,7 @@ class LatexMathExpressionsEditor(gtk.Table):
         self.latex_textview.set_indent(5)
         self.latex_textview.set_editable(True)
         self.latex_textview.show()
+        #self.latex_textview.set_size_request(302, 200)
         buffer = self.latex_textview.get_buffer()
         buffer.set_text(latex)
         scrolledwindow1.add(self.latex_textview)
@@ -176,6 +213,7 @@ class LatexMathExpressionsEditor(gtk.Table):
         ## toolbox
         toolview = GtkToolBoxView()
         toolview.show()
+        #toolview.set_size_request(302, 200)
         for text, mark in latex_mark_list:
             label = gtk.Label()
             label.set_markup(text)
@@ -186,6 +224,7 @@ class LatexMathExpressionsEditor(gtk.Table):
             button.add(label)
             button.set_relief(gtk.RELIEF_NONE)
             button.connect("clicked", self.on_insert_tex_mark, text, mark)
+            button.set_tooltip_text(mark)
             button.show()
             toolview.add(button)
             pass
@@ -224,7 +263,7 @@ class LatexMathExpressionsEditor(gtk.Table):
         '''
         old_latex = ""
         while True:
-            time.sleep(2)
+            time.sleep(1)
             if not self.get_window():
                 break
             latex = self.get_latex()
@@ -249,8 +288,11 @@ class LatexMathExpressionsEditor(gtk.Table):
         buffer = view.get_buffer()
         bounds = buffer.get_selection_bounds()
         select = bounds and buffer.get_slice(bounds[0], bounds[1]) or text
-        if '%' in mark:
+        if mark.count("%") == 1:
             mark = mark % select
+            pass
+        else:
+            mark = mark + select
             pass
         buffer.delete_selection(1, 1)
         buffer.insert_at_cursor(mark)
@@ -265,7 +307,7 @@ def latex_dlg(latex="", title=_("LaTeX math expressions"), parent=None):
     dlg = gtk.Dialog(title, parent, gtk.DIALOG_DESTROY_WITH_PARENT,
             (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
             gtk.STOCK_OK, gtk.RESPONSE_OK    ))
-    dlg.set_default_size(650, 400)
+    dlg.set_default_size(680, 400)
     editor = LatexMathExpressionsEditor(latex)
     dlg.vbox.pack_start(editor, True, True, 5)
     dlg.show_all()
