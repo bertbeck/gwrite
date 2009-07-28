@@ -434,7 +434,7 @@ class MainWindow:
         menu_insert.append(menuitem_separator9)
 
         ##
-        menuitem_latex_math_equation = gtk.ImageMenuItem(_("LaTeX Math _Equation"))
+        menuitem_latex_math_equation = gtk.ImageMenuItem(_("LaTeX _Equation"))
         menuitem_latex_math_equation.show()
         menuitem_latex_math_equation.connect("activate", self.do_insert_latex_math_equation)
 

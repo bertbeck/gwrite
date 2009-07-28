@@ -273,12 +273,13 @@ class WebKitEdit(webkit.WebView):
             latex = gtklatex.latex_dlg(latex)
             if latex:
                 img = gtklatex.gif2base64(gtklatex.tex2gif(latex))
-                self.eval("""
+                self.execute_script("""
                     img = document.getElementById('%s');
                     img.alt = "mimetex:"+"%s";
                     img.src='%s';
                 """ % (id, stastr(latex), stastr(img)))
-                return True
+                pass
+            self.execute_script("""document.getElementById('%s').removeAttribute("id");""" % id)
             return True
         return
 
