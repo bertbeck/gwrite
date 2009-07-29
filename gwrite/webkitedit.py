@@ -596,6 +596,7 @@ class WebKitEdit(webkit.WebView):
                 prompt("_#uptex:"+img.id, img.alt);
             }
                         
+            window.focus();
             ;'''
         self.execute_script(cmd)
         pass
