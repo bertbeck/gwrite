@@ -345,6 +345,11 @@ def gif2base64(gif):
     '''
     return 'data:image/gif;base64,%s' % base64.encodestring(gif).replace('\n', '')
 
+def tex2base64(tex):
+    '''将 latex 数学公式转为 base64 内联图像
+    '''
+    return gif2base64(tex2gif(tex))
+
 def tex2html(tex):
     '''将 latex 数学公式转为 base64 内联图像
     '''

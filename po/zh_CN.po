@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gwrite 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 16:34+0800\n"
+"POT-Creation-Date: 2009-07-28 23:07+0800\n"
 "PO-Revision-Date: 2009-07-18 01:15+0800\n"
 "Last-Translator: Jiahua Huang <jhuangjiahua@gmail.com>\n"
 "Language-Team: Chinese/Simplified\n"
@@ -564,6 +564,6 @@ msgstr "部分选项需要重启生效。"
 msgid "Run mode"
 msgstr "运行模式"
 
-#: ../gwrite/gtklatex.py:264
+#: ../gwrite/gtklatex.py:306
 msgid "LaTeX math expressions"
 msgstr "LaTex 数学公式"

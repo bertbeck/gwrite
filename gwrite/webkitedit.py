@@ -272,8 +272,9 @@ class WebKitEdit(webkit.WebView):
             latex = value[8:].replace('\\\\', '\\')
             latex = gtklatex.latex_dlg(latex)
             if latex:
-                img = gtklatex.gif2base64(gtklatex.tex2gif(latex))
+                img = gtklatex.tex2base64(latex)
                 self.execute_script("""
+                    window.focus();
                     img = document.getElementById('%s');
                     img.alt = "mimetex:"+"%s";
                     img.src='%s';
@@ -804,7 +805,8 @@ class WebKitEdit(webkit.WebView):
         '''插入 html
         '''
         #print 'WebKitEdit.do_insert_html:'
-        self.execute_script(''' 
+        self.execute_script('''
+                window.focus();
                 document.execCommand("inserthtml", false, "%s"); 
                 '''%stastr(html))
         pass
