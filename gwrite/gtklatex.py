@@ -19,8 +19,30 @@ try: import i18n
 except: from gettext import gettext as _
 
 latex_mark_list = [
+#    ["+",            r" + "],
+#    ["<big>-</big>", r" - "],
+    ["<b>⋅</b>",     r" \cdot "],
+    ["x",            r" \times "],
+    ["/",            r" / "],
+    ["<big><b>÷</b></big>", r" \frac { } { }"],
+
+    ["a<sup>n</sup>",     r"^{%s}"],
+    ["a<sub>n</sub>",     r"_{%s}"],
+
+    [" ≠ ",   r" \neq "],
+    [" ≤ ",   r" \le "],
+    [" ≥ ",   r" \ge "],
+    [" ≡ ",   r" \equiv "],
+
+    [" ≪ ",   r" \ll "],
+    [" ≫ ",   r" \gg "],
+    [" ≃ ",    r" \simeq "],
+    [" ≈ ",   r" \approx "],
+
     ["√¯",    r" \sqrt[] {%s}"],
     ["∫",     r" \int^{}_{} "],
+    ["∬",     r" \iint^{}_{} "],
+    ["∮",     r" \oint^{}_{} "],
     ["[ ]",    r"\[ %s \]"],
     ["( )",    r"\( %s \)"],
     ["{ }",    r"\{ %s \}"],
@@ -38,15 +60,6 @@ latex_mark_list = [
        c & e & f
    \end{pmatrix}
 """],
-#    ["+",            r" + "],
-#    ["<big>-</big>", r" - "],
-    ["<b>⋅</b>",     r" \cdot "],
-    ["X",            r" \times "],
-    ["/",            r" / "],
-    ["<big><b>÷</b></big>", r" \frac { } { }"],
-
-    ["a<sup>n</sup>",     r"^{%s}"],
-    ["a<sub>n</sub>",     r"_{%s}"],
 
     ["(<big> : </big>)",    r"{ } \choose { } "],
     ["<big>(</big> x <big>)</big>",         r"\left( { %s } \right)"],
@@ -55,19 +68,13 @@ latex_mark_list = [
     [" ∓ ",    r" \mp "],
     [" ∨ ",   r" \lor" ],
     [" ∧ ",   r" \land "],
-    [" ≤ ",   r" \le "],
-    [" ≥ ",   r" \ge "],
-    [" ≡ ",   r" \equiv "],
-    ["mod",    r"{ } \bmod { } "],
+
+    ["mod",    r" \bmod "],
     [" ∼ ",   r" \sim "],
     ["∥ ",    r" \parallel "],
     [" ⊥ ",   r" \perp "],
     ["<big><big>∞</big></big>",     r" \infty "],
-    [" ≪ ",   r" \ll "],
-    [" ≫ ",   r" \gg "],
-    [" ≃ ",    r" \simeq "],
-    [" ≈ ",   r" \approx "],
-    [" ≠ ",   r" \neq "],
+
     ["∠",     r" \angle "],
     ["<big><b>△</b></big>",     r" \triangle "],
     ["∑",     r" \sum_{ }^{ } "],
@@ -102,10 +109,10 @@ latex_mark_list = [
     ["log",    r" \log "],
     ["ln",     r" \ln "],
 
-    ["...", r"\cdots"],
-    [" <sub>...</sub> ", r"\ldots"],
-    [":", r"\vdots"],
-    ["<sup>.</sup>.<sub>.</sub>", r"\ddots"],
+    ["...",                       r" \cdots "],
+    [" <sub>...</sub> ",          r" \ldots "],
+    ["<big>⁝</big>",              r" \vdots "],
+    ["<sup>.</sup>.<sub>.</sub>", r" \ddots "],
 
     ["α",     r" \alpha "],
     ["β",     r" \beta "],
@@ -269,7 +276,7 @@ class LatexMathExpressionsEditor(gtk.Table):
             latex = self.get_latex()
             if latex == old_latex:
                 continue
-            pic = tex2gif(latex, 0)
+            pic = tex2gif(latex, 1)
             old_latex = self.get_latex()
             if latex == self.get_latex():
                 gobject.idle_add(self.set_pic, pic)

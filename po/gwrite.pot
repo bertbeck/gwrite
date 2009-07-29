@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 23:07+0800\n"
+"POT-Creation-Date: 2009-07-29 16:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "_Edit"
 msgstr ""
 
-#: ../gwrite/gwrite.py:251 ../gwrite/webkitedit.py:315
+#: ../gwrite/gwrite.py:251 ../gwrite/webkitedit.py:316
 msgid "Pa_ste Unformatted"
 msgstr ""
 
@@ -532,7 +532,7 @@ msgstr ""
 msgid "Do you which to replace it with the current project?"
 msgstr ""
 
-#: ../gwrite/webkitedit.py:657
+#: ../gwrite/webkitedit.py:659
 msgid "HTML"
 msgstr ""
 
