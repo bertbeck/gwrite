@@ -103,13 +103,17 @@ img{
     padding: 5px;
 }
 h1, h2, h3, h4, h5, h6 {
-//    color: DarkGreen;
+    color: DarkGreen;
 }
 h1{
 //    background-color:#CCFFCC;
+//    border-bottom: 1px solid green;
+//    width: 80%;
 }
 h2{
 //    background-color:#CCFFCC;
+//    border-bottom: 1px solid green;
+//    width: 60%;
 }
 h3{
 //    background-color:#CCFFCC;
