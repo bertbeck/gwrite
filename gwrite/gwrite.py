@@ -2007,25 +2007,25 @@ class MainWindow:
     def do_formatblock_address(self, *args):
         #-print 'do_formatblock_address:'
         self.window.present()
-        self.linkview.updatehtmllinks( self.edit.do_formatblock_address() )
+        self.edit.do_formatblock_address()
         pass
 
     def do_formatblock_code(self, *args):
         #-print 'do_formatblock_code:'
         self.window.present()
-        self.linkview.updatehtmllinks( self.edit.do_formatblock_code() )
+        self.edit.do_formatblock_code()
         pass
 
     def do_formatblock_blockquote(self, *args):
         #-print 'do_formatblock_blockquote:'
         self.window.present()
-        self.linkview.updatehtmllinks( self.edit.do_formatblock_blockquote() )
+        self.edit.do_formatblock_blockquote()
         pass
 
     def do_formatblock_pre(self, *args):
         #-print 'do_formatblock_pre:'
         self.window.present()
-        self.linkview.updatehtmllinks( self.edit.do_formatblock_pre() )
+        self.edit.do_formatblock_pre()
         pass
 
     def on_bold(self, *args):

@@ -105,46 +105,22 @@ img{
 h1, h2, h3, h4, h5, h6 {
     color: DarkGreen;
 }
-h1{
-//    background-color:#CCFFCC;
-//    border-bottom: 1px solid green;
-//    width: 80%;
-}
-h2{
-//    background-color:#CCFFCC;
-//    border-bottom: 1px solid green;
-//    width: 60%;
-}
-h3{
-//    background-color:#CCFFCC;
-}
-h4{
-//    background-color:#CCFFCC;
-}
-h5{
-//    background-color:#CCFFCC;
-}
-h6{
-//    background-color:#CCFFCC;
-}
 blockquote{
     background-color:#EEFFFF;
     border-left: 5px solid green;
     padding-left: 5px;
-    margin: 15px;
+    margin: 0px;
     padding: 5px;
 }
 pre{
     background-color:#EEEEFF;
     display: block;
-    border: 1px solid green;
-    margin: 15px;
+    border-left: 1px solid green;
+    margin: 0px;
     padding: 5px;
 }
 code{
     background-color:#EEEEFF;
-    display: block;
-    border: 1px solid blue;
     margin: 15px;
     padding: 5px;
 }
