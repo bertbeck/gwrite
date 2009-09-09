@@ -57,13 +57,15 @@ class LinkTextView(webkit.WebView):
         <body>
         <code>%s</code>
         </body>
-        </html>''' % proc(html), '/tmp/dir.html') # 首次执行时还没 document.body 对象
+        </html>''' % proc(html), '') # 首次执行时还没 document.body 对象
         self.updatehtmllinks = lambda html : self.execute_script('document.body.innerHTML="<code>%s</code>";' % stastr(proc(html))) # 保持滚动条位置
         pass
 
     def on_navigation_requested(self, widget, WebKitWebFrame, WebKitNetworkRequest):
         href = WebKitNetworkRequest.get_uri()
-        self.emit("url-clicked", href, "link")
+        if '#' in href:
+            self.emit("url-clicked", href, "link")
+            pass
         return True
 
 if __name__=="__main__":
