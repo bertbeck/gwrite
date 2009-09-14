@@ -103,7 +103,7 @@ img{
     padding: 5px;
 }
 h1, h2, h3, h4, h5, h6 {
-    color: DarkGreen;
+    color: #7DA721;
 }
 blockquote{
     background-color:#EEFFFF;
