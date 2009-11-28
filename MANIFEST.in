@@ -1,0 +1,16 @@
+setup.cfg
+setup.py
+gwrite/__init__.py
+gwrite/config.py
+gwrite/gtkdialogs.py
+gwrite/gtklatex.py
+gwrite/gwrite.py
+gwrite/i18n.py
+gwrite/webkitedit.py
+gwrite/webkitlinkview.py
+scripts/gwrite
+gwrite.png
+gwrite.desktop.in
+po/zh_CN.po
+po/gwrite.pot
+po/POTFILES.in
