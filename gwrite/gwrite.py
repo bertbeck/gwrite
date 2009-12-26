@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 """GWrite
 """
-__version__ = '0.0.1'
+__version__ = '0.1.1'
 
 import gtk, gobject
 import gtkdialogs
@@ -2199,13 +2199,13 @@ class MainWindow:
         about = gobject.new(gtk.AboutDialog, 
                 name=_("GWrite"), 
                 program_name=_("GWrite"),
-                logo_icon_name="gtk-dnd",
-                version="0.1", 
-                copyright=_("(C) hiweed.com"),
+                logo_icon_name="gwrite",
+                version=__version__,
+                copyright=_("(C) linux.deepin"),
                 comments=_("Rich Text Editor"),
                 license="LGPLv3",
-                website="http://www.hiweed.com/",
-                website_label="hiweed.com",
+                website="http://linux.deepin.org/",
+                website_label="linux.deepin.org",
                 authors=authors)
         #about.set_transient_for(self.window)
         about.run()     

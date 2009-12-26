@@ -105,6 +105,9 @@ img{
 h1, h2, h3, h4, h5, h6 {
     color: #7DA721;
 }
+p{
+    text-indent: 2em;
+}
 blockquote{
     background-color:#EEFFFF;
     border-left: 5px solid green;

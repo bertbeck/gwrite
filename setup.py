@@ -5,7 +5,7 @@ from DistUtilsExtra.command import *
 from glob import glob
 
 setup(name='gwrite',
-      version='0.0.1',
+      version='0.0.2',
       description='HTML5 Doc Writer based on GTK2',
       long_description ="""GWrite is a simple HTML5 Doc Writer base on Gtk2.
 
@@ -36,6 +36,9 @@ Features include:
       packages = ['gwrite'], 
       data_files = [
           ('share/pixmaps', ['gwrite.png']),
+      ],
+      include_data_files = [
+          ('.', ['po']),
       ],
       cmdclass = { "build" :  build_extra.build_extra,
                    "build_i18n" :  build_i18n.build_i18n,
