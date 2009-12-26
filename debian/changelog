@@ -1,0 +1,17 @@
+gwrite (0.1.1-1) karmic; urgency=low
+
+  * New upstream release.
+
+ -- Jiahua Huang <jhuangjiahua@gmail.com>  Sat, 26 Dec 2009 20:41:04 +0800
+
+gwrite (0.1-1) karmic; urgency=low
+
+  * Changed architecture to all
+
+ -- Jiahua Huang <jhuangjiahua@gmail.com>  Fri, 25 Dec 2009 18:56:28 +0800
+
+gwrite (0.1) karmic; urgency=low
+
+  * Initial Release.
+
+ -- Jiahua Huang <jhuangjiahua@gmail.com>  Fri, 25 Dec 2009 17:59:55 +0800

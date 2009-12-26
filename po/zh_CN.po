@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gwrite 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-10 00:03+0800\n"
+"POT-Creation-Date: 2009-11-27 02:40+0800\n"
 "PO-Revision-Date: 2009-07-18 01:15+0800\n"
 "Last-Translator: Jiahua Huang <jhuangjiahua@gmail.com>\n"
 "Language-Team: Chinese/Simplified\n"
@@ -43,7 +43,7 @@ msgstr "关闭窗口(_D)"
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: ../gwrite/gwrite.py:251 ../gwrite/webkitedit.py:296
+#: ../gwrite/gwrite.py:251 ../gwrite/webkitedit.py:299
 msgid "Pa_ste Unformatted"
 msgstr "无格式粘贴(_S)"
 
@@ -530,7 +530,7 @@ msgstr "文件 \"%s\" 已经存在"
 msgid "Do you which to replace it with the current project?"
 msgstr "您是否想要替换它？"
 
-#: ../gwrite/webkitedit.py:639
+#: ../gwrite/webkitedit.py:642
 msgid "HTML"
 msgstr "HTML"
 
