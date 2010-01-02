@@ -1,9 +1,8 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-'''模块名
-@version: $Id$
+'''WebkitLinkView
 @author: U{Jiahua Huang <jhuangjiahua@gmail.com>}
-@license: LGPL-3
+@license: LGPLv3+
 '''
 
 import gobject

@@ -1,10 +1,8 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-'''模块名
-@version: $Id$
+'''Gtk LaTex
 @author: U{Jiahua Huang <jhuangjiahua@gmail.com>}
-@license: LGPL
-@see: 参考资料链接等等
+@license: LGPLv3+
 '''
 
 import gtk, gobject
