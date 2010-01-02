@@ -1,11 +1,8 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-# GPL 
 '''Gtk 对话框
-@version: $Id$
 @author: U{Jiahua Huang <jhuangjiahua@gmail.com>}
-@license: LGPL
-@see: 参考资料链接等等
+@license: LGPLv3+
 '''
 
 import os

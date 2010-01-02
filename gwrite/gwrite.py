@@ -1,8 +1,11 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-"""GWrite
-"""
-__version__ = '0.1.1'
+'''GWrite
+@author: U{Jiahua Huang <jhuangjiahua@gmail.com>}
+@license: LGPLv3+
+'''
+
+__version__ = '0.1.2'
 
 import gtk, gobject
 import gtkdialogs
@@ -2195,17 +2198,18 @@ class MainWindow:
         #-print 'on_about:'
         authors = [
             "Jiahua Huang <jhuangjiahua(at)gmail.com>",
+            "Aron Xu <happyaron.xu(at)gmail.com>",
             ]
         about = gobject.new(gtk.AboutDialog, 
                 name=_("GWrite"), 
                 program_name=_("GWrite"),
                 logo_icon_name="gwrite",
                 version=__version__,
-                copyright=_("(C) linux.deepin"),
+                copyright=_("(C) Jiahua Huang"),
                 comments=_("Rich Text Editor"),
-                license="LGPLv3",
-                website="http://linux.deepin.org/",
-                website_label="linux.deepin.org",
+                license="LGPLv3+",
+                website="http://gwrite.googlecode.com/",
+                website_label="gwrite.googlecode.com",
                 authors=authors)
         #about.set_transient_for(self.window)
         about.run()     

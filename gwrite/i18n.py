@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 # vim:set shiftwidth=4 tabstop=4 expandtab textwidth=79:
 # Author: Huang Jiahua <jhuangjiahua@gmail.com>
-# License: GNU LGPL
+# License: LGPLv3+
 # Last modified:
 
 app = 'gwrite'

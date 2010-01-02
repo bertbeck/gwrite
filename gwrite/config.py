@@ -1,5 +1,9 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+'''config
+@author: U{Jiahua Huang <jhuangjiahua@gmail.com>}
+@license: LGPLv3+
+'''
 
 import gtk, gobject
 import os, sys
