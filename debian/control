@@ -1,16 +1,15 @@
 Source: gwrite
 Section: editors
-Priority: extra
-Maintainer: Jiahua Huang <jhuangjiahua@gmail.com>
-Build-Depends: cdbs, debhelper (>= 7), quilt, python, python-support, python-setuptools, python-distutils-extra
-Standards-Version: 3.8.1
-Homepage: http://code.google.com/p/gwrite/
+Priority: optional
+Maintainer: Aron Xu <happyaron.xu@gmail.com>
+Build-Depends: cdbs, debhelper (>= 7), python, python-support, python-setuptools, python-distutils-extra
+Standards-Version: 3.8.3
+Homepage: http://code.google.com/p/gwrite
 
 Package: gwrite
 Architecture: all
-Depends: python, python-gtk2, python-jswebkit, python-webkit
+Depends: ${shlibs:Depends}, ${misc:Depends}, python, python-gtk2, python-jswebkit, python-webkit, mimetex
 Description: GTK+ based simple HTML5 editor
  gWrite is a simple GTK+ HTML5 editor, the user interface is
  similar to Wordpad. It aims to be lighter than OOWrite & OOWeb,
  and to be as useful as them.
-
