@@ -11,7 +11,7 @@ Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, python, python-gtk2, python-jswebkit, python-webkit, mimetex
 Description: simple GTK+ HTML5 rich text editor
  gWrite is a simple GTK+ HTML5 WYSIWYG editor, focusing on writing
- and simple text formating. It can automaticaly generate a table of
+ and simple text formating. It can automatically generate a table of
  contents based on the document structure. 
  .
  It aims to be lighter than OOWrite & OOWeb, and to be as useful as them.
