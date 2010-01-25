@@ -820,10 +820,10 @@ class WebKitEdit(webkit.WebView):
             if(t=document.getElementById("toctitle")){
                 document.removeChild(t);
             }
-            html = '<pre id="toctitle" contentEditable="false" style="background-color:#EEEEFF; display: block; border: 1px solid green; margin: 15px; padding: 5px;"><div title="点击固定目录" onclick=\' t = document.getElementById("toctitle"); if(this.alt){ this.alt = 0; document.body.style.cssText=" "; t.style.cssText=" "; }else{ this.alt = 1; document.body.style.cssText="margin:5pt; border:5pt; height:100%; width:70%; overflow-y:auto;"; t.style.cssText="display:block; top:10px; right:0; width:25%; height:90%; overflow:auto; position:fixed;"; } \' class="dirtitle">目录:<br/></div><span id="toctitledir"> </span></pre>'; 
+            html = '<pre id="toctitle" contentEditable="false" style="background-color:#EEEEFF; display: block; border: 1px solid green; margin: 15px; padding: 5px;"><div title="点击固定目录" onclick=\' t = document.getElementById("toctitle"); if(this.alt){ this.alt = 0; document.body.style.cssText=" "; t.style.cssText=" "; }else{ this.alt = 1; document.body.style.cssText="margin:5pt; border:5pt; height:100%; width:70%; overflow-y:auto;"; t.style.cssText="display:block; top:10px; right:0; width:25%; height:90%; overflow:auto; position:fixed;"; } \' class="dirtitle">目录<br/></div><span id="toctitledir"> </span></pre>';
             document.execCommand("inserthtml", false, html); 
             updatedir();
-            ''')
+            '''.replace("目录", _("Table of contents")))
         pass
 
     def do_formatblock_p(self, *args):
