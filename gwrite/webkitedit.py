@@ -774,11 +774,11 @@ class WebKitEdit(webkit.WebView):
         会询问行、列数
         '''
         #print 'WebKitEdit.do_insert_table:'
-        html = "\n<table border='2px' width='100%' ><tbody>\n"
+        html = "\n<table cellspacing='0' border='1px' bordercolor='#aaaacc' width='100%' ><tbody>\n"
         for row in range(int(rows)):
             html+= "<tr>\n"
             for cow in range(int(cows)):
-                html+= "        <td> </td>\n"
+                html+= "        <td><br/></td>\n"
             html+= "</tr>\n"
         html+= "</tbody></table>\n<p><br/></p>\n"
         self.do_insert_html(html)
@@ -982,6 +982,7 @@ class WebKitEdit(webkit.WebView):
         '''
         #print 'WebKitEdit.do_font_fontname:'
         self.execute_script(r''' 
+                document.execCommand("useCSS", false, true);
                 document.execCommand("fontname", false, "%s"); 
                 '''%fontname)
         pass
