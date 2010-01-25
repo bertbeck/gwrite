@@ -2320,14 +2320,14 @@ def main():
         opts, args = getopt.getopt(sys.argv[1:], 'vh', ['version', 'help'])
         pass
     except:
-        #-print usage
+        print usage
         return
     for o, v in opts:
         if o in ('-h', '--help'):
-            #-print usage
+            print usage
             return
         elif o in ('-v', '--version'):
-            #-print __version__
+            print __version__
             return
         pass
     ## 要 打开的文件
