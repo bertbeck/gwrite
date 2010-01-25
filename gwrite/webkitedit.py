@@ -479,10 +479,10 @@ class WebKitEdit(webkit.WebView):
                         h5 = 0;
                         h6 = 0;
                         tt += String(h1);
-                        inode.id = tt;
+                        inode.id = "g" + tt;
                         inode.textContent = getiname(tt, name);   
                         tdir += '';
-                        tdir += '<a href="#' + tt + '">' + getiname(tt, name) + '</a>\n';
+                        tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
                         break;
             
                         case "H2":
@@ -493,10 +493,10 @@ class WebKitEdit(webkit.WebView):
                         h5 = 0;
                         h6 = 0;
                         tt += String(h1) + '.' + h2;
-                        inode.id = tt;
+                        inode.id = "g" + tt;
                         inode.textContent = getiname(tt, name);           
                         tdir += ' ';
-                        tdir += '<a href="#' + tt + '">' + getiname(tt, name) + '</a>\n';
+                        tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
                         break;
             
                         case "H3":
@@ -506,10 +506,10 @@ class WebKitEdit(webkit.WebView):
                         h5 = 0;
                         h6 = 0;
                         tt += String(h1) + '.' + h2 + '.' + h3;
-                        inode.id = tt;
+                        inode.id = "g" + tt;
                         inode.textContent = getiname(tt, name);           
                         tdir += '  ';
-                        tdir += '<a href="#' + tt + '">' + getiname(tt, name) + '</a>\n';
+                        tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
                         break;
             
                         case "H4":
@@ -518,10 +518,10 @@ class WebKitEdit(webkit.WebView):
                         h5 = 0;
                         h6 = 0;
                         tt += String(h1) + '.' + h2 + '.' + h3 + '.' +h4;
-                        inode.id = tt;
+                        inode.id = "g" + tt;
                         inode.textContent = getiname(tt, name);           
                         tdir += '   ';
-                        tdir += '<a href="#' + tt + '">' + getiname(tt, name) + '</a>\n';
+                        tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
                         break;
             
                         case "H5":
@@ -529,20 +529,20 @@ class WebKitEdit(webkit.WebView):
                         h5 += 1;
                         h6 = 0;
                         tt += String(h1) + '.' + h2 + '.' + h3 + '.' + h4 + '.' + h5;
-                        inode.id = tt;
+                        inode.id = "g" + tt;
                         inode.textContent = getiname(tt, name);           
                         tdir += '    ';
-                        tdir += '<a href="#' + tt + '">' + getiname(tt, name) + '</a>\n';
+                        tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
                         break;
             
                         case "H6":
                         tt = '';
                         h6 += 1;
                         tt += String(h1) + '.' + h2 + '.' + h3 + '.' + h4 + '.' + h5 + '.' + h6;
-                        inode.id = tt;
+                        inode.id = "g" + tt;
                         inode.textContent = getiname(tt, name);           
                         tdir += '     ';
-                        tdir += '<a href="#' + tt + '">' + getiname(tt, name) + '</a>\n';
+                        tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
                         break;
                     }
             
