@@ -2205,8 +2205,8 @@ class MainWindow:
                 program_name=_("GWrite"),
                 logo_icon_name="gwrite",
                 version=__version__,
-                copyright=_("(C) Jiahua Huang"),
-                comments=_("Rich Text Editor"),
+                copyright=_("Copyright (C) 2009-2010 Jiahua Huang, Aron Xu"),
+                comments=_("Simple GTK+ HTML5 Rich Text Editor"),
                 license="LGPLv3+",
                 website="http://gwrite.googlecode.com/",
                 website_label="gwrite.googlecode.com",
@@ -2279,7 +2279,7 @@ class MainWindow:
 usage = _('''GWrite
 
 Usage:
-  gedit [OPTION...] [FILE...] - Edit html files
+  gwrite [OPTION...] [FILE...] - Edit html files
 
 Options:
   -h, --help                     Show help options
