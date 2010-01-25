@@ -10,6 +10,8 @@ Package: gwrite
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, python, python-gtk2, python-jswebkit, python-webkit, mimetex
 Description: GTK+ based simple HTML5 editor
- gWrite is a simple GTK+ HTML5 editor, the user interface is
- similar to Wordpad. It aims to be lighter than OOWrite & OOWeb,
- and to be as useful as them.
+ gWrite is a simple GTK+ HTML5 WYSIWYG editor, focusing on writing
+ and simple text formating. It can automaticaly generate a table of
+ contents based on the document structure. 
+ .
+ It aims to be lighter than OOWrite & OOWeb, and to be as useful as them.
