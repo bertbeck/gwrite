@@ -780,7 +780,7 @@ class WebKitEdit(webkit.WebView):
             for cow in range(int(cows)):
                 html+= "        <td> </td>\n"
             html+= "</tr>\n"
-        html+= "</tbody></table>\n"
+        html+= "</tbody></table>\n<p><br/></p>\n"
         self.do_insert_html(html)
         pass
 
