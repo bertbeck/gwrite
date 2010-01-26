@@ -780,7 +780,7 @@ class WebKitEdit(webkit.WebView):
             for cow in range(int(cows)):
                 html+= "        <td><br/></td>\n"
             html+= "</tr>\n"
-        html+= "</tbody></table>\n<p><br/></p>\n"
+        html+= "</tbody></table>\n<br/>\n"
         self.do_insert_html(html)
         pass
 
@@ -820,7 +820,15 @@ class WebKitEdit(webkit.WebView):
             if(t=document.getElementById("toctitle")){
                 document.removeChild(t);
             }
-            html = '<div id="toctitle" contentEditable="false" style="background-color:#EEEEFF; display: block; border: 1px solid green; margin: 15px; padding: 5px; white-space: pre;"><div title="点击固定目录" onclick=\' t = document.getElementById("toctitle"); if(this.alt){ this.alt = 0; document.body.style.cssText=" "; t.style.cssText=" "; }else{ this.alt = 1; document.body.style.cssText="margin:5pt; border:5pt; height:100%; width:70%; overflow-y:auto;"; t.style.cssText="display:block; top:10px; right:0; width:25%; height:90%; overflow:auto; position:fixed;"; } \' class="dirtitle">目录<br/></div><span id="toctitledir"> </span></div>';
+            html = '<div id="toctitle" contentEditable="false" style="\
+                text-indent: 0; background-color:#EEEEFF; display: block; border: 1px solid green; margin: 15px; padding: 5px; white-space: pre;"\
+            ><div title="点击固定目录" onclick=\' t = document.getElementById("toctitle"); if(this.alt){ this.alt = 0; document.body.style.cssText=" "; t.style.cssText="\
+                text-indent: 0; background-color:#EEEEFF; display: block; border: 1px solid green; margin: 15px; padding: 5px; white-space: pre; "\
+            ; }else{ this.alt = 1; document.body.style.cssText="\
+            margin:5pt; border:5pt; height:100%; width:70%; overflow-y:auto;"\
+            ; t.style.cssText="\
+                text-indent: 0; background-color:#EEEEFF; display: block; border: 1px solid green; margin: 5px; padding: 5px; white-space: pre; top:10px; right:0; width:25%; height:90%; overflow:auto; position:fixed; "\
+            ; } \' class="dirtitle">目录<br/></div><span id="toctitledir"> </span></div><br/>';
             document.execCommand("inserthtml", false, html); 
             updatedir();
             '''.replace("目录", _("Table of contents")))
