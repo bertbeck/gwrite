@@ -1,0 +1,18 @@
+gwrite (0.1.3-1) unstable; urgency=low
+
+  * New upstream release:
+       Make it generate valid HTML files (Closes: #566659)
+       Make every end of paragraph use <p> instead of <div> (Closes: #566658)
+       Fix internationalization issue with issertion of Chinese character
+         (Closes: #566660)
+       Make it possible to add text after table of content (Closes: #566665)
+    
+  * debian/control: Improve package description (Closes: #566657)
+
+ -- Aron Xu <happyaron.xu@gmail.com>  Mon, 25 Jan 2010 18:19:08 +0800
+
+gwrite (0.1.2-1) unstable; urgency=low
+
+  * Initial release (Closes: #563368)
+
+ -- Aron Xu <happyaron.xu@gmail.com>  Sat, 02 Jan 2010 18:54:17 +0800

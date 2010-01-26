@@ -1,0 +1,2 @@
+?package(gwrite):needs="X11" section="Applications/Editors"\
+  title="gwrite" command="/usr/bin/gwrite"
