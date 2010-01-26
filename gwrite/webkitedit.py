@@ -90,8 +90,8 @@ def menu_find_with_stock(menu, stock):
 BLANKHTML='''<!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="generator" content="GWrite (WYSIWYG editor)">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="GWrite (WYSIWYG editor)" />
   <title></title>
   <style>
 img{
@@ -820,7 +820,7 @@ class WebKitEdit(webkit.WebView):
             if(t=document.getElementById("toctitle")){
                 document.removeChild(t);
             }
-            html = '<div id="toctitle" contentEditable="false" style="\
+            html = '<br/><div id="toctitle" contentEditable="false" style="\
                 text-indent: 0; background-color:#EEEEFF; display: block; border: 1px solid green; margin: 15px; padding: 5px; white-space: pre;"\
             ><div title="点击固定目录" onclick=\' t = document.getElementById("toctitle"); if(this.alt){ this.alt = 0; document.body.style.cssText=" "; t.style.cssText="\
                 text-indent: 0; background-color:#EEEEFF; display: block; border: 1px solid green; margin: 15px; padding: 5px; white-space: pre; "\
