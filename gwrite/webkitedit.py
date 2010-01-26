@@ -25,16 +25,18 @@ def stastr(stri):
 
 def get_end_ids(start):
     '''获取可能的下一个 id
+    @note: 为了符合 w3 的 id 命名，在数字前加上字母 g 前缀
 
-    >>> get_end_ids('5.1.1.1')
-    ['5.1.1.2', '5.1.2', '5.2', '6']
+    >>> get_end_ids('g5.1.1.1')
+    ['g5.1.1.2', 'g5.1.2', 'g5.2', 'g6']
     '''
+    start = start.replace('g', '')
     ids = start.split('.')
     ends = []
     for i in range(1, len(ids)+1):
         end = int(ids[-i])+1
         end = '.'.join(ids[:-i] + [str(end)])
-        ends.append(end)
+        ends.append('g' + end)
         pass
     return ends
 
@@ -827,7 +829,7 @@ class WebKitEdit(webkit.WebView):
             ; }else{ this.alt = 1; document.body.style.cssText="\
             margin:5pt; border:5pt; height:100%; width:70%; overflow-y:auto;"\
             ; t.style.cssText="\
-                text-indent: 0; background-color:#EEEEFF; display: block; border: 1px solid green; margin: 5px; padding: 5px; white-space: pre; top:10px; right:0; width:25%; height:90%; overflow:auto; position:fixed; "\
+                text-indent: 0; background-color:#EEEEFF; display: block; border-left: 1px solid green; margin: 0px; padding: 5px; white-space: pre; top:0px; right:0; width:25%; height:98%; overflow:auto; position:fixed; "\
             ; } \' class="dirtitle">目录<br/></div><span id="toctitledir"> </span></div><br/>';
             document.execCommand("inserthtml", false, html); 
             updatedir();
@@ -871,7 +873,7 @@ class WebKitEdit(webkit.WebView):
         return self.eval(''' 
                 document.execCommand("formatblock", false, "h3");
                 updatedir();
-''')
+                ''')
         pass
 
     def do_formatblock_h4(self, *args):
