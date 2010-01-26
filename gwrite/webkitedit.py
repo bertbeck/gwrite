@@ -91,7 +91,7 @@ BLANKHTML='''<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="generator" content="GWrite">
+  <meta name="generator" content="GWrite (WYSIWYG editor)">
   <title></title>
   <style>
 img{
