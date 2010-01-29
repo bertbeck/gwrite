@@ -41,7 +41,7 @@ def get_end_ids(start):
     return ends
 
 def textbox(title='Text Box', label='Text',
-        parent=None, text='', mime=''):
+        parent=None, text='', language=''):
     """display a text edit dialog
     
     return the text , or None
@@ -63,9 +63,9 @@ def textbox(title='Text Box', label='Text',
         textview.set_show_line_numbers(1)
         textview.set_show_line_marks(1)
         textview.set_show_right_margin(1)
-        if mime:
+        if language:
             manger = gtksourceview2.LanguageManager()
-            buffer.set_language(manger.get_language('html'))
+            buffer.set_language(manger.get_language(language))
             buffer.set_highlight_syntax(1)
             pass
         pass
@@ -655,7 +655,7 @@ class WebKitEdit(webkit.WebView):
         #print 'WebKitEdit.do_html_view:'
         self.do_image_base64()
         html = self.get_html()
-        html = textbox(title=_("HTML"), text=html, mime='text/html')
+        html = textbox(title=_("HTML"), text=html, language='html')
         if html:
             self.update_html(html)
             pass
