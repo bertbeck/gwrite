@@ -8,7 +8,7 @@ Homepage: http://code.google.com/p/gwrite
 
 Package: gwrite
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, python, python-gtk2, python-jswebkit, python-webkit, mimetex
+Depends: ${shlibs:Depends}, ${misc:Depends}, python, python-gtk2, python-jswebkit, python-webkit, mimetex, python-gtksourceview2
 Description: simple GTK+ HTML5 rich text editor
  gWrite is a simple GTK+ HTML5 WYSIWYG editor, focusing on writing
  and simple text formating. It can automatically generate a table of
