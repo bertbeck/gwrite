@@ -56,16 +56,16 @@ def textbox(title='Text Box', label='Text',
     #gscw.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
     gscw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
     try:
-        import gtksourceview
-        buffer = gtksourceview.SourceBuffer()
-        textview = gtksourceview.SourceView(buffer)
+        import gtksourceview2
+        buffer = gtksourceview2.Buffer()
+        textview = gtksourceview2.View(buffer)
         textview.set_show_line_numbers(1)
-        textview.set_show_line_markers(1)
-        textview.set_show_margin(1)
+        textview.set_show_line_marks(1)
+        textview.set_show_right_margin(1)
         if mime:
-            manger = gtksourceview.SourceLanguagesManager()
-            buffer.set_language(manger.get_language_from_mime_type('text/html'))
-            buffer.set_highlight(1)
+            manger = gtksourceview2.LanguageManager()
+            buffer.set_language(manger.get_language('html'))
+            buffer.set_highlight_syntax(1)
             pass
         pass
     except:
