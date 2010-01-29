@@ -1932,7 +1932,7 @@ class MainWindow:
 
     def do_insert_html(self, *args):
         #-print 'do_insert_html:'
-        html = gtkdialogs.textbox(title=_('Insert Html'), text='', mime='text/html')
+        html = gtkdialogs.textbox(title=_('Insert Html'), text='', language='html')
         if html:
             self.edit.do_insert_html(html)
         pass
