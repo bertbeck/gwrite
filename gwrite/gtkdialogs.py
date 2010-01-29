@@ -38,7 +38,7 @@ def colorbox(title="Changing color", previous_color='', current_color=''):
     return htmlcolor
 
 def textbox(title='Text Box', label='Text',
-        parent=None, text=''):
+        parent=None, text='', mime=''):
     """display a text edit dialog
     
     return the text , or None
@@ -46,7 +46,7 @@ def textbox(title='Text Box', label='Text',
     dlg = gtk.Dialog(title, parent, gtk.DIALOG_DESTROY_WITH_PARENT,
             (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
             gtk.STOCK_OK, gtk.RESPONSE_OK    ))
-    dlg.set_default_size(500,500)
+    dlg.set_default_size(600, 500)
     #lbl = gtk.Label(label)
     #lbl.set_alignment(0, 0.5)
     #lbl.show()
@@ -55,8 +55,23 @@ def textbox(title='Text Box', label='Text',
     gscw.set_shadow_type(gtk.SHADOW_IN)    
     #gscw.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
     gscw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-    textview=gtk.TextView(buffer=None)
-    buffer = textview.get_buffer()
+    try:
+        import gtksourceview
+        buffer = gtksourceview.SourceBuffer()
+        textview = gtksourceview.SourceView(buffer)
+        textview.set_show_line_numbers(1)
+        textview.set_show_line_markers(1)
+        textview.set_show_margin(1)
+        if mime:
+            manger = gtksourceview.SourceLanguagesManager()
+            buffer.set_language(manger.get_language_from_mime_type('text/html'))
+            buffer.set_highlight(1)
+            pass
+        pass
+    except:
+        textview = gtk.TextView(buffer=None)
+        buffer = textview.get_buffer()
+        pass
     
     if text:buffer.set_text(text)    
     
