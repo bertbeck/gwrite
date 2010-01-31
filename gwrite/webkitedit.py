@@ -177,9 +177,13 @@ class WebKitEdit(webkit.WebView):
     def get_html(self, *args):
         '''获取 HTML 内容
         '''
-        self.execute_script('guesstitle();')
-        html = self.ctx().EvaluateScript('document.documentElement.innerHTML')
-        return '<!DOCTYPE html>\n<html>\n%s\n</html>\n' % html
+        if not self.get_view_source_mode():
+            self.execute_script('guesstitle();')
+            html = self.ctx().EvaluateScript('document.documentElement.innerHTML')
+            return '<!DOCTYPE html>\n<html>\n%s\n</html>\n' % html
+        else:
+            html = self.get_text()
+            return html
 
     def get_section(self, *args):
         #@TODO: 用于查看章节字数等
@@ -639,15 +643,15 @@ class WebKitEdit(webkit.WebView):
         '''
         #print 'WebKitEdit.do_html_view:'
         if not self.get_view_source_mode():
-            self.set_view_source_mode(1)
             self.do_image_base64()
             html = self.get_html()
+            self.set_view_source_mode(1)
             self.reload()
             self.update_html(html)
             pass
         else:
+            html = self.get_text()
             self.set_view_source_mode(0)
-            html = self.eval('''document.body.textContent;''')
             self.reload()
             self.update_html(html)
             pass
