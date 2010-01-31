@@ -638,13 +638,20 @@ class WebKitEdit(webkit.WebView):
         '''查看源码
         '''
         #print 'WebKitEdit.do_html_view:'
-        self.do_image_base64()
-        html = self.get_html()
-        html = textbox(title=_("HTML"), text=html)
-        if html:
+        if not self.get_view_source_mode():
+            self.set_view_source_mode(1)
+            self.do_image_base64()
+            html = self.get_html()
+            self.reload()
             self.update_html(html)
             pass
-        pass
+        else:
+            self.set_view_source_mode(0)
+            html = self.eval('''document.body.textContent;''')
+            self.reload()
+            self.update_html(html)
+            pass
+        return
 
     def do_print(self, *args):
         '''打印
@@ -790,10 +797,22 @@ class WebKitEdit(webkit.WebView):
         '''插入 html
         '''
         #print 'WebKitEdit.do_insert_html:'
-        self.execute_script('''
-                window.focus();
-                document.execCommand("inserthtml", false, "%s"); 
-                '''%stastr(html))
+        if not self.get_view_source_mode():
+            self.execute_script('''
+                   window.focus();
+                   document.execCommand("inserthtml", false, "%s");
+                  '''%stastr(html))
+            pass
+        else:
+            self.execute_script('''
+                    var text = "%s";
+                    var i = document.createElement("div");
+                    i.textContent = text;
+                    html = i.innerHTML;
+                    html = html.replace(/\\ \\ /g, '&nbsp;&nbsp;');
+                    document.execCommand("inserthtml", false, html);
+                    '''%stastr(html))
+            pass
         pass
 
     def do_insert_text(self, text):
