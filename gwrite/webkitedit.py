@@ -210,12 +210,12 @@ class WebKitEdit(webkit.WebView):
         text = self.ctx().EvaluateScript('''
             //text = document.body.textContent;
             html = document.body.innerHTML;
-            html = html.replace(/<h/g, '\\n<h');
-            html = html.replace(/<p/g, '\\n<p');
+            //html = html.replace(/<h/g, '\\n<h');
+            //html = html.replace(/<p/g, '\\n<p');
             html = html.replace(/<t/g, '\\n<t');
-            html = html.replace(/<br/g, '\\n<br');
-            html = html.replace(/<bl/g, '\\n<bl');
-            html = html.replace(/<div/g, '\\n<div');
+            //html = html.replace(/<br/g, '\\n<br');
+            //html = html.replace(/<bl/g, '\\n<bl');
+            //html = html.replace(/<div/g, '\\n<div');
             i = document.createElement("div");
             i.innerHTML = html;
             text = i.textContent;            
