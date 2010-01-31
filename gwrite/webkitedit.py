@@ -182,8 +182,14 @@ class WebKitEdit(webkit.WebView):
             html = self.ctx().EvaluateScript('document.documentElement.innerHTML')
             return '<!DOCTYPE html>\n<html>\n%s\n</html>\n' % html
         else:
-            html = self.get_text()
-            return html
+            text = self.eval('''
+                html = document.body.innerHTML;
+                html = html.replace(/td><td/g, 'td>\\n<td');
+                document.body.innerHTML = html;
+                text = document.body.textContent;
+                text;''')
+            text = re.sub('\\s*</body>', '\n</body>', text)
+            return text
 
     def get_section(self, *args):
         #@TODO: 用于查看章节字数等
@@ -210,15 +216,15 @@ class WebKitEdit(webkit.WebView):
         text = self.ctx().EvaluateScript('''
             //text = document.body.textContent;
             html = document.body.innerHTML;
-            //html = html.replace(/<h/g, '\\n<h');
-            //html = html.replace(/<p/g, '\\n<p');
+            html = html.replace(/<h/g, '\\n<h');
+            html = html.replace(/<p/g, '\\n<p');
             html = html.replace(/<t/g, '\\n<t');
-            //html = html.replace(/<br/g, '\\n<br');
-            //html = html.replace(/<bl/g, '\\n<bl');
-            //html = html.replace(/<div/g, '\\n<div');
+            html = html.replace(/<br/g, '\\n<br');
+            html = html.replace(/<bl/g, '\\n<bl');
+            html = html.replace(/<div/g, '\\n<div');
             i = document.createElement("div");
             i.innerHTML = html;
-            text = i.textContent;            
+            text = i.textContent;
             text;''')
         return text
 
@@ -638,22 +644,33 @@ class WebKitEdit(webkit.WebView):
         pass
 
 
+    __prev_visual_html = ''
+    __prev_source_html = ''
     def do_html_view(self, *args):
         '''查看源码
         '''
         #print 'WebKitEdit.do_html_view:'
+        ## 从所见所得模式转到源码模式
         if not self.get_view_source_mode():
             self.do_image_base64()
             html = self.get_html()
+            self.__prev_visual_html = html
             self.set_view_source_mode(1)
             self.reload()
             self.update_html(html)
+            self.__prev_source_html = self.get_html()
             pass
+        ## 从源码模式转到所见所得模式
         else:
-            html = self.get_text()
+            html = self.get_html()
             self.set_view_source_mode(0)
             self.reload()
-            self.update_html(html)
+            if self.__prev_source_html == html:
+                self.update_html(self.__prev_visual_html)
+                pass
+            else:
+                self.update_html(html)
+                pass
             pass
         return
 
