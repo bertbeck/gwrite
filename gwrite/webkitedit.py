@@ -41,7 +41,7 @@ def get_end_ids(start):
     return ends
 
 def textbox(title='Text Box', label='Text',
-        parent=None, text='', language=''):
+        parent=None, text=''):
     """display a text edit dialog
     
     return the text , or None
@@ -49,31 +49,16 @@ def textbox(title='Text Box', label='Text',
     dlg = gtk.Dialog(title, parent, gtk.DIALOG_DESTROY_WITH_PARENT,
             (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
             gtk.STOCK_OK, gtk.RESPONSE_OK    ))
-    dlg.set_default_size(600, 500)
+    dlg.set_default_size(500,500)
     #lbl = gtk.Label(label)
     #lbl.set_alignment(0, 0.5)
     #lbl.show()
     #dlg.vbox.pack_start(lbl,  False)
     gscw = gtk.ScrolledWindow()
     gscw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-    try:
-        import gtksourceview2
-        buffer = gtksourceview2.Buffer()
-        textview = gtksourceview2.View(buffer)
-        textview.set_show_line_numbers(1)
-        textview.set_show_line_marks(1)
-        textview.set_show_right_margin(1)
-        if language:
-            manger = gtksourceview2.LanguageManager()
-            buffer.set_language(manger.get_language(language))
-            buffer.set_highlight_syntax(1)
-            pass
-        pass
-    except:
-        textview = gtk.TextView()
-        textview.set_wrap_mode(gtk.WRAP_WORD_CHAR)
-        buffer = textview.get_buffer()
-        pass
+    textview=gtk.TextView()
+    textview.set_wrap_mode(gtk.WRAP_WORD_CHAR)
+    buffer = textview.get_buffer()
     
     if text: buffer.set_text(text)    
     
@@ -655,7 +640,7 @@ class WebKitEdit(webkit.WebView):
         #print 'WebKitEdit.do_html_view:'
         self.do_image_base64()
         html = self.get_html()
-        html = textbox(title=_("HTML"), text=html, language='html')
+        html = textbox(title=_("HTML"), text=html)
         if html:
             self.update_html(html)
             pass
