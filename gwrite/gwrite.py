@@ -1434,6 +1434,8 @@ class MainWindow:
 
         hpaned.pack1(vbox1, False, True)
 
+        editbox.navigation_pane = vbox1
+
         ## 编辑区
         import webkitedit
         scrolledwindow2 = gtk.ScrolledWindow()
@@ -1893,7 +1895,18 @@ class MainWindow:
     def view_sourceview(self, *args):
         #-print 'view_sourceview:'
         self.window.present()
-        self.edit.do_html_view()
+        ## 源码模式隐藏导航栏
+        #@NOTE 执行顺序和 idle_add 是为了避免闪烁
+        if not self.edit.get_view_source_mode():
+            ## 先转到源码模式，再 idle_add 隐藏导航条，以便显示变化平滑
+            self.edit.toggle_html_view()
+            gobject.idle_add( self.editbox.navigation_pane.hide )
+            pass
+        else:
+            ## 先显示导航条，再 idle_add 转为所见所得模式，以便显示变化平滑
+            self.editbox.navigation_pane.show_all()
+            gobject.idle_add( self.edit.toggle_html_view )
+            pass
         #self.edit.do_bodyhtml_view()
         pass
 
