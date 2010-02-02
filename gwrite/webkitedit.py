@@ -142,6 +142,8 @@ class WebKitEdit(webkit.WebView):
         '''WebKitEdit.__init__
         '''
         webkit.WebView.__init__(self)
+        self.set_property('can-focus', True)
+        self.set_property('can-default', True)
         self.set_full_content_zoom(1)
         self.write_html(BLANKHTML)
         self.lastDir = ''
@@ -179,6 +181,7 @@ class WebKitEdit(webkit.WebView):
         '''
         if not self.get_view_source_mode():
             self.execute_script('guesstitle();')
+            self.do_image_base64()
             html = self.ctx().EvaluateScript('document.documentElement.innerHTML')
             return '<!DOCTYPE html>\n<html>\n%s\n</html>\n' % html
         else:
@@ -643,22 +646,43 @@ class WebKitEdit(webkit.WebView):
         ''')
         pass
 
+    def set_visual_view(self, visual=True):
+        '''切换所见所得模式
+        '''
+        if visual:
+            if self.get_view_source_mode():
+                self.toggle_html_view()
+            pass
+        else:
+            if not self.get_view_source_mode():
+                self.toggle_html_view()
+                pass
+            pass
+        pass
 
     __prev_visual_html = ''
     __prev_source_html = ''
-    def do_html_view(self, *args):
+    def toggle_html_view(self, *args):
         '''查看源码
         '''
-        #print 'WebKitEdit.do_html_view:'
+        #print 'WebKitEdit.toggle_html_view:'
+        ## 转换模式会修改 html 源码，所以得判断下可有保存
         ## 从所见所得模式转到源码模式
         if not self.get_view_source_mode():
-            self.do_image_base64()
             html = self.get_html()
             self.__prev_visual_html = html
+            is_saved = self.is_saved()
             self.set_view_source_mode(1)
             self.reload()
             self.update_html(html)
-            self.__prev_source_html = self.get_html()
+            def do_is_saved():
+                if is_saved:
+                    self.__prev_source_html = self.get_html()
+                    pass
+                else:
+                    self.__prev_source_html = ''
+                pass
+            gobject.idle_add(do_is_saved)
             pass
         ## 从源码模式转到所见所得模式
         else:
@@ -667,6 +691,7 @@ class WebKitEdit(webkit.WebView):
             self.reload()
             if self.__prev_source_html == html:
                 self.update_html(self.__prev_visual_html)
+                gobject.idle_add(self.set_saved)
                 pass
             else:
                 self.update_html(html)
@@ -759,7 +784,7 @@ class WebKitEdit(webkit.WebView):
         '''查看源码
         '''
         #print 'WebKitEdit.view_sourceview:'
-        self.do_html_view()
+        self.toggle_html_view()
         pass
 
     def do_insertimage(self, img=""):
