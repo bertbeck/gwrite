@@ -1,3 +1,14 @@
+gwrite (0.2.0-1) unstable; urgency=low
+
+ * New upstream release:
+     Change to WebView.set_view_source_mode to display HTML source code
+     Change to python-gtksourceview2 to display HTML
+ * debian/control:
+     Bump Standard-Version to 3.8.4
+     Add Depends on python-gtksourceview2
+
+ -- Aron Xu <happyaron.xu@gmail.com>  Tue, 02 Feb 2010 09:42:30 +0800
+
 gwrite (0.1.4-1) unstable; urgency=low
 
   * New upstream release: further progress on w3c validation.
