@@ -13,7 +13,7 @@ import gettext
 if os.path.isdir(os.path.dirname(sys.argv[0]) + '/../build/mo'):
     gettext.install(app, os.path.dirname(sys.argv[0]) + '/../build/mo', unicode=True)
 else:
-    gettext.install(app, '/usr/share/locale', unicode=True)
+    gettext.install(app, unicode=True)
 
 if __name__=="__main__":
 	print _('')
