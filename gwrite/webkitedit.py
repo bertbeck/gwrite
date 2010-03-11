@@ -14,6 +14,7 @@ import gtklatex
 import urllib2
 import os, errno
 import re
+import docfilter
 
 try: import i18n
 except: import gettext.gettext as _
@@ -163,6 +164,25 @@ class WebKitEdit(webkit.WebView):
         self.connect_after("populate-popup", self.populate_popup)
         self.connect("script-prompt", self.on_script_prompt)
         ##
+        pass
+
+    def open(self, editfile):
+        '''打开文件
+        '''
+        self.editfile = editfile
+        ## 导入 .doc
+        if re.match('.*\.doc', editfile, re.I):
+            self.editfile = editfile[:-3] + '.html'
+            editfile = docfilter.doc2html(editfile)
+            pass
+        ## 导入 .odf
+        elif re.match('.*\.odf', editfile, re.I):
+            pass
+        ## 导入 .rtf
+        elif re.match('.*\.rtf', editfile, re.I):
+            pass
+        ## 打开 html
+        webkit.WebView.open(self, editfile)
         pass
 
     def ctx(self, *args):
