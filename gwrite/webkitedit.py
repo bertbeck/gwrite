@@ -172,7 +172,7 @@ class WebKitEdit(webkit.WebView):
         self.editfile = editfile
         ## 导入 .doc
         if re.match('.*\.doc', editfile, re.I):
-            self.editfile = editfile[:-3] + '.html'
+            self.editfile = editfile[:-4] + '.html'
             editfile = docfilter.doc2html(editfile)
             pass
         ## 导入 .odf

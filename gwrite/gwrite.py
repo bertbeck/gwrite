@@ -1458,7 +1458,6 @@ class MainWindow:
 
         if editfile:
             edit.lastDir = os.path.dirname(editfile)
-            edit.editfile = editfile
             edit.title = os.path.basename(editfile)
             self.add_recent(editfile)
             pass
