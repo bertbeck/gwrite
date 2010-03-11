@@ -1,3 +1,12 @@
+gwrite (0.3.0-1) unstable; urgency=low
+
+  * New upstream release:
+      Add doc import support.
+  * debian/control: 
+      Add dependency on wv.
+
+ -- Aron Xu <happyaron.xu@gmail.com>  Thu, 11 Mar 2010 15:00:23 +0800
+
 gwrite (0.2.0-1) unstable; urgency=low
 
  * New upstream release:
