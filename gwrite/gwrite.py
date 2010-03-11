@@ -1716,10 +1716,10 @@ class MainWindow:
     def on_open(self, *args):
         #-print 'on_open:'
         filename = gtkdialogs.open(title=_('Open'),
-                name_mimes={
-                    _("Html Document"):"text/html",
-                    _("MS Doc Document"):"application/msword",
-                    })
+                name_mimes=[
+                    [_("Html Document"), "text/html"],
+                    [_("MS Doc Document"), "application/msword"],
+                    ])
         if filename and os.access(filename, os.R_OK):
             self.open(filename)
             pass
@@ -1736,7 +1736,7 @@ class MainWindow:
             #current_name = ''
             current_name = get_doctitle(html)
             filename = gtkdialogs.save(title=_('Save'), 
-                    name_mimes={_("Html Document"):"text/html"},
+                    name_mimes=[[_("Html Document"), "text/html"]],
                     current_name=current_name,)
             if filename and not '.' in os.path.basename(filename):
                 filename = filename + '.html'
@@ -1767,7 +1767,7 @@ class MainWindow:
         #current_name = ''
         current_name = get_doctitle(html)
         filename = gtkdialogs.save(title=_('Save As'), 
-                name_mimes={_("Html Document"):"text/html"},
+                name_mimes=[[_("Html Document"), "text/html"]],
                 current_name=current_name, folder=self.edit.lastDir,)
         if filename and not '.' in os.path.basename(filename):
             filename = filename + '.html'
@@ -1922,7 +1922,7 @@ class MainWindow:
 
     def do_insertimage(self, *args):
         #-print 'do_insertimage:'
-        src = gtkdialogs.open(title=_('InsertImage'), name_mimes={_("Image Files"):"image/*"})
+        src = gtkdialogs.open(title=_('InsertImage'), name_mimes=[[_("Image Files"), "image/*"]])
         if src:
             self.edit.do_insertimage(src)
         pass
