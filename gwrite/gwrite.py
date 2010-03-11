@@ -2378,6 +2378,12 @@ def main():
         i = os.path.abspath(i)
         edit.open(i)
         pass
+    ## 处理 Gtk 图标主题
+    settings = gtk.settings_get_default( )
+    if settings.get_property( 'gtk-icon-theme-name' ) == 'hicolor':
+        settings.set_property( 'gtk-icon-theme-name', 'Tango')
+        pass
+    ##
     gtk.gdk.threads_enter()
     gtk.main()
     gtk.gdk.threads_leave()
