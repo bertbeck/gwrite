@@ -367,7 +367,7 @@ def yesno(text="OK ?", parent=None):
     return 0
 
 def open(title='', parent=None, 
-        patterns=[], mimes=[], name_mimes={}, name_patterns={}, folder=None):
+        patterns=[], mimes=[], name_mimes=[], name_patterns=[], folder=None):
     """Displays an open dialog.
     
     return the  full path , or None"""
@@ -390,14 +390,15 @@ def open(title='', parent=None,
         filechooser.add_filter(file_filter)
         pass
     if name_mimes:
-        for name, mime in name_mimes.iteritems():
+        for name, mime in name_mimes:
             file_filter = gtk.FileFilter()
             file_filter.set_name(name)
             file_filter.add_mime_type(mime)
             filechooser.add_filter(file_filter)
-    if not "*" in name_patterns.values():
-        name_patterns[_("All Files")] = "*"
-    for name, pattern in name_patterns.iteritems():
+    if not "*" in [ i[1] for i in name_patterns]:
+        name_patterns += [[_("All Files"), "*"]]
+        pass
+    for name, pattern in name_patterns:
             file_filter = gtk.FileFilter()
             file_filter.set_name(name)
             file_filter.add_pattern(pattern)
@@ -428,7 +429,7 @@ def open(title='', parent=None,
     return path
 
 def save(title='', parent=None, current_name='', 
-        patterns=[], mimes=[], name_mimes={}, name_patterns={}, folder=None):
+        patterns=[], mimes=[], name_mimes=[], name_patterns=[], folder=None):
     """Displays a save dialog.
     
     return the  full path , or None
@@ -452,14 +453,15 @@ def save(title='', parent=None, current_name='',
         filechooser.add_filter(file_filter)
         pass
     if name_mimes:
-        for name, mime in name_mimes.iteritems():
+        for name, mime in name_mimes:
             file_filter = gtk.FileFilter()
             file_filter.set_name(name)
             file_filter.add_mime_type(mime)
             filechooser.add_filter(file_filter)
-    if not "*" in name_patterns.values():
-        name_patterns[_("All Files")] = "*"
-    for name, pattern in name_patterns.iteritems():
+    if not "*" in [ i[1] for i in name_patterns]:
+        name_patterns += [[_("All Files"), "*"]]
+        pass
+    for name, pattern in name_patterns:
             file_filter = gtk.FileFilter()
             file_filter.set_name(name)
             file_filter.add_pattern(pattern)
