@@ -1715,7 +1715,11 @@ class MainWindow:
 
     def on_open(self, *args):
         #-print 'on_open:'
-        filename = gtkdialogs.open(title=_('Open'), name_mimes={_("Html Document"):"text/html"})
+        filename = gtkdialogs.open(title=_('Open'),
+                name_mimes={
+                    _("Html Document"):"text/html",
+                    _("MS Doc Document"):"application/msword",
+                    })
         if filename and os.access(filename, os.R_OK):
             self.open(filename)
             pass
