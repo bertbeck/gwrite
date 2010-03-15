@@ -1,20 +1,20 @@
 gwrite (0.3.0-1) unstable; urgency=low
 
   * New upstream release:
-      Add doc import support.
-  * debian/control: 
-      Add dependency on wv.
+      Add doc import support
+  * debian/control:
+      Add dependency on wv
 
- -- Aron Xu <happyaron.xu@gmail.com>  Thu, 11 Mar 2010 15:00:23 +0800
+ -- Aron Xu <happyaron.xu@gmail.com>  Mon, 15 Mar 2010 16:55:28 +0800
 
 gwrite (0.2.0-1) unstable; urgency=low
 
- * New upstream release:
-     Change to WebView.set_view_source_mode to display HTML source code
-     Change to python-gtksourceview2 to display HTML
- * debian/control:
-     Bump Standard-Version to 3.8.4
-     Add Depends on python-gtksourceview2
+  * New upstream release:
+      Change to WebView.set_view_source_mode to display HTML source code
+      Change to python-gtksourceview2 to display HTML
+  * debian/control: 
+      Bump Standard-Version to 3.8.4
+      Add Depends on python-gtksourceview2
 
  -- Aron Xu <happyaron.xu@gmail.com>  Tue, 02 Feb 2010 09:42:30 +0800
 
