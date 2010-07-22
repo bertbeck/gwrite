@@ -1015,6 +1015,14 @@ class WebKitEdit(webkit.WebView):
                 document.execCommand("insertorderedlist", false, null); ''')
         pass
 
+    def do_formatblock_div(self, *args):
+        ''' DIV 样式
+        '''
+        #print 'WebKitEdit.formatblock_addres:'
+        return self.eval('''
+                document.execCommand("div", false, "address"); ''')
+        pass
+
     def do_formatblock_address(self, *args):
         '''地址样式
         '''

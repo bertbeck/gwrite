@@ -551,6 +551,14 @@ class MainWindow:
 
         menu_style.append(menuitem_separator6)
 
+        div1 = gtk.ImageMenuItem(_("Di_v"))
+        div1.show()
+        div1.connect("activate", self.do_formatblock_div)
+
+        img = gtk.image_new_from_icon_name('stock_tools-hyphenation', gtk.ICON_SIZE_MENU)
+        div1.set_image(img)
+        menu_style.append(div1)
+
         address1 = gtk.ImageMenuItem(_("A_ddress"))
         address1.show()
         address1.connect("activate", self.do_formatblock_address)
@@ -998,6 +1006,14 @@ class MainWindow:
         menuitem_separator6.show()
 
         menu_style.append(menuitem_separator6)
+
+        div1 = gtk.ImageMenuItem(_("Di_v"))
+        div1.show()
+        div1.connect("activate", self.do_formatblock_div)
+
+        img = gtk.image_new_from_icon_name('stock_tools-hyphenation', gtk.ICON_SIZE_MENU)
+        div1.set_image(img)
+        menu_style.append(div1)
 
         address1 = gtk.ImageMenuItem(_("A_ddress"))
         address1.show()
@@ -2021,6 +2037,12 @@ class MainWindow:
         #-print 'do_insertorderedlist:'
         self.window.present()
         self.edit.do_insertorderedlist()
+        pass
+
+    def do_formatblock_div(self, *args):
+        #-print 'do_formatblock_address:'
+        self.window.present()
+        self.edit.do_formatblock_address()
         pass
 
     def do_formatblock_address(self, *args):
