@@ -47,7 +47,7 @@ Title = _("GWrite")
 #mdi_mode = 1
 
 class MainWindow:
-    def __init__(self, editfile='', create = True, accel_group = None, tooltips = None):
+    def __init__(self, editfile='', create = True, accel_group = None):
         self.editfile = editfile
         ## 考虑已经打开文档的情况
         if editfile:
@@ -71,11 +71,6 @@ class MainWindow:
             self.accel_group = gtk.AccelGroup()
         else:
             self.accel_group = accel_group
-        if tooltips is None:
-            self.tooltips = gtk.Tooltips()
-        else:
-            self.tooltips = tooltips
-        self.tooltips.enable()
         if create:
             self.window = gtk.Window()
             gtk.window_set_default_icon_name("gtk-dnd")
@@ -866,14 +861,14 @@ class MainWindow:
         self.toolbar1.show()
 
         toolbutton_new = gtk.ToolButton()
-        self.tooltips.set_tip(toolbutton_new, _("New"))
+        toolbutton_new.set_tooltip_text(_("New"))
         toolbutton_new.show()
         toolbutton_new.set_stock_id(gtk.STOCK_NEW)
         toolbutton_new.connect("clicked", self.on_new)
         self.toolbar1.add(toolbutton_new)
 
         toolbutton_open = gtk.MenuToolButton(gtk.STOCK_OPEN)
-        self.tooltips.set_tip(toolbutton_open, _("Open"))
+        toolbutton_open.set_tooltip_text(_("Open"))
         toolbutton_open.show()
         #toolbutton_open.set_stock_id(gtk.STOCK_OPEN)
         toolbutton_open.connect("clicked", self.on_open)
@@ -881,7 +876,7 @@ class MainWindow:
         self.toolbar1.add(toolbutton_open)
 
         toolbutton_save = gtk.ToolButton()
-        self.tooltips.set_tip(toolbutton_save, _("Save"))
+        toolbutton_save.set_tooltip_text(_("Save"))
         toolbutton_save.show()
         toolbutton_save.set_stock_id(gtk.STOCK_SAVE)
         toolbutton_save.connect("clicked", self.on_save)
@@ -892,14 +887,14 @@ class MainWindow:
         self.toolbar1.add(separatortoolitem1)
 
         toolbutton_undo = gtk.ToolButton()
-        self.tooltips.set_tip(toolbutton_undo, _("Undo"))
+        toolbutton_undo.set_tooltip_text(_("Undo"))
         toolbutton_undo.show()
         toolbutton_undo.set_stock_id(gtk.STOCK_UNDO)
         toolbutton_undo.connect("clicked", self.do_undo)
         self.toolbar1.add(toolbutton_undo)
 
         toolbutton_redo = gtk.ToolButton()
-        self.tooltips.set_tip(toolbutton_redo, _("Redo"))
+        toolbutton_redo.set_tooltip_text(_("Redo"))
         toolbutton_redo.show()
         toolbutton_redo.set_stock_id(gtk.STOCK_REDO)
         toolbutton_redo.connect("clicked", self.do_redo)
@@ -910,21 +905,21 @@ class MainWindow:
         self.toolbar1.add(separatortoolitem3)
 
         toolbutton_cut = gtk.ToolButton()
-        self.tooltips.set_tip(toolbutton_cut, _("Cut"))
+        toolbutton_cut.set_tooltip_text(_("Cut"))
         toolbutton_cut.show()
         toolbutton_cut.set_stock_id(gtk.STOCK_CUT)
         toolbutton_cut.connect("clicked", self.do_cut)
         self.toolbar1.add(toolbutton_cut)
 
         toolbutton_copy = gtk.ToolButton()
-        self.tooltips.set_tip(toolbutton_copy, _("Copy"))
+        toolbutton_copy.set_tooltip_text(_("Copy"))
         toolbutton_copy.show()
         toolbutton_copy.set_stock_id(gtk.STOCK_COPY)
         toolbutton_copy.connect("clicked", self.do_copy)
         self.toolbar1.add(toolbutton_copy)
 
         toolbutton_paste = gtk.ToolButton()
-        self.tooltips.set_tip(toolbutton_paste, _("Paste"))
+        toolbutton_paste.set_tooltip_text(_("Paste"))
         toolbutton_paste.show()
         toolbutton_paste.set_stock_id(gtk.STOCK_PASTE)
         toolbutton_paste.connect("clicked", self.do_paste)
@@ -938,7 +933,7 @@ class MainWindow:
         label1 = gtk.Label("")
         label1.set_markup("<b>P</b>")
         button1 = gtk.ToolButton(label1, _("Paragraph"))
-        self.tooltips.set_tip(button1, _("Paragraph"))
+        button1.set_tooltip_text(_("Paragraph"))
         button1.connect("clicked", self.do_formatblock_p)
         button1.show()
         self.toolbar1.add( button1)
@@ -946,7 +941,7 @@ class MainWindow:
         label1 = gtk.Label("")
         label1.set_markup("<big><big><b>H1</b></big></big>")
         button1 = gtk.ToolButton(label1, _("Heading 1"))
-        self.tooltips.set_tip(button1, _("Heading 1"))
+        button1.set_tooltip_text(_("Heading 1"))
         button1.connect("clicked", self.do_formatblock_h1)
         button1.show()
         self.toolbar1.add( button1)
@@ -954,7 +949,7 @@ class MainWindow:
         label1 = gtk.Label("")
         label1.set_markup("<big><b>H2</b></big>")
         button1 = gtk.ToolButton(label1, _("Heading 2"))
-        self.tooltips.set_tip(button1, _("Heading 2"))
+        button1.set_tooltip_text(_("Heading 2"))
         button1.connect("clicked", self.do_formatblock_h2)
         button1.show()
         self.toolbar1.add( button1)
@@ -964,7 +959,7 @@ class MainWindow:
         label1 = gtk.Label("")
         label1.set_markup("<b>H3</b>")
         button1 = gtk.MenuToolButton(label1, _("Heading 3"))
-        self.tooltips.set_tip(button1, _("Heading 3"))
+        button1.set_tooltip_text(_("Heading 3"))
         button1.set_arrow_tooltip_markup(_("Style"))
         button1.connect("clicked", self.do_formatblock_h3)
         button1.show()
@@ -1094,7 +1089,7 @@ class MainWindow:
 
         toolbutton_bold = gtk.MenuToolButton(gtk.STOCK_BOLD)
         toolbutton_bold.set_label(_("Bold"))
-        self.tooltips.set_tip(toolbutton_bold, _("Bold"))
+        toolbutton_bold.set_tooltip_text(_("Bold"))
         toolbutton_bold.show()
         toolbutton_bold.set_stock_id(gtk.STOCK_BOLD)
         toolbutton_bold.connect("clicked", self.on_bold)
@@ -1105,7 +1100,7 @@ class MainWindow:
         toolbutton_hilitecolor = gtk.MenuToolButton("")
         toolbutton_hilitecolor.set_icon_name("stock_text_color_hilight")
         toolbutton_hilitecolor.set_label(_("Highlight"))
-        self.tooltips.set_tip(toolbutton_hilitecolor, _("Highlight"))
+        toolbutton_hilitecolor.set_tooltip_text(_("Highlight"))
         toolbutton_hilitecolor.set_arrow_tooltip_markup(_("Select hilitecolor"))
         toolbutton_hilitecolor.set_menu(gtk.Menu())
         toolbutton_hilitecolor.show()
@@ -1120,7 +1115,7 @@ class MainWindow:
         button1 = gtk.ToolButton()
         button1.set_icon_name("gtk-clear")
         button1.set_label(_("Clear format"))
-        self.tooltips.set_tip(button1, _("Clear format"))
+        button1.set_tooltip_text(_("Clear format"))
         button1.show()
         button1.connect("clicked", self.do_removeformat)
         self.toolbar1.add(button1)
@@ -1128,7 +1123,7 @@ class MainWindow:
         ### 字体菜单按钮
         #toolbutton_font = gtk.MenuToolButton("gtk-select-font")
         #toolbutton_font.set_label(_("Font"))
-        #self.tooltips.set_tip(toolbutton_font, _("Font"))
+        #toolbutton_font.set_tooltip_text(_("Font"))
         #toolbutton_font.show()
         #toolbutton_font.set_menu(self.fontname_menu)
 
@@ -1166,7 +1161,7 @@ class MainWindow:
         self.notebox.set_tab_pos(2) # 0, 1, 2, 3 -> left, top, right, bottom
         self.notebox.set_border_width(0)
         #self.notebox.popup_enable()
-        self.notebox.set_homogeneous_tabs(0)
+        self.notebox.set_property('homogeneous', 0)
         self.notebox.unset_flags(gtk.CAN_FOCUS)
         self.notebox.set_scrollable(True)
         self.notebox.connect("switch-page", self.on_mdi_switch_page)
@@ -1216,7 +1211,7 @@ class MainWindow:
         self.findbox.pack_start(self.entry_searchtext)
 
         button1 = gtk.Button()
-        self.tooltips.set_tip(button1, _("Find Previous"))
+        button1.set_tooltip_text(_("Find Previous"))
         button1.show()
         button1.set_relief(gtk.RELIEF_NONE)
         button1.connect("clicked", self.do_find_text_backward)
@@ -1233,7 +1228,7 @@ class MainWindow:
         img.set_from_stock("gtk-find", 4)
         img.show()
         button_search_text.set_image(img)
-        self.tooltips.set_tip(button_search_text, _("Find Next"))
+        button_search_text.set_tooltip_text(_("Find Next"))
         button_search_text.show()
         button_search_text.set_relief(gtk.RELIEF_NONE)
         button_search_text.connect("clicked", self.do_find_text)
@@ -1251,7 +1246,7 @@ class MainWindow:
         self.findbox.pack_start(self.entry_replace_text)
 
         button_replace_text = gtk.Button()
-        self.tooltips.set_tip(button_replace_text, _("Replace"))
+        button_replace_text.set_tooltip_text(_("Replace"))
         button_replace_text.show()
         button_replace_text.set_relief(gtk.RELIEF_NONE)
         button_replace_text.connect("clicked", self.do_replace_text)
@@ -1281,7 +1276,7 @@ class MainWindow:
         #self.findbox.pack_start(gtk.VSeparator(), False, False, 0)
 
         button2 = gtk.Button()
-        self.tooltips.set_tip(button2, _("Replace All"))
+        button2.set_tooltip_text(_("Replace All"))
         button2.set_label(_("ReplaceAll"))
         button2.show()
         button2.set_relief(gtk.RELIEF_NONE)
