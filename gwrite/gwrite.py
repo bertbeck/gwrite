@@ -638,7 +638,17 @@ class MainWindow:
         ## 字体列表菜单 #########################################
         self.fontname_menu = gtk.Menu()
         self.fontname_menu.append(gtk.TearoffMenuItem())
-        fontnames = list(reversed(sorted(( familie.get_name() for familie in gtk.Label().get_pango_context().list_families() ))))
+        fontnames = sorted(( familie.get_name() for familie in gtk.Label().get_pango_context().list_families() ))
+        ## 调整字体列表顺序，将中文字体提至前列
+        for fontname in fontnames:
+            try:
+                fontname.decode('ascii')
+                pass
+            except:
+                fontnames.remove(fontname)
+                fontnames.insert(0, fontname)
+                pass
+            pass
         for fontname in ['Serif', 'Sans', 'Sans-serif', 'Monospace', ''] + fontnames:
             if fontname:
                 menu = gtk.MenuItem(fontname)
