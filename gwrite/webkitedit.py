@@ -163,6 +163,14 @@ class WebKitEdit(webkit.WebView):
         self.connect("new-window-policy-decision-requested", self.on_new_window_policy_decision_requested)
         self.connect_after("populate-popup", self.populate_popup)
         self.connect("script-prompt", self.on_script_prompt)
+
+        ## 允许跨域 XMLHttpRequest，以便 base64 内联图片
+        settings = self.get_settings()
+        settings.set_property('enable-xss-auditor', False)
+        settings.set_property('enable-universal-access-from-file-uris', True)
+        settings.set_property('enable-file-access-from-file-uris', True)
+        settings.set_property('enable-page-cache', True)
+
         ##
         pass
 
