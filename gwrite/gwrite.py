@@ -87,6 +87,11 @@ class MainWindow:
             self.window.show()
             self.window.connect("delete_event", self.on_close)
 
+        ## 用 Alt-1, Alt-2... 来切换标签页，gtk.gdk.MOD1_MASK 是 Alt
+        for k in range(1, 10):
+            self.accel_group.connect_group(gtk.gdk.keyval_from_name(str(k)), gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE, self.on_accel_connect_group)
+            pass
+
         self.vbox1 = gtk.VBox(False, 0)
         self.vbox1.show()
 
@@ -1330,6 +1335,13 @@ class MainWindow:
             pass
         menu.show_all()
         return menu
+
+    def on_accel_connect_group(self, accel_group, acceleratable, keyval, modifier):
+        ## 按 Alt-1, Alt-2... 切换标签页
+        ## gtk.gdk.keyval_from_name('1') 为 49
+        num = keyval - 49
+        self.notebox.set_current_page(num)
+        return
 
     def on_mdi_menu(self, widget, event, editbox=None, *args):
         #-print self, widget, event, editbox, args
