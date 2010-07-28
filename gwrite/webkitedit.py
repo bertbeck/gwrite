@@ -19,6 +19,14 @@ import docfilter
 try: import i18n
 except: import gettext.gettext as _
 
+def format_html(html):
+    '''给 html 添加适当换行
+    '''
+    html = re.sub('\n?\ ?<(address|blockquote|center|dir|div|dl|fieldset|form|h1|h2|h3|h4|h5|h6|hr|isindex|menu|noframes|noscript|ol|p|pre|table|ul|dd|dt|frameset|li|tbody|td|tfoot|th|thead|tr)([^>]*?)>', '\n<\\1\\2>', html)
+    html = re.sub('</(address|blockquote|center|dir|div|dl|fieldset|form|h1|h2|h3|h4|h5|h6|hr|isindex|menu|noframes|noscript|ol|p|pre|table|ul|dd|dt|frameset|li|tbody|td|tfoot|th|thead|tr)([^>]*?)>\ ?\n?', '</\\1\\2>\n', html)
+    html = re.sub('\n?<(img|hr|br)([^>]*?)>\n?', '\n<\\1\\2>\n', html)
+    return html
+
 def stastr(stri):
     '''处理字符串的  '   "
     '''
@@ -212,6 +220,7 @@ class WebKitEdit(webkit.WebView):
             self.execute_script('guesstitle();')
             self.do_image_base64()
             html = self.ctx().EvaluateScript('document.documentElement.innerHTML')
+            html = format_html(html)
             return '<!DOCTYPE html>\n<html>\n%s\n</html>\n' % html
         else:
             text = self.eval('''
@@ -221,6 +230,8 @@ class WebKitEdit(webkit.WebView):
                 text = document.body.textContent;
                 text;''')
             text = re.sub('\\s*</body>', '\n</body>', text)
+            text = text.replace(' \n', '\n')
+            text = format_html(text)
             return text
 
     def get_section(self, *args):
@@ -942,6 +953,7 @@ class WebKitEdit(webkit.WebView):
 
     def do_formatblock_h1(self, *args):
         '''<h1> 样式
+        @NOTE: 将一行字设为标题后，回车出现的是 <div> 而非 <p>。需要让他换行后使用 <p>。考虑在下一行添加一个 <p>
         '''
         #print 'WebKitEdit.do_formatblock_h1:'
         return self.eval(''' 
