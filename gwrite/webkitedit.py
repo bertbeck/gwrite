@@ -25,6 +25,9 @@ def format_html(html):
     html = re.sub('\n?\ ?<(address|blockquote|center|dir|div|dl|fieldset|form|h1|h2|h3|h4|h5|h6|hr|isindex|menu|noframes|noscript|ol|p|pre|table|ul|dd|dt|frameset|li|tbody|td|tfoot|th|thead|tr)([^>]*?)>', '\n<\\1\\2>', html)
     html = re.sub('</(address|blockquote|center|dir|div|dl|fieldset|form|h1|h2|h3|h4|h5|h6|hr|isindex|menu|noframes|noscript|ol|p|pre|table|ul|dd|dt|frameset|li|tbody|td|tfoot|th|thead|tr)([^>]*?)>\ ?\n?', '</\\1\\2>\n', html)
     html = re.sub('\n?<(img|hr|br)([^>]*?)>\n?', '\n<\\1\\2>\n', html)
+    ## 对于 pre，合并相邻 <pre>，将 <pre> 内的 <br> 转为 "\n"
+    html = re.sub('\n?</pre>\s*<pre>\n?', '', html)
+    html = re.sub('<pre>[^\0]*?</pre>', lambda m: re.sub('\n?<br>\n?', '\\n', m.group()), html)
     return html
 
 def stastr(stri):
