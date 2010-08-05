@@ -164,6 +164,12 @@ class GtkToolBoxView(gtk.TextView):
         self.unset_flags(gtk.CAN_FOCUS)
         self.set_editable(0)
         self.set_wrap_mode(gtk.WRAP_WORD)
+        self.connect('realize', self.on_realize)
+        pass
+
+    def on_realize(self, *args):
+        ## 将默认 I 形鼠标指针换成箭头
+        self.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gtk.gdk.Cursor(gtk.gdk.ARROW))
         pass
 
     def add(self, widget):
@@ -173,7 +179,20 @@ class GtkToolBoxView(gtk.TextView):
         iter = buffer.get_end_iter()
         anchor = buffer.create_child_anchor(iter)
         buffer.insert(iter, "")
+        widget.set_data('buffer_anchor', anchor)
         self.add_child_at_anchor(widget, anchor)
+        pass
+
+    def remove(self, widget):
+        '''删除 widget
+        '''
+        anchor = widget.get_data('buffer_anchor')
+        if anchor:
+            buffer = self.get_buffer()
+            start = buffer.get_iter_at_child_anchor(anchor)
+            end = buffer.get_iter_at_offset( start.get_offset() + 1 )
+            buffer.delete(start, end)
+            pass
         pass
 
 class LatexMathExpressionsEditor(gtk.Table):
