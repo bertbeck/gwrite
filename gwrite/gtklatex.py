@@ -13,6 +13,9 @@ import subprocess
 import os, sys
 import base64
 
+try: import gtksourceview2
+except: gtksourceview2 = None
+
 try: import i18n
 except: from gettext import gettext as _
 
@@ -210,7 +213,18 @@ class LatexMathExpressionsEditor(gtk.Table):
         scrolledwindow1.show()
         scrolledwindow1.set_shadow_type(gtk.SHADOW_IN)
 
-        self.latex_textview = gtk.TextView()
+        if gtksourceview2:
+            self.latex_textview = gtksourceview2.View()
+            lm = gtksourceview2.language_manager_get_default()
+            language = lm.get_language('latex')
+            buffer = gtksourceview2.Buffer()
+            buffer.set_highlight_syntax(1)
+            buffer.set_language(language)
+            self.latex_textview.set_buffer(buffer)
+            pass
+        else:
+            self.latex_textview = gtk.TextView()
+            pass
         self.latex_textview.set_wrap_mode(gtk.WRAP_WORD)
         self.latex_textview.set_cursor_visible(True)
         self.latex_textview.set_indent(5)
