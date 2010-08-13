@@ -9,15 +9,16 @@
 '''
 
 import os
+import subprocess
 
 def doc2html(docfile):
     '''将 mso doc 转换为 html
     依赖 wv
     '''
-    dir = os.tmpnam().replace('file', 'gwrite-%s/file' % os.getlogin() )
+    dir = os.tmpnam()
+    dir = dir.replace('file', 'gwrite-%s/file' % os.getlogin() )
     html = 'gwrite.html'
     os.makedirs(dir)
-    i, o = os.popen2(['wvHtml', '--targetdir=%s'%dir, docfile, html])
-    o.read()
+    subprocess.Popen(['wvHtml', '--targetdir=%s'%dir, docfile, html]).wait()
     return dir + '/' + html
 
