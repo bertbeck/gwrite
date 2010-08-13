@@ -1,0 +1,8 @@
+gwrite/gwrite.py
+gwrite/i18n.py
+gwrite/webkitlinkview.py
+gwrite/gtkdialogs.py
+gwrite/webkitedit.py
+gwrite.desktop.in
+gwrite/config.py
+gwrite/gtklatex.py

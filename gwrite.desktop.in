@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=GWrite
+Name[zh_CN]=写字板
+Comment=Simple text editor
+Comment[zh_CN]=HTML 写字板
+Exec=gwrite %f
+Icon=gwrite
+Terminal=false
+Type=Application
+MimeType=text/html
+Categories=GTK;Utility;TextEditor;

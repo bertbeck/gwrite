@@ -1,0 +1,17 @@
+Source: gwrite
+Section: editors
+Priority: optional
+Maintainer: Aron Xu <happyaron.xu@gmail.com>
+Build-Depends: cdbs, debhelper (>= 7), python, python-support, python-setuptools, python-distutils-extra
+Standards-Version: 3.8.4
+Homepage: http://code.google.com/p/gwrite
+
+Package: gwrite
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, python, python-gtk2, python-jswebkit, python-webkit, mimetex, wv
+Description: simple GTK+ HTML5 rich text editor
+ gWrite is a simple GTK+ HTML5 WYSIWYG editor, focusing on writing
+ and simple text formating. It can automatically generate a table of
+ contents based on the document structure. 
+ .
+ It aims to be lighter than OOWrite & OOWeb, and to be as useful as them.
