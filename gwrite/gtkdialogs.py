@@ -14,7 +14,7 @@ __all__ = ['error', 'info', 'inputbox', 'messagedialog', 'open', 'save', 'warnin
         'yesno']
 
 try: import i18n
-except: import gettext.gettext as _
+except: from gettext import gettext as _
 
 def colorbox(title="Changing color", previous_color='', current_color=''):
     '''
