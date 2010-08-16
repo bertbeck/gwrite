@@ -18,7 +18,7 @@ import re
 import urllib2
 
 try: import i18n
-except: import gettext.gettext as _
+except: from gettext import gettext as _
 
 def get_doctitle(html):
     title = ''

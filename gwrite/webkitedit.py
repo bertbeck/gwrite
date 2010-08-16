@@ -17,7 +17,7 @@ import re
 import docfilter
 
 try: import i18n
-except: import gettext.gettext as _
+except: from gettext import gettext as _
 
 def format_html(html):
     '''给 html 添加适当换行
