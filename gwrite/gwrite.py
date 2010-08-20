@@ -372,7 +372,7 @@ class MainWindow:
 
         menu_view.append(menuitem_separator10)
 
-        menuitem_view_source = gtk.ImageMenuItem(_("So_urce"))
+        menuitem_view_source = gtk.ImageMenuItem(_("So_urce/Visual"))
         menuitem_view_source.show()
         menuitem_view_source.connect("activate", self.view_sourceview)
         menuitem_view_source.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("u"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
