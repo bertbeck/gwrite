@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gwrite 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-22 10:26+0800\n"
+"POT-Creation-Date: 2010-08-20 23:55+0800\n"
 "PO-Revision-Date: 2010-01-25 18:58+0800\n"
 "Last-Translator: Jiahua Huang <jhuangjiahua@gmail.com>\n"
 "Language-Team: Chinese/Simplified\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "NewDocument"
 msgstr "新建文档"
 
-#: ../gwrite/gwrite.py:44 ../gwrite/gwrite.py:2242 ../gwrite/gwrite.py:2243
+#: ../gwrite/gwrite.py:44 ../gwrite/gwrite.py:2259 ../gwrite/gwrite.py:2260
 msgid "GWrite"
 msgstr "写字板"
 
@@ -46,7 +46,7 @@ msgstr "关闭窗口(_D)"
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: ../gwrite/gwrite.py:254 ../gwrite/webkitedit.py:341
+#: ../gwrite/gwrite.py:254 ../gwrite/webkitedit.py:356
 msgid "Pa_ste Unformatted"
 msgstr "无格式粘贴(_S)"
 
@@ -55,11 +55,11 @@ msgid "_View"
 msgstr "查看(_V)"
 
 #. # 更新目录
-#: ../gwrite/gwrite.py:346 ../gwrite/gwrite.py:1545
+#: ../gwrite/gwrite.py:346 ../gwrite/gwrite.py:1562
 msgid "Update _Contents"
 msgstr "更新目录(_C)"
 
-#: ../gwrite/gwrite.py:354 ../gwrite/gwrite.py:1553
+#: ../gwrite/gwrite.py:354 ../gwrite/gwrite.py:1570
 msgid "Toggle _Numbered Title"
 msgstr "切换标题自动编号(_N)"
 
@@ -68,8 +68,8 @@ msgid "Update _Images"
 msgstr "更新图片(_I)"
 
 #: ../gwrite/gwrite.py:375
-msgid "So_urce"
-msgstr "源码(_U)"
+msgid "So_urce/Visual"
+msgstr "源码/可视化(_U)"
 
 #: ../gwrite/gwrite.py:388
 msgid "_Insert"
@@ -125,31 +125,31 @@ msgstr "标题 _2"
 msgid "Heading _3"
 msgstr "标题 _3"
 
-#: ../gwrite/gwrite.py:504 ../gwrite/gwrite.py:960
+#: ../gwrite/gwrite.py:504 ../gwrite/gwrite.py:970
 msgid "Heading _4"
 msgstr "标题 _4"
 
-#: ../gwrite/gwrite.py:512 ../gwrite/gwrite.py:968
+#: ../gwrite/gwrite.py:512 ../gwrite/gwrite.py:978
 msgid "Heading _5"
 msgstr "标题 _5"
 
-#: ../gwrite/gwrite.py:520 ../gwrite/gwrite.py:976
+#: ../gwrite/gwrite.py:520 ../gwrite/gwrite.py:986
 msgid "Heading _6"
 msgstr "标题 _6"
 
-#: ../gwrite/gwrite.py:533 ../gwrite/gwrite.py:989
+#: ../gwrite/gwrite.py:533 ../gwrite/gwrite.py:999
 msgid "_Bulleted List"
 msgstr "圆点列表(_B)"
 
-#: ../gwrite/gwrite.py:541 ../gwrite/gwrite.py:997
+#: ../gwrite/gwrite.py:541 ../gwrite/gwrite.py:1007
 msgid "Numbered _List"
 msgstr "数字列表(_L)"
 
-#: ../gwrite/gwrite.py:554 ../gwrite/gwrite.py:1010
+#: ../gwrite/gwrite.py:554 ../gwrite/gwrite.py:1020
 msgid "Di_v"
 msgstr "DIV 块(_V)"
 
-#: ../gwrite/gwrite.py:562 ../gwrite/gwrite.py:1018
+#: ../gwrite/gwrite.py:562 ../gwrite/gwrite.py:1028
 msgid "A_ddress"
 msgstr "地址(_D)"
 
@@ -160,11 +160,11 @@ msgstr "地址(_D)"
 #. img = gtk.image_new_from_icon_name('stock_text-monospaced', gtk.ICON_SIZE_MENU)
 #. menuitem_formatblock_code.set_image(img)
 #. menu_style.append(menuitem_formatblock_code)
-#: ../gwrite/gwrite.py:578 ../gwrite/gwrite.py:1034
+#: ../gwrite/gwrite.py:578 ../gwrite/gwrite.py:1044
 msgid "Block_quote"
 msgstr "引用(_Q)"
 
-#: ../gwrite/gwrite.py:586 ../gwrite/gwrite.py:1042
+#: ../gwrite/gwrite.py:586 ../gwrite/gwrite.py:1052
 msgid "_Preformat"
 msgstr "预格式化(_P)"
 
@@ -172,321 +172,321 @@ msgstr "预格式化(_P)"
 msgid "For_mat"
 msgstr "格式(_M)"
 
-#: ../gwrite/gwrite.py:659
+#: ../gwrite/gwrite.py:669
 msgid "Font _Size"
 msgstr "字号(_S)"
 
-#: ../gwrite/gwrite.py:667
+#: ../gwrite/gwrite.py:677
 msgid "_1"
 msgstr "_1"
 
-#: ../gwrite/gwrite.py:673
+#: ../gwrite/gwrite.py:683
 msgid "_2"
 msgstr "_2"
 
-#: ../gwrite/gwrite.py:679
+#: ../gwrite/gwrite.py:689
 msgid "_3"
 msgstr "_3"
 
-#: ../gwrite/gwrite.py:685
+#: ../gwrite/gwrite.py:695
 msgid "_4"
 msgstr "_4"
 
-#: ../gwrite/gwrite.py:691
+#: ../gwrite/gwrite.py:701
 msgid "_5"
 msgstr "_5"
 
-#: ../gwrite/gwrite.py:697
+#: ../gwrite/gwrite.py:707
 msgid "_6"
 msgstr "_6"
 
-#: ../gwrite/gwrite.py:703
+#: ../gwrite/gwrite.py:713
 msgid "_7"
 msgstr "_7"
 
-#: ../gwrite/gwrite.py:719
+#: ../gwrite/gwrite.py:729
 msgid "_Highlight"
 msgstr "高亮(_H)"
 
-#: ../gwrite/gwrite.py:728
+#: ../gwrite/gwrite.py:738
 msgid "_HiliteColor"
 msgstr "选择高亮颜色(_H)"
 
-#: ../gwrite/gwrite.py:736
+#: ../gwrite/gwrite.py:746
 msgid "_Clear format"
 msgstr "清除格式(_C)"
 
-#: ../gwrite/gwrite.py:789
+#: ../gwrite/gwrite.py:799
 msgid "Subs_cript"
 msgstr "下标(_C)"
 
-#: ../gwrite/gwrite.py:797
+#: ../gwrite/gwrite.py:807
 msgid "Su_perscript"
 msgstr "上标(_P)"
 
 #. #
-#: ../gwrite/gwrite.py:809
+#: ../gwrite/gwrite.py:819
 msgid "_Tools"
 msgstr "工具(_T)"
 
-#: ../gwrite/gwrite.py:815
+#: ../gwrite/gwrite.py:825
 msgid "_Word Count"
 msgstr "字数统计(_W)"
 
 #. #
-#: ../gwrite/gwrite.py:827
+#: ../gwrite/gwrite.py:837
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../gwrite/gwrite.py:854
+#: ../gwrite/gwrite.py:864
 msgid "New"
 msgstr "新建"
 
 #. -print 'on_open:'
-#: ../gwrite/gwrite.py:861 ../gwrite/gwrite.py:1733
+#: ../gwrite/gwrite.py:871 ../gwrite/gwrite.py:1750
 #: ../gwrite/gtkdialogs.py:374
 msgid "Open"
 msgstr "打开"
 
-#: ../gwrite/gwrite.py:869 ../gwrite/gwrite.py:1753
+#: ../gwrite/gwrite.py:879 ../gwrite/gwrite.py:1770
 #: ../gwrite/gtkdialogs.py:437
 msgid "Save"
 msgstr "保存"
 
-#: ../gwrite/gwrite.py:880
+#: ../gwrite/gwrite.py:890
 msgid "Undo"
 msgstr "撤销"
 
-#: ../gwrite/gwrite.py:887
+#: ../gwrite/gwrite.py:897
 msgid "Redo"
 msgstr "重做"
 
-#: ../gwrite/gwrite.py:898
+#: ../gwrite/gwrite.py:908
 msgid "Cut"
 msgstr "剪切"
 
-#: ../gwrite/gwrite.py:905
+#: ../gwrite/gwrite.py:915
 msgid "Copy"
 msgstr "复制"
 
-#: ../gwrite/gwrite.py:912
+#: ../gwrite/gwrite.py:922
 msgid "Paste"
 msgstr "粘贴"
 
-#: ../gwrite/gwrite.py:925 ../gwrite/gwrite.py:926
+#: ../gwrite/gwrite.py:935 ../gwrite/gwrite.py:936
 msgid "Paragraph"
 msgstr "段落"
 
-#: ../gwrite/gwrite.py:933 ../gwrite/gwrite.py:934
+#: ../gwrite/gwrite.py:943 ../gwrite/gwrite.py:944
 msgid "Heading 1"
 msgstr "标题一"
 
-#: ../gwrite/gwrite.py:941 ../gwrite/gwrite.py:942
+#: ../gwrite/gwrite.py:951 ../gwrite/gwrite.py:952
 msgid "Heading 2"
 msgstr "标题二"
 
-#: ../gwrite/gwrite.py:951 ../gwrite/gwrite.py:952
+#: ../gwrite/gwrite.py:961 ../gwrite/gwrite.py:962
 msgid "Heading 3"
 msgstr "标题三"
 
-#: ../gwrite/gwrite.py:953
+#: ../gwrite/gwrite.py:963
 msgid "Style"
 msgstr "样式"
 
-#: ../gwrite/gwrite.py:1081 ../gwrite/gwrite.py:1082
+#: ../gwrite/gwrite.py:1091 ../gwrite/gwrite.py:1092
 msgid "Bold"
 msgstr "粗体"
 
-#: ../gwrite/gwrite.py:1092 ../gwrite/gwrite.py:1093
+#: ../gwrite/gwrite.py:1102 ../gwrite/gwrite.py:1103
 msgid "Highlight"
 msgstr "高亮"
 
-#: ../gwrite/gwrite.py:1094
+#: ../gwrite/gwrite.py:1104
 msgid "Select hilitecolor"
 msgstr "选择高亮颜色"
 
-#: ../gwrite/gwrite.py:1107 ../gwrite/gwrite.py:1108
+#: ../gwrite/gwrite.py:1117 ../gwrite/gwrite.py:1118
 msgid "Clear format"
 msgstr "清除格式"
 
-#: ../gwrite/gwrite.py:1176
+#: ../gwrite/gwrite.py:1186
 msgid "Close Findbar"
 msgstr "关闭查找栏"
 
-#: ../gwrite/gwrite.py:1196 ../gwrite/gwrite.py:1221
+#: ../gwrite/gwrite.py:1206 ../gwrite/gwrite.py:1231
 msgid "Find Next"
 msgstr "查找下一个"
 
-#: ../gwrite/gwrite.py:1198 ../gwrite/gwrite.py:2273
+#: ../gwrite/gwrite.py:1208 ../gwrite/gwrite.py:2290
 msgid "Search text"
 msgstr "查找文字"
 
-#: ../gwrite/gwrite.py:1204
+#: ../gwrite/gwrite.py:1214
 msgid "Find Previous"
 msgstr "查找上一个"
 
-#: ../gwrite/gwrite.py:1216
+#: ../gwrite/gwrite.py:1226
 msgid "Find"
 msgstr "查找"
 
-#: ../gwrite/gwrite.py:1233
+#: ../gwrite/gwrite.py:1243
 msgid "Replace text"
 msgstr "替换为"
 
-#: ../gwrite/gwrite.py:1235 ../gwrite/gwrite.py:1239 ../gwrite/gwrite.py:1256
+#: ../gwrite/gwrite.py:1245 ../gwrite/gwrite.py:1249 ../gwrite/gwrite.py:1266
 #: ../gwrite/gtkdialogs.py:498
 msgid "Replace"
 msgstr "替换"
 
-#: ../gwrite/gwrite.py:1269
+#: ../gwrite/gwrite.py:1279
 msgid "Replace All"
 msgstr "全部替换"
 
-#: ../gwrite/gwrite.py:1270
+#: ../gwrite/gwrite.py:1280
 msgid "ReplaceAll"
 msgstr "全部替换"
 
-#: ../gwrite/gwrite.py:1431
+#: ../gwrite/gwrite.py:1448
 msgid "Navigation Pane"
 msgstr "导航栏"
 
-#: ../gwrite/gwrite.py:1482
+#: ../gwrite/gwrite.py:1499
 #, python-format
 msgid "[New Document] %s"
 msgstr "[ 新建文档 ] %s"
 
-#: ../gwrite/gwrite.py:1486
+#: ../gwrite/gwrite.py:1503
 msgid "[New Document]"
 msgstr "新建文档"
 
-#: ../gwrite/gwrite.py:1533
+#: ../gwrite/gwrite.py:1550
 msgid "_Select this"
 msgstr "选择该章节(_S)"
 
-#: ../gwrite/gwrite.py:1536
+#: ../gwrite/gwrite.py:1553
 msgid "您也可以直接<b>双击</b>以选择该章节文字"
 msgstr "您也可以直接<b>双击</b>以选择该章节文字"
 
 #. # r: 1, -1, 0 => yes, no, cancel
-#: ../gwrite/gwrite.py:1615
+#: ../gwrite/gwrite.py:1632
 #, python-format
 msgid "%s Save Changes?"
 msgstr "%s 是否保存修改？"
 
-#: ../gwrite/gwrite.py:1735 ../gwrite/gwrite.py:1754 ../gwrite/gwrite.py:1785
+#: ../gwrite/gwrite.py:1752 ../gwrite/gwrite.py:1771 ../gwrite/gwrite.py:1802
 msgid "Html Document"
 msgstr "HTML 文档"
 
-#: ../gwrite/gwrite.py:1736
+#: ../gwrite/gwrite.py:1753
 msgid "MS Doc Document"
 msgstr "Doc 文档"
 
-#: ../gwrite/gwrite.py:1763 ../gwrite/gwrite.py:1794
+#: ../gwrite/gwrite.py:1780 ../gwrite/gwrite.py:1811
 msgid "Unable to write to file."
 msgstr "无法写入文件。"
 
-#: ../gwrite/gwrite.py:1784
+#: ../gwrite/gwrite.py:1801
 msgid "Save As"
 msgstr "另存为"
 
-#: ../gwrite/gwrite.py:1830
+#: ../gwrite/gwrite.py:1847
 msgid "Document"
 msgstr "文档"
 
-#: ../gwrite/gwrite.py:1830
+#: ../gwrite/gwrite.py:1847
 msgid "Selection"
 msgstr "选中范围"
 
-#: ../gwrite/gwrite.py:1831
+#: ../gwrite/gwrite.py:1848
 msgid "Words: "
 msgstr "字数: "
 
-#: ../gwrite/gwrite.py:1832
+#: ../gwrite/gwrite.py:1849
 msgid "Characters (with spaces): "
 msgstr "字符数(算空格): "
 
-#: ../gwrite/gwrite.py:1833
+#: ../gwrite/gwrite.py:1850
 msgid "Characters (no spaces): "
 msgstr "字符数(无空格): "
 
-#: ../gwrite/gwrite.py:1834
+#: ../gwrite/gwrite.py:1851
 msgid "Paragraphs: "
 msgstr "段落: "
 
-#: ../gwrite/gwrite.py:1835
+#: ../gwrite/gwrite.py:1852
 msgid "Lines: "
 msgstr "行数: "
 
-#: ../gwrite/gwrite.py:1836
+#: ../gwrite/gwrite.py:1853
 msgid "English words: "
 msgstr "单词: "
 
-#: ../gwrite/gwrite.py:1837
+#: ../gwrite/gwrite.py:1854
 msgid "Chinese characters: "
 msgstr "中文字: "
 
 #. -print info
-#: ../gwrite/gwrite.py:1840
+#: ../gwrite/gwrite.py:1857
 msgid "Word Counts"
 msgstr "字数统计"
 
 #. -print 'do_insertimage:'
-#: ../gwrite/gwrite.py:1940
+#: ../gwrite/gwrite.py:1957
 msgid "InsertImage"
 msgstr "插入图片"
 
-#: ../gwrite/gwrite.py:1940
+#: ../gwrite/gwrite.py:1957
 msgid "Image Files"
 msgstr "图片文件"
 
 #. -print 'do_createlink:'
 #. #print self.edit.get_link_message()
-#: ../gwrite/gwrite.py:1948
+#: ../gwrite/gwrite.py:1965
 msgid "Create Link"
 msgstr "创建链接"
 
-#: ../gwrite/gwrite.py:1948
+#: ../gwrite/gwrite.py:1965
 msgid "URL:"
 msgstr "URL:"
 
 #. -print 'do_insert_table:'
-#: ../gwrite/gwrite.py:1961
+#: ../gwrite/gwrite.py:1978
 msgid "Insert Table"
 msgstr "插入表格"
 
-#: ../gwrite/gwrite.py:1961
+#: ../gwrite/gwrite.py:1978
 msgid "Rows:"
 msgstr "行数："
 
-#: ../gwrite/gwrite.py:1961
+#: ../gwrite/gwrite.py:1978
 msgid "Cows:"
 msgstr "列数："
 
 #. -print 'do_insert_html:'
-#: ../gwrite/gwrite.py:1967
+#: ../gwrite/gwrite.py:1984
 msgid "Insert Html"
 msgstr "插入 HTML"
 
-#: ../gwrite/gwrite.py:2246
+#: ../gwrite/gwrite.py:2263
 msgid "Copyright (C) 2009-2010 Jiahua Huang, Aron Xu"
 msgstr "版权所有 (C) 2009-2010 Jiahua Huang, Aron Xu"
 
-#: ../gwrite/gwrite.py:2247
+#: ../gwrite/gwrite.py:2264
 msgid "Simple GTK+ HTML5 Rich Text Editor"
 msgstr "简易的 GTK+ HTML5 写字板"
 
-#: ../gwrite/gwrite.py:2268
+#: ../gwrite/gwrite.py:2285
 #, python-format
 msgid "%s matches"
 msgstr "%s 个匹配"
 
-#: ../gwrite/gwrite.py:2311
+#: ../gwrite/gwrite.py:2328
 #, python-format
 msgid "(custom widget: %s)"
 msgstr "(自定义控件: %s)"
 
 #. #cmd test
-#: ../gwrite/gwrite.py:2317
+#: ../gwrite/gwrite.py:2334
 msgid ""
 "GWrite\n"
 "\n"
@@ -551,7 +551,7 @@ msgstr "您是否想要替换它？"
 
 #. print 'WebKitEdit.do_insert_contents:'
 #. @FIXME: 无法删除现存目录表格
-#: ../gwrite/webkitedit.py:929
+#: ../gwrite/webkitedit.py:944
 msgid "Table of contents"
 msgstr "目录"
 
@@ -585,7 +585,7 @@ msgstr "部分选项需要重启生效。"
 msgid "Run mode"
 msgstr "运行模式"
 
-#: ../gwrite/gtklatex.py:311
+#: ../gwrite/gtklatex.py:344
 msgid "LaTeX math expressions"
 msgstr "LaTex 数学公式"
 
