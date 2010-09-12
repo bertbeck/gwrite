@@ -34,6 +34,7 @@ Features include:
       platforms = ['Linux'],
       scripts=['scripts/gwrite'],
       packages = ['gwrite'], 
+      package_data = {'gwrite': ['icons/*']},
       data_files = [
           ('share/pixmaps', ['gwrite.png']),
       ],
