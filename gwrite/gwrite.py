@@ -2422,6 +2422,10 @@ def main():
     if settings.get_property( 'gtk-icon-theme-name' ) == 'hicolor':
         settings.set_property( 'gtk-icon-theme-name', 'Tango')
         pass
+    ## 处理额外图标路径
+    icon_theme = gtk.icon_theme_get_default()
+    icon_dir = os.path.dirname(__file__) + '/icons'
+    icon_theme.append_search_path(icon_dir)
     ##
     gtk.gdk.threads_enter()
     gtk.main()
