@@ -11,8 +11,8 @@ gwrite/webkitlinkview.py
 scripts/gwrite
 gwrite.png
 gwrite.desktop.in
+po/fr.po
 po/zh_CN.po
-po/gwrite.pot
 po/POTFILES.in
 gwrite/icons/stock_font-size.png
 gwrite/icons/stock_insert-header.png
