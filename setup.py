@@ -5,7 +5,7 @@ from DistUtilsExtra.command import *
 from glob import glob
 
 setup(name='gwrite',
-      version='0.4.0',
+      version='0.5.0',
       description='HTML5 Doc Writer based on GTK2',
       long_description ="""GWrite is a simple HTML5 Doc Writer base on Gtk2.
 
