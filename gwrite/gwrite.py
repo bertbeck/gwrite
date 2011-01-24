@@ -91,7 +91,7 @@ class MainWindow:
             self.window = gtk.Window()
             gtk.window_set_default_icon_name("gtk-dnd")
             self.window.set_icon_name("gtk-dnd")
-            self.window.set_default_size(750, 550)
+            self.window.set_default_size(780, 550)
             self.window.set_title(Title)
             if editfile: self.window.set_title(os.path.basename(self.editfile) + ' - ' + Title) 
             self.window.add_accel_group(self.accel_group)
