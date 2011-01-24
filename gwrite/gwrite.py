@@ -26,6 +26,22 @@ def get_doctitle(html):
     return title
 
 
+def proc_webkit_color(*webviews):
+    ## 设置样式，让 WebKit 背景色使用 Gtk 颜色
+    style = webviews[0].get_style()
+    html_bg_color = str(style.base[gtk.STATE_NORMAL])
+    html_fg_color = str(style.text[gtk.STATE_NORMAL])
+    user_stylesheet = ''' html {
+        background-color: %s;
+        color: %s;\n}''' % (html_bg_color, html_fg_color)
+    user_stylesheet_file = config.user_stylesheet_file
+    file(user_stylesheet_file, 'w').write(user_stylesheet)
+    user_stylesheet_uri = 'file://' + user_stylesheet_file
+    for webview in webviews:
+        settings = webview.get_settings()
+        settings.set_property('user-stylesheet-uri', user_stylesheet_uri)
+    pass
+
 def menu_find_with_stock(menu, stock):
     # 查找菜单中对应 stock 的菜单项位置
     n = 0
@@ -1504,6 +1520,8 @@ class MainWindow:
                 pass
 
         editbox.connect("button-press-event", lambda *i: True) ## 中止鼠标按钮事件向上传递
+
+        gobject.idle_add(proc_webkit_color, edit, linkview)
 
         return editbox
 

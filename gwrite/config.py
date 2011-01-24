@@ -26,6 +26,7 @@ def getconf():
     if not os.path.isdir(profdir): os.makedirs(profdir)    
     ctlfile = profdir + '/gwrite.ctl' + os.environ['DISPLAY']
     prof = profdir + '/gwrite.conf'
+    user_stylesheet_file = profdir + '/user_stylesheet_uri.css'
     ##    
     for k, v in globals().items():
         if not k.startswith('__') and (
@@ -42,6 +43,7 @@ def getconf():
     config['profdir'] = profdir
     config['ctlfile'] = ctlfile
     config['prof'] = prof
+    config['user_stylesheet_file'] = user_stylesheet_file
     return config
 
 def load():
@@ -49,7 +51,7 @@ def load():
     '''
     config = getconf()
     ##
-    try: config = pickle.loads(file(config['prof']).read())
+    try: config.update(pickle.loads(file(config['prof']).read()))
     except: pass
     ##
     globals().update(config)
