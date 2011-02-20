@@ -1219,8 +1219,16 @@ class WebKitEdit(webkit.WebView):
         '''居中
         '''
         #print 'WebKitEdit.do_justifycenter:'
-        self.execute_script(''' 
+        self.execute_script('''
                 document.execCommand("justifycenter", false, null); ''')
+        pass
+
+    def do_justifyfull(self, *args):
+        '''分散对齐
+        '''
+        #print 'WebKitEdit.do_justifycenter:'
+        self.execute_script(''' 
+                document.execCommand("justifyfull", false, null); ''')
         pass
 
     def do_justifyright(self, *args):
