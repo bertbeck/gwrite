@@ -484,6 +484,7 @@ class MainWindow:
         menuitem_normal = gtk.ImageMenuItem(_("_Normal"))
         menuitem_normal.show()
         menuitem_normal.connect("activate", self.do_formatblock_p)
+        menuitem_normal.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("0"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
 
         img = gtk.image_new_from_icon_name('stock_insert_section', gtk.ICON_SIZE_MENU)
         menuitem_normal.set_image(img)
@@ -497,7 +498,7 @@ class MainWindow:
         menuitem_heading_1 = gtk.ImageMenuItem(_("Heading _1"))
         menuitem_heading_1.show()
         menuitem_heading_1.connect("activate", self.do_formatblock_h1)
-        menuitem_heading_1.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("1"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_1.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("1"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
 
         img = gtk.image_new_from_icon_name('stock_insert-header', gtk.ICON_SIZE_MENU)
         menuitem_heading_1.set_image(img)
@@ -506,7 +507,7 @@ class MainWindow:
         menuitem_heading_2 = gtk.ImageMenuItem(_("Heading _2"))
         menuitem_heading_2.show()
         menuitem_heading_2.connect("activate", self.do_formatblock_h2)
-        menuitem_heading_2.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("2"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_2.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("2"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
 
         img = gtk.image_new_from_icon_name('stock_line-spacing-2', gtk.ICON_SIZE_MENU)
         menuitem_heading_2.set_image(img)
@@ -515,7 +516,7 @@ class MainWindow:
         menuitem_heading_3 = gtk.ImageMenuItem(_("Heading _3"))
         menuitem_heading_3.show()
         menuitem_heading_3.connect("activate", self.do_formatblock_h3)
-        menuitem_heading_3.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("3"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_3.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("3"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
 
         img = gtk.image_new_from_icon_name('stock_line-spacing-1', gtk.ICON_SIZE_MENU)
         menuitem_heading_3.set_image(img)
@@ -524,7 +525,7 @@ class MainWindow:
         menuitem_heading_4 = gtk.ImageMenuItem(_("Heading _4"))
         menuitem_heading_4.show()
         menuitem_heading_4.connect("activate", self.do_formatblock_h4)
-        menuitem_heading_4.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("4"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_4.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("4"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
 
         img = gtk.image_new_from_icon_name('stock_line-spacing-1.5', gtk.ICON_SIZE_MENU)
         menuitem_heading_4.set_image(img)
@@ -533,7 +534,7 @@ class MainWindow:
         menuitem_heading_5 = gtk.ImageMenuItem(_("Heading _5"))
         menuitem_heading_5.show()
         menuitem_heading_5.connect("activate", self.do_formatblock_h5)
-        menuitem_heading_5.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("5"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_5.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("5"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
 
         img = gtk.image_new_from_icon_name('stock_list_enum-off', gtk.ICON_SIZE_MENU)
         menuitem_heading_5.set_image(img)
@@ -542,7 +543,7 @@ class MainWindow:
         menuitem_heading_6 = gtk.ImageMenuItem(_("Heading _6"))
         menuitem_heading_6.show()
         menuitem_heading_6.connect("activate", self.do_formatblock_h6)
-        menuitem_heading_6.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("6"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_6.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("6"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
 
         img = gtk.image_new_from_icon_name('stock_list_enum-off', gtk.ICON_SIZE_MENU)
         menuitem_heading_6.set_image(img)
@@ -786,18 +787,21 @@ class MainWindow:
         menuitem_justifyleft = gtk.ImageMenuItem("gtk-justify-left")
         menuitem_justifyleft.show()
         menuitem_justifyleft.connect("activate", self.do_justifyleft)
+        menuitem_justifyleft.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("l"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
 
         menu_format.append(menuitem_justifyleft)
 
         menuitem_justifycenter = gtk.ImageMenuItem("gtk-justify-center")
         menuitem_justifycenter.show()
         menuitem_justifycenter.connect("activate", self.do_justifycenter)
+        menuitem_justifycenter.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("e"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
 
         menu_format.append(menuitem_justifycenter)
 
         menuitem_justifyright = gtk.ImageMenuItem("gtk-justify-right")
         menuitem_justifyright.show()
         menuitem_justifyright.connect("activate", self.do_justifyright)
+        menuitem_justifyright.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("l"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
 
         menu_format.append(menuitem_justifyright)
 
@@ -856,6 +860,7 @@ class MainWindow:
         menuitem_word_count.set_image(img)
         menuitem_word_count.show()
         menuitem_word_count.connect("activate", self.on_word_counts)
+        menuitem_word_count.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("c"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
 
         menu_tools.append(menuitem_word_count)
 
