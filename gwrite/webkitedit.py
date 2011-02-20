@@ -182,6 +182,7 @@ class WebKitEdit(webkit.WebView):
         settings.set_property('enable-universal-access-from-file-uris', True)
         settings.set_property('enable-file-access-from-file-uris', True)
         settings.set_property('enable-page-cache', True)
+        settings.set_property('javascript-can-access-clipboard', True)
         settings.set_property('tab-key-cycles-through-elements', False)
 
         ##
@@ -766,13 +767,13 @@ class WebKitEdit(webkit.WebView):
         '''剪切
         '''
         #print 'WebKitEdit.do_cut:'
-        self.execute_script(' document.execCommand("cut", false, false); ')
+        self.cut_clipboard()
 
     def do_copy(self, *args):
         '''复制
         '''
         #print 'WebKitEdit.do_copy:'
-        self.execute_script(' document.execCommand("copy", false, false); ')
+        self.copy_clipboard()
 
     def do_paste(self, *args):
         '''粘贴
