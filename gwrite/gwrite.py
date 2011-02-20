@@ -418,6 +418,7 @@ class MainWindow:
         menuitem_link = gtk.ImageMenuItem(_("_Link"))
         menuitem_link.show()
         menuitem_link.connect("activate", self.do_createlink)
+        menuitem_link.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("k"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
         img = gtk.image_new_from_icon_name('stock_link', gtk.ICON_SIZE_MENU)
         menuitem_link.set_image(img)
@@ -648,7 +649,6 @@ class MainWindow:
         menuitem_strikethrough = gtk.ImageMenuItem("gtk-strikethrough")
         menuitem_strikethrough.show()
         menuitem_strikethrough.connect("activate", self.do_strikethrough)
-        menuitem_strikethrough.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("k"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
         menu_format.append(menuitem_strikethrough)
 
@@ -774,6 +774,7 @@ class MainWindow:
         menuitem_clearformat.set_image(img)
         menuitem_clearformat.show()
         menuitem_clearformat.connect("activate", self.do_removeformat)
+        menuitem_clearformat.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("backslash"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
         menu_format.append(menuitem_clearformat)
 
@@ -822,21 +823,23 @@ class MainWindow:
 
         menu_format.append(self.separator16)
 
-        menuitem_subscript = gtk.ImageMenuItem(_("Subs_cript"))
-        menuitem_subscript.show()
-        menuitem_subscript.connect("activate", self.do_subscript)
-
-        img = gtk.image_new_from_icon_name('stock_subscript', gtk.ICON_SIZE_MENU)
-        menuitem_subscript.set_image(img)
-        menu_format.append(menuitem_subscript)
-
         menuitem_superscript = gtk.ImageMenuItem(_("Su_perscript"))
         menuitem_superscript.show()
         menuitem_superscript.connect("activate", self.do_superscript)
+        menuitem_superscript.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("period"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
         img = gtk.image_new_from_icon_name('stock_superscript', gtk.ICON_SIZE_MENU)
         menuitem_superscript.set_image(img)
         menu_format.append(menuitem_superscript)
+
+        menuitem_subscript = gtk.ImageMenuItem(_("Subs_cript"))
+        menuitem_subscript.show()
+        menuitem_subscript.connect("activate", self.do_subscript)
+        menuitem_subscript.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("comma"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+
+        img = gtk.image_new_from_icon_name('stock_subscript', gtk.ICON_SIZE_MENU)
+        menuitem_subscript.set_image(img)
+        menu_format.append(menuitem_subscript)
 
         menuitem_format.set_submenu(menu_format)
 
