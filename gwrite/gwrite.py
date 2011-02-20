@@ -633,19 +633,19 @@ class MainWindow:
 
         menu_format.append(menuitem_bold)
 
-        menuitem_underline = gtk.ImageMenuItem("gtk-underline")
-        menuitem_underline.show()
-        menuitem_underline.connect("activate", self.do_underline)
-        menuitem_underline.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("u"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-
-        menu_format.append(menuitem_underline)
-
         menuitem_italic = gtk.ImageMenuItem("gtk-italic")
         menuitem_italic.show()
         menuitem_italic.connect("activate", self.do_italic)
         menuitem_italic.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("i"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
         menu_format.append(menuitem_italic)
+
+        menuitem_underline = gtk.ImageMenuItem("gtk-underline")
+        menuitem_underline.show()
+        menuitem_underline.connect("activate", self.do_underline)
+        menuitem_underline.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("u"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+
+        menu_format.append(menuitem_underline)
 
         menuitem_strikethrough = gtk.ImageMenuItem("gtk-strikethrough")
         menuitem_strikethrough.show()
@@ -1106,17 +1106,17 @@ class MainWindow:
         menu_format = gtk.Menu()
         menu_format.append(gtk.TearoffMenuItem())
 
-        menuitem_underline = gtk.ImageMenuItem("gtk-underline")
-        menuitem_underline.show()
-        menuitem_underline.connect("activate", self.do_underline)
-
-        menu_format.append(menuitem_underline)
-
         menuitem_italic = gtk.ImageMenuItem("gtk-italic")
         menuitem_italic.show()
         menuitem_italic.connect("activate", self.do_italic)
 
         menu_format.append(menuitem_italic)
+
+        menuitem_underline = gtk.ImageMenuItem("gtk-underline")
+        menuitem_underline.show()
+        menuitem_underline.connect("activate", self.do_underline)
+
+        menu_format.append(menuitem_underline)
 
         menuitem_strikethrough = gtk.ImageMenuItem("gtk-strikethrough")
         menuitem_strikethrough.show()
