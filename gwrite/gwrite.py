@@ -271,7 +271,7 @@ class MainWindow:
         menuitem_paste_unformatted.show()
         menuitem_paste_unformatted.connect("activate", self.do_paste_unformatted)
         menuitem_paste_unformatted.add_accelerator("activate", 
-                self.accel_group, gtk.gdk.keyval_from_name("period"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+                self.accel_group, gtk.gdk.keyval_from_name("v"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
         menu_edit.append(menuitem_paste_unformatted)
 
         menuitem_delete = gtk.ImageMenuItem("gtk-delete")
