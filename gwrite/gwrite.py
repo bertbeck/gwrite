@@ -801,9 +801,16 @@ class MainWindow:
         menuitem_justifyright = gtk.ImageMenuItem("gtk-justify-right")
         menuitem_justifyright.show()
         menuitem_justifyright.connect("activate", self.do_justifyright)
-        menuitem_justifyright.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("l"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_justifyright.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("r"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
 
         menu_format.append(menuitem_justifyright)
+
+        menuitem_justifyfull = gtk.ImageMenuItem("gtk-justify-fill")
+        menuitem_justifyfull.show()
+        menuitem_justifyfull.connect("activate", self.do_justifyfull)
+        menuitem_justifyfull.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("j"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
+
+        menu_format.append(menuitem_justifyfull)
 
         self.separator11 = gtk.MenuItem()
         self.separator11.show()
@@ -2254,6 +2261,12 @@ class MainWindow:
         #-print 'do_justifycenter:'
         self.window.present()
         self.edit.do_justifycenter()
+        pass
+
+    def do_justifyfull(self, *args):
+        #-print 'do_justify:'
+        self.window.present()
+        self.edit.do_justifyfull()
         pass
 
     def do_justifyright(self, *args):
