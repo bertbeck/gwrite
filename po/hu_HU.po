@@ -1,0 +1,595 @@
+# Hungarian translation for GWrite.
+# Copyright (C) Szontágh Ferenc 2011
+# This file is distributed under the same license as the GWrite package.
+# Szontágh Ferenc <szontagh.ferenc@exahost.eu>, 2011.
+#
+#: ../gwrite/i18n.py:19
+msgid ""
+msgstr ""
+"Project-Id-Version: gwrite 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-02 14:36+0200\n"
+"PO-Revision-Date: 2011-04-02 16:05+0200\n"
+"Last-Translator: Szontágh Ferenc <szontagh.ferenc@exahost.eu>\n"
+"Language-Team: Hungarian <>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../gwrite/gwrite.py:25
+msgid "NewDocument"
+msgstr "Új dokumentum"
+
+#: ../gwrite/gwrite.py:60 ../gwrite/gwrite.py:2308 ../gwrite/gwrite.py:2309
+msgid "GWrite"
+msgstr "GWrite"
+
+#: ../gwrite/gwrite.py:112
+msgid "_File"
+msgstr "_Fájl"
+
+#: ../gwrite/gwrite.py:127
+msgid "New _Window"
+msgstr "_Új Ablak"
+
+#: ../gwrite/gwrite.py:187
+msgid "_Recently"
+msgstr "_Utoljára megnyitott"
+
+#: ../gwrite/gwrite.py:207
+msgid "Close Win_dow"
+msgstr "_Ablak Bezárása"
+
+#: ../gwrite/gwrite.py:229
+msgid "_Edit"
+msgstr "S_zerkesztés"
+
+#: ../gwrite/gwrite.py:270 ../gwrite/webkitedit.py:360
+msgid "Pa_ste Unformatted"
+msgstr "Beille_sztés Formázatlanul"
+
+#: ../gwrite/gwrite.py:327
+msgid "_View"
+msgstr "_Nézet"
+
+#. # 更新目录
+#: ../gwrite/gwrite.py:362 ../gwrite/gwrite.py:1605
+msgid "Update _Contents"
+msgstr "_Tartalom Frissítése"
+
+#: ../gwrite/gwrite.py:370 ../gwrite/gwrite.py:1613
+msgid "Toggle _Numbered Title"
+msgstr "Toggle _Numbered Title"
+
+#: ../gwrite/gwrite.py:378
+msgid "Update _Images"
+msgstr "Képek fr_issítése"
+
+#: ../gwrite/gwrite.py:391
+msgid "So_urce/Visual"
+msgstr "Forrás/Viz_uális"
+
+#: ../gwrite/gwrite.py:404
+msgid "_Insert"
+msgstr "_Beszúrás"
+
+#: ../gwrite/gwrite.py:410
+msgid "_Picture"
+msgstr "_Kép"
+
+#: ../gwrite/gwrite.py:418
+msgid "_Link"
+msgstr "_Hivatkozás"
+
+#: ../gwrite/gwrite.py:427
+msgid "Horizontal_Rule"
+msgstr "_Vízszintes Vonal"
+
+#: ../gwrite/gwrite.py:435
+msgid "_Table"
+msgstr "_Táblázat"
+
+#: ../gwrite/gwrite.py:443
+msgid "_HTML"
+msgstr "_HTML"
+
+#. #
+#: ../gwrite/gwrite.py:457
+msgid "LaTeX _Equation"
+msgstr "LaTeX _Egyenletek"
+
+#. #
+#: ../gwrite/gwrite.py:466
+msgid "_Contents"
+msgstr "_Tartalmak"
+
+#: ../gwrite/gwrite.py:478
+msgid "_Style"
+msgstr "_Stílus"
+
+#: ../gwrite/gwrite.py:484
+msgid "_Normal"
+msgstr "_Normális"
+
+#: ../gwrite/gwrite.py:498
+msgid "Heading _1"
+msgstr "Címsor _1"
+
+#: ../gwrite/gwrite.py:507
+msgid "Heading _2"
+msgstr "Címsor _2"
+
+#: ../gwrite/gwrite.py:516
+msgid "Heading _3"
+msgstr "Címsor _3"
+
+#: ../gwrite/gwrite.py:525 ../gwrite/gwrite.py:1011
+msgid "Heading _4"
+msgstr "Címsor _4"
+
+#: ../gwrite/gwrite.py:534 ../gwrite/gwrite.py:1019
+msgid "Heading _5"
+msgstr "Címsor _5"
+
+#: ../gwrite/gwrite.py:543 ../gwrite/gwrite.py:1027
+msgid "Heading _6"
+msgstr "Címsor _6"
+
+#: ../gwrite/gwrite.py:557 ../gwrite/gwrite.py:1040
+msgid "_Bulleted List"
+msgstr "_Lista"
+
+#: ../gwrite/gwrite.py:565 ../gwrite/gwrite.py:1048
+msgid "Numbered _List"
+msgstr "Számozott _Lista"
+
+#: ../gwrite/gwrite.py:578 ../gwrite/gwrite.py:1061
+msgid "Di_v"
+msgstr "Di_v"
+
+#: ../gwrite/gwrite.py:586 ../gwrite/gwrite.py:1069
+msgid "A_ddress"
+msgstr "_Cím"
+
+#. menuitem_formatblock_code = gtk.ImageMenuItem(_("_Code"))
+#. menuitem_formatblock_code.show()
+#. menuitem_formatblock_code.connect("activate", self.do_formatblock_code)
+#.
+#. img = gtk.image_new_from_icon_name('stock_text-monospaced', gtk.ICON_SIZE_MENU)
+#. menuitem_formatblock_code.set_image(img)
+#. menu_style.append(menuitem_formatblock_code)
+#: ../gwrite/gwrite.py:602 ../gwrite/gwrite.py:1085
+msgid "Block_quote"
+msgstr "_Blokkos Idézet"
+
+#: ../gwrite/gwrite.py:610 ../gwrite/gwrite.py:1093
+msgid "_Preformat"
+msgstr "_Előre formázott"
+
+#: ../gwrite/gwrite.py:623
+msgid "For_mat"
+msgstr "For_mátum"
+
+#: ../gwrite/gwrite.py:696
+msgid "Font _Size"
+msgstr "_Betű méret"
+
+#: ../gwrite/gwrite.py:704
+msgid "_1"
+msgstr "_1"
+
+#: ../gwrite/gwrite.py:710
+msgid "_2"
+msgstr "_2"
+
+#: ../gwrite/gwrite.py:716
+msgid "_3"
+msgstr "_3"
+
+#: ../gwrite/gwrite.py:722
+msgid "_4"
+msgstr "_4"
+
+#: ../gwrite/gwrite.py:728
+msgid "_5"
+msgstr "_5"
+
+#: ../gwrite/gwrite.py:734
+msgid "_6"
+msgstr "_6"
+
+#: ../gwrite/gwrite.py:740
+msgid "_7"
+msgstr "_7"
+
+#: ../gwrite/gwrite.py:756
+msgid "_Highlight"
+msgstr "_Kiemelés"
+
+#: ../gwrite/gwrite.py:765
+msgid "_HiliteColor"
+msgstr "_HiliteColor"
+
+#: ../gwrite/gwrite.py:773
+msgid "_Clear format"
+msgstr "_Formázás törlése"
+
+#: ../gwrite/gwrite.py:837
+msgid "Su_perscript"
+msgstr "Su_perScript"
+
+#: ../gwrite/gwrite.py:846
+msgid "Subs_cript"
+msgstr "Subs_cript"
+
+#. #
+#: ../gwrite/gwrite.py:859
+msgid "_Tools"
+msgstr "_Eszközök"
+
+#: ../gwrite/gwrite.py:865
+msgid "_Word Count"
+msgstr "Szavak _megszámlálása"
+
+#. #
+#: ../gwrite/gwrite.py:878
+msgid "_Help"
+msgstr "_Súgó"
+
+#: ../gwrite/gwrite.py:905
+msgid "New"
+msgstr "Új"
+
+#. -print 'on_open:'
+#: ../gwrite/gwrite.py:912 ../gwrite/gwrite.py:1793
+#: ../gwrite/gtkdialogs.py:374
+msgid "Open"
+msgstr "Megnyitás"
+
+#: ../gwrite/gwrite.py:920 ../gwrite/gwrite.py:1813
+#: ../gwrite/gtkdialogs.py:437
+msgid "Save"
+msgstr "Mentés"
+
+#: ../gwrite/gwrite.py:931
+msgid "Undo"
+msgstr "Visszavonás"
+
+#: ../gwrite/gwrite.py:938
+msgid "Redo"
+msgstr "Előre"
+
+#: ../gwrite/gwrite.py:949
+msgid "Cut"
+msgstr "Kivágás"
+
+#: ../gwrite/gwrite.py:956
+msgid "Copy"
+msgstr "Másolás"
+
+#: ../gwrite/gwrite.py:963
+msgid "Paste"
+msgstr "Beillesztés"
+
+#: ../gwrite/gwrite.py:976 ../gwrite/gwrite.py:977
+msgid "Paragraph"
+msgstr "Bekezdés"
+
+#: ../gwrite/gwrite.py:984 ../gwrite/gwrite.py:985
+msgid "Heading 1"
+msgstr "Címsor 1"
+
+#: ../gwrite/gwrite.py:992 ../gwrite/gwrite.py:993
+msgid "Heading 2"
+msgstr "Címsor 2"
+
+#: ../gwrite/gwrite.py:1002 ../gwrite/gwrite.py:1003
+msgid "Heading 3"
+msgstr "Címsor 3"
+
+#: ../gwrite/gwrite.py:1004
+msgid "Style"
+msgstr "Stílus"
+
+#: ../gwrite/gwrite.py:1132 ../gwrite/gwrite.py:1133
+msgid "Bold"
+msgstr "Félkövér"
+
+#: ../gwrite/gwrite.py:1143 ../gwrite/gwrite.py:1144
+msgid "Highlight"
+msgstr "Kiemelés"
+
+#: ../gwrite/gwrite.py:1145
+msgid "Select hilitecolor"
+msgstr "Hilitecolor bezárása"
+
+#: ../gwrite/gwrite.py:1158 ../gwrite/gwrite.py:1159
+msgid "Clear format"
+msgstr "Formázás törlése"
+
+#: ../gwrite/gwrite.py:1227
+msgid "Close Findbar"
+msgstr "Kereső sáv bezárása"
+
+#: ../gwrite/gwrite.py:1247 ../gwrite/gwrite.py:1272
+msgid "Find Next"
+msgstr "Következő keresése"
+
+#: ../gwrite/gwrite.py:1249 ../gwrite/gwrite.py:2339
+msgid "Search text"
+msgstr "Szöveg keresése"
+
+#: ../gwrite/gwrite.py:1255
+msgid "Find Previous"
+msgstr "Előző keresése"
+
+#: ../gwrite/gwrite.py:1267
+msgid "Find"
+msgstr "Keresés"
+
+#: ../gwrite/gwrite.py:1284
+msgid "Replace text"
+msgstr "Szöveg csere"
+
+#: ../gwrite/gwrite.py:1286 ../gwrite/gwrite.py:1290 ../gwrite/gwrite.py:1307
+#: ../gwrite/gtkdialogs.py:498
+msgid "Replace"
+msgstr "Csere"
+
+#: ../gwrite/gwrite.py:1320
+msgid "Replace All"
+msgstr "Összes fájl"
+
+#: ../gwrite/gwrite.py:1321
+msgid "ReplaceAll"
+msgstr "Összes felcserélése"
+
+#: ../gwrite/gwrite.py:1489
+msgid "Navigation Pane"
+msgstr "Navigáció"
+
+#: ../gwrite/gwrite.py:1540
+#, python-format
+msgid "[New Document] %s"
+msgstr "[Új Dokumentum] %s"
+
+#: ../gwrite/gwrite.py:1544
+msgid "[New Document]"
+msgstr "[Új Dokumentum]"
+
+#: ../gwrite/gwrite.py:1593
+msgid "_Select this"
+msgstr "_Kiválasztása"
+
+#: ../gwrite/gwrite.py:1596
+msgid "您也可以直接<b>双击</b>以选择该章节文字"
+msgstr "您也可以直接<b>双击</b>以选择该章节文字"
+
+#. # r: 1, -1, 0 => yes, no, cancel
+#: ../gwrite/gwrite.py:1675
+#, python-format
+msgid "%s Save Changes?"
+msgstr "%s Módosítások mentése?"
+
+#: ../gwrite/gwrite.py:1795 ../gwrite/gwrite.py:1814 ../gwrite/gwrite.py:1845
+msgid "Html Document"
+msgstr "Html Dokumentum"
+
+#: ../gwrite/gwrite.py:1796
+msgid "MS Doc Document"
+msgstr "MS Doc Dokumentum"
+
+#: ../gwrite/gwrite.py:1823 ../gwrite/gwrite.py:1854
+msgid "Unable to write to file."
+msgstr "Nem sikerült a fájlba írni."
+
+#: ../gwrite/gwrite.py:1844
+msgid "Save As"
+msgstr "Mentés más néven"
+
+#: ../gwrite/gwrite.py:1890
+msgid "Document"
+msgstr "Dokumentum"
+
+#: ../gwrite/gwrite.py:1890
+msgid "Selection"
+msgstr "Kiválasztás"
+
+#: ../gwrite/gwrite.py:1891
+msgid "Words: "
+msgstr "Szavak:"
+
+#: ../gwrite/gwrite.py:1892
+msgid "Characters (with spaces): "
+msgstr "Karakterek (szóközökkel):"
+
+#: ../gwrite/gwrite.py:1893
+msgid "Characters (no spaces): "
+msgstr "Karakterek (szóköz nélkül):"
+
+#: ../gwrite/gwrite.py:1894
+msgid "Paragraphs: "
+msgstr "Bekezdések:"
+
+#: ../gwrite/gwrite.py:1895
+msgid "Lines: "
+msgstr "Vonalak:"
+
+#: ../gwrite/gwrite.py:1896
+msgid "English words: "
+msgstr "Angol szavak:"
+
+#: ../gwrite/gwrite.py:1897
+msgid "Chinese characters: "
+msgstr "Kínai karakterek:"
+
+#. -print info
+#: ../gwrite/gwrite.py:1900
+msgid "Word Counts"
+msgstr "Szavak száma"
+
+#. -print 'do_insertimage:'
+#: ../gwrite/gwrite.py:2000
+msgid "InsertImage"
+msgstr "Képe bszúrása"
+
+#: ../gwrite/gwrite.py:2000
+msgid "Image Files"
+msgstr "Kép fájlok"
+
+#. -print 'do_createlink:'
+#. #print self.edit.get_link_message()
+#: ../gwrite/gwrite.py:2008
+msgid "Create Link"
+msgstr "Hivatkozás létrehozása"
+
+#: ../gwrite/gwrite.py:2008
+msgid "URL:"
+msgstr "URL:"
+
+#. -print 'do_insert_table:'
+#: ../gwrite/gwrite.py:2021
+msgid "Insert Table"
+msgstr "Táblázat beszúrása"
+
+#: ../gwrite/gwrite.py:2021
+msgid "Rows:"
+msgstr "Sorok:"
+
+#: ../gwrite/gwrite.py:2021
+msgid "Cows:"
+msgstr "Tehenek:"
+
+#. -print 'do_insert_html:'
+#: ../gwrite/gwrite.py:2027
+msgid "Insert Html"
+msgstr "Html beszúrása"
+
+#: ../gwrite/gwrite.py:2312
+msgid "Copyright (C) 2009-2010 Jiahua Huang, Aron Xu"
+msgstr "Minden jog fenntartva (C) 2009-2010 Jiahua Huang, Aron Xu"
+
+#: ../gwrite/gwrite.py:2313
+msgid "Simple GTK+ HTML5 Rich Text Editor"
+msgstr "Egyszerü GTK+ HTML5 Szöveg Szerkesztő"
+
+#: ../gwrite/gwrite.py:2334
+#, python-format
+msgid "%s matches"
+msgstr "%s találat"
+
+#: ../gwrite/gwrite.py:2377
+#, python-format
+msgid "(custom widget: %s)"
+msgstr "(egyéni widget: %s)"
+
+#. #cmd test
+#: ../gwrite/gwrite.py:2383
+msgid ""
+"GWrite\n"
+"\n"
+"Usage:\n"
+"  gwrite [OPTION...] [FILE...] - Edit html files\n"
+"\n"
+"Options:\n"
+"  -h, --help                     Show help options\n"
+"  -v, --version                  Show version information\n"
+msgstr ""
+"GWrite\n"
+"\n"
+"Használat:\n"
+"  gwrite [OPCIÓ...] [FÁJL...] - HTML fájlok szerkesztése\n"
+"\n"
+"Opciók:\n"
+"  -h, --help                    Súgó mutatása\n"
+"  -v, --version                  Verzió információk\n"
+
+#: ../gwrite/gtkdialogs.py:263
+msgid "Save Changes?"
+msgstr "Mentse a módosításokat?"
+
+#: ../gwrite/gtkdialogs.py:276
+msgid "Info"
+msgstr "Információ"
+
+#: ../gwrite/gtkdialogs.py:276
+msgid "Key:"
+msgstr "Kulcs"
+
+#: ../gwrite/gtkdialogs.py:276
+msgid "Value"
+msgstr "Érték"
+
+#: ../gwrite/gtkdialogs.py:334
+msgid "Click here for details"
+msgstr "Kattints ide a részletekért"
+
+#: ../gwrite/gtkdialogs.py:399 ../gwrite/gtkdialogs.py:462
+msgid "All Files"
+msgstr "Összes fájl"
+
+#: ../gwrite/gtkdialogs.py:424
+#, python-format
+msgid "Could not open file \"%s\""
+msgstr "Nem sikerült megnyitni a fájlt \"%s\"."
+
+#: ../gwrite/gtkdialogs.py:425
+#, python-format
+msgid "The file \"%s\" could not be opened. Permission denied."
+msgstr "A fájl \"%s\" nem olvasható. Nincs elég jogosultság hozzá."
+
+#: ../gwrite/gtkdialogs.py:488
+#, python-format
+msgid "A file named \"%s\" already exists"
+msgstr "A fájl \"%s\" már létezik"
+
+#: ../gwrite/gtkdialogs.py:489
+msgid "Do you which to replace it with the current project?"
+msgstr "Valóban lecseréled a jelenlegi projekttel?"
+
+#. print 'WebKitEdit.do_insert_contents:'
+#. @FIXME: 无法删除现存目录表格
+#: ../gwrite/webkitedit.py:948
+msgid "Table of contents"
+msgstr "Tartalomjegyzék"
+
+#: ../gwrite/config.py:67
+msgid "Preferences"
+msgstr "Beállítások"
+
+#: ../gwrite/config.py:88
+msgid "Use Tabs MDI interface"
+msgstr "Használja a Fül felületet"
+
+#: ../gwrite/config.py:89
+msgid ""
+"Supports editing multiple files in one window (known sometimes as tabs or "
+"MDI)"
+msgstr "Támogatja a több fájlt egy ablakban való szerkesztését"
+
+#: ../gwrite/config.py:98
+msgid "Single Instance mode"
+msgstr "Egyszerre egy példány futhasson csak"
+
+#: ../gwrite/config.py:99
+msgid "Only one instance of the application will be running at a time."
+msgstr "Egyszerre egy példány futhat egy időben."
+
+#: ../gwrite/config.py:110
+msgid "You need to restart gwrite for some options to take effect."
+msgstr "Újra kell indítani a gwrite-ot, hogy pár beállítás érvénybe léphessen."
+
+#: ../gwrite/config.py:119
+msgid "Run mode"
+msgstr "Futási mód"
+
+#: ../gwrite/gtklatex.py:344
+msgid "LaTeX math expressions"
+msgstr "LaTex matematikai kifejezés"
+
+#~ msgid "HTML"
+#~ msgstr "HTML"
+
+#~ msgid "(C) hiweed.com"
+#~ msgstr "(C) hiweed.com"
