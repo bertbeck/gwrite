@@ -1038,9 +1038,9 @@ class WebKitEdit(webkit.WebView):
     def do_formatblock_div(self, *args):
         ''' DIV 样式
         '''
-        #print 'WebKitEdit.formatblock_addres:'
+        #print 'WebKitEdit.formatblock_div:'
         return self.eval('''
-                document.execCommand("div", false, "address"); ''')
+                document.execCommand("formatblock", false, "div"); ''')
         pass
 
     def do_formatblock_address(self, *args):
