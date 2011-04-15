@@ -2102,7 +2102,7 @@ class MainWindow:
     def do_formatblock_div(self, *args):
         #-print 'do_formatblock_address:'
         self.window.present()
-        self.edit.do_formatblock_address()
+        self.edit.do_formatblock_div()
         pass
 
     def do_formatblock_address(self, *args):
