@@ -458,6 +458,20 @@ class WebKitEdit(webkit.WebView):
         #-print 'WebKitEdit.set_editable:'
         #cmd = r''' document.documentElement.contentEditable="true"; '''
         self.set_editable(1)
+        if self.get_view_source_mode():
+            # 隐藏源码编辑模式下的 webkit 删除工具
+            # webkit 编辑模式下会有
+            #   #WebKit-Editing-Delete-Container
+            #   #WebKit-Editing-Delete-Outline
+            #   #WebKit-Editing-Delete-Button
+            # 几个 div 和 img 删除控件，
+            # 在编辑模式的源码表格下会影响使用，所以需要隐藏掉
+            self.execute_script('''
+                s = document.createElement('style')
+                s.innerHTML = '#WebKit-Editing-Delete-Container, #WebKit-Editing-Delete-Outline, #WebKit-Editing-Delete-Button {display: none;}'
+                document.body.appendChild(s);
+            ''')
+            pass
         cmd = r''' 
             /*document.documentElement.contentEditable="true";*/
             /*document.body.contentEditable="true";*/
