@@ -142,6 +142,13 @@ code{
     margin: 15px;
     padding: 5px;
 }
+#toctitle::-webkit-scrollbar {
+    width: 3.5px;
+    height: 3.5px;
+}
+#toctitle::-webkit-scrollbar-thumb:horizontal {
+    background-color: #D35D22;
+}
   </style>
 </head>
 <body>
@@ -939,9 +946,9 @@ class WebKitEdit(webkit.WebView):
             ><div title="点击固定目录" onclick=\' t = document.getElementById("toctitle"); if(this.alt){ this.alt = 0; document.body.style.cssText=" "; t.style.cssText="\
                 text-indent: 0; background-color:#EEEEFF; display: block; border: 1px solid green; margin: 15px; padding: 5px; white-space: pre; "\
             ; }else{ this.alt = 1; document.body.style.cssText="\
-            margin:5pt; border:5pt; height:100%; width:70%; overflow-y:auto;"\
+            margin:5pt; border:5pt; height:100%; margin-right: 210px; overflow-y:auto;"\
             ; t.style.cssText="\
-                text-indent: 0; background-color:#EEEEFF; display: block; border-left: 1px solid green; margin: 0px; padding: 5px; white-space: pre; top:0px; right:0; width:25%; height:98%; overflow:auto; position:fixed; "\
+            text-indent: 0; background-color:#EEEEFF; display: block; border-left: 1px solid green; margin: 0px; margin-bottom:3px; padding: 5px; white-space: pre; top:0px; right:0; width: 200px; height:98%; overflow:auto; position:fixed; "\
             ; } \' class="dirtitle">目录<br/></div><span id="toctitledir"> </span></div><br/>';
             document.execCommand("inserthtml", false, html); 
             updatedir();
