@@ -469,7 +469,7 @@ class WebKitEdit(webkit.WebView):
             self.execute_script('''
                 s = document.createElement('style')
                 s.innerHTML = '#WebKit-Editing-Delete-Container, #WebKit-Editing-Delete-Outline, #WebKit-Editing-Delete-Button {display: none;}'
-                document.body.appendChild(s);
+                document.head.appendChild(s);
             ''')
             pass
         cmd = r''' 
