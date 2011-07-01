@@ -142,12 +142,19 @@ code{
     margin: 15px;
     padding: 5px;
 }
+#toctitle {
+    -webkit-transition: all .3s ease-out-in;
+}
 #toctitle::-webkit-scrollbar {
     width: 3.5px;
     height: 3.5px;
 }
 #toctitle::-webkit-scrollbar-thumb:horizontal {
     background-color: #D35D22;
+}
+#WebKit-Editing-Delete-Button {
+    border: none;
+    padding: 0px;
 }
   </style>
 </head>
