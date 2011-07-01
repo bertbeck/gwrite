@@ -473,10 +473,15 @@ class WebKitEdit(webkit.WebView):
             #   #WebKit-Editing-Delete-Button
             # 几个 div 和 img 删除控件，
             # 在编辑模式的源码表格下会影响使用，所以需要隐藏掉
+            # 默认源码模式下 styleSheets 是空的，所以得先插入一个 <style>
             self.execute_script('''
                 s = document.createElement('style')
-                s.innerHTML = '#WebKit-Editing-Delete-Container, #WebKit-Editing-Delete-Outline, #WebKit-Editing-Delete-Button {display: none;}'
-                document.head.appendChild(s);
+                document.body.appendChild(s);
+                setTimeout(function() {
+                    document.styleSheets[0].insertRule('#WebKit-Editing-Delete-Container {display: none;}', 0);
+                    document.styleSheets[0].insertRule('#WebKit-Editing-Delete-Outline {display: none;}', 0);
+                    document.styleSheets[0].insertRule('#WebKit-Editing-Delete-Button {display: none;}', 0);
+                }, 100);
             ''')
             pass
         cmd = r''' 
