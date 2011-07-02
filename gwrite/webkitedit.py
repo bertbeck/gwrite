@@ -512,16 +512,7 @@ class WebKitEdit(webkit.WebView):
             /* 目录处理 */
             function getheads(){
                 /* 取得所有 heading 标签到 heads */
-                tags = document.getElementsByTagName("*");
-                heads = new Array();
-                for (var i=0; i<tags.length; i++){
-                    t = tags[i].nodeName;
-                    if (t == "H1" || t == "H2" || t == "H3" || t == "H4" || 
-                            t == "H5" || t == "H6"){
-                        heads.push(tags[i]);
-                    }
-                }
-                return heads;
+                return document.querySelectorAll('h1, h2, h3, h4, h5, h6');
             };
             
             autonu = 0;
