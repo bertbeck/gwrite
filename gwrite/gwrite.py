@@ -2024,7 +2024,7 @@ class MainWindow:
 
     def do_insert_html(self, *args):
         #-print 'do_insert_html:'
-        html = gtkdialogs.textbox(title=_('Insert Html'), text='')
+        html = gtkdialogs.textbox(title=_('Insert Html'), text='', lang='html')
         if html:
             self.edit.do_insert_html(html)
         pass
@@ -2301,8 +2301,8 @@ class MainWindow:
     def on_about(self, *args):
         #-print 'on_about:'
         authors = [
-            "Jiahua Huang <jhuangjiahua(at)gmail.com>",
-            "Aron Xu <happyaron.xu(at)gmail.com>",
+            "Jiahua Huang <jhuangjiahua@gmail.com>",
+            "Aron Xu <happyaron.xu@gmail.com>",
             ]
         about = gobject.new(gtk.AboutDialog, 
                 name=_("GWrite"), 
