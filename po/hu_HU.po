@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gwrite 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-02 14:36+0200\n"
+"POT-Creation-Date: 2011-08-15 17:55+0800\n"
 "PO-Revision-Date: 2011-04-02 16:05+0200\n"
 "Last-Translator: Szontágh Ferenc <szontagh.ferenc@exahost.eu>\n"
 "Language-Team: Hungarian <>\n"
@@ -45,7 +45,7 @@ msgstr "_Ablak Bezárása"
 msgid "_Edit"
 msgstr "S_zerkesztés"
 
-#: ../gwrite/gwrite.py:270 ../gwrite/webkitedit.py:360
+#: ../gwrite/gwrite.py:270 ../gwrite/webkitedit.py:374
 msgid "Pa_ste Unformatted"
 msgstr "Beille_sztés Formázatlanul"
 
@@ -243,12 +243,12 @@ msgstr "Új"
 
 #. -print 'on_open:'
 #: ../gwrite/gwrite.py:912 ../gwrite/gwrite.py:1793
-#: ../gwrite/gtkdialogs.py:374
+#: ../gwrite/gtkdialogs.py:390
 msgid "Open"
 msgstr "Megnyitás"
 
 #: ../gwrite/gwrite.py:920 ../gwrite/gwrite.py:1813
-#: ../gwrite/gtkdialogs.py:437
+#: ../gwrite/gtkdialogs.py:453
 msgid "Save"
 msgstr "Mentés"
 
@@ -333,7 +333,7 @@ msgid "Replace text"
 msgstr "Szöveg csere"
 
 #: ../gwrite/gwrite.py:1286 ../gwrite/gwrite.py:1290 ../gwrite/gwrite.py:1307
-#: ../gwrite/gtkdialogs.py:498
+#: ../gwrite/gtkdialogs.py:514
 msgid "Replace"
 msgstr "Csere"
 
@@ -505,84 +505,96 @@ msgstr ""
 "  -h, --help                    Súgó mutatása\n"
 "  -v, --version                  Verzió információk\n"
 
-#: ../gwrite/gtkdialogs.py:263
+#: ../gwrite/gtkdialogs.py:279
 msgid "Save Changes?"
 msgstr "Mentse a módosításokat?"
 
-#: ../gwrite/gtkdialogs.py:276
+#: ../gwrite/gtkdialogs.py:292
 msgid "Info"
 msgstr "Információ"
 
-#: ../gwrite/gtkdialogs.py:276
+#: ../gwrite/gtkdialogs.py:292
 msgid "Key:"
 msgstr "Kulcs"
 
-#: ../gwrite/gtkdialogs.py:276
+#: ../gwrite/gtkdialogs.py:292
 msgid "Value"
 msgstr "Érték"
 
-#: ../gwrite/gtkdialogs.py:334
+#: ../gwrite/gtkdialogs.py:350
 msgid "Click here for details"
 msgstr "Kattints ide a részletekért"
 
-#: ../gwrite/gtkdialogs.py:399 ../gwrite/gtkdialogs.py:462
+#: ../gwrite/gtkdialogs.py:415 ../gwrite/gtkdialogs.py:478
 msgid "All Files"
 msgstr "Összes fájl"
 
-#: ../gwrite/gtkdialogs.py:424
+#: ../gwrite/gtkdialogs.py:440
 #, python-format
 msgid "Could not open file \"%s\""
 msgstr "Nem sikerült megnyitni a fájlt \"%s\"."
 
-#: ../gwrite/gtkdialogs.py:425
+#: ../gwrite/gtkdialogs.py:441
 #, python-format
 msgid "The file \"%s\" could not be opened. Permission denied."
 msgstr "A fájl \"%s\" nem olvasható. Nincs elég jogosultság hozzá."
 
-#: ../gwrite/gtkdialogs.py:488
+#: ../gwrite/gtkdialogs.py:504
 #, python-format
 msgid "A file named \"%s\" already exists"
 msgstr "A fájl \"%s\" már létezik"
 
-#: ../gwrite/gtkdialogs.py:489
+#: ../gwrite/gtkdialogs.py:505
 msgid "Do you which to replace it with the current project?"
 msgstr "Valóban lecseréled a jelenlegi projekttel?"
 
 #. print 'WebKitEdit.do_insert_contents:'
 #. @FIXME: 无法删除现存目录表格
-#: ../gwrite/webkitedit.py:948
+#: ../gwrite/webkitedit.py:972
 msgid "Table of contents"
 msgstr "Tartalomjegyzék"
 
-#: ../gwrite/config.py:67
+#: ../gwrite/config.py:72
 msgid "Preferences"
 msgstr "Beállítások"
 
-#: ../gwrite/config.py:88
+#: ../gwrite/config.py:93
 msgid "Use Tabs MDI interface"
 msgstr "Használja a Fül felületet"
 
-#: ../gwrite/config.py:89
+#: ../gwrite/config.py:94
 msgid ""
 "Supports editing multiple files in one window (known sometimes as tabs or "
 "MDI)"
 msgstr "Támogatja a több fájlt egy ablakban való szerkesztését"
 
-#: ../gwrite/config.py:98
+#: ../gwrite/config.py:103
 msgid "Single Instance mode"
 msgstr "Egyszerre egy példány futhasson csak"
 
-#: ../gwrite/config.py:99
+#: ../gwrite/config.py:104
 msgid "Only one instance of the application will be running at a time."
 msgstr "Egyszerre egy példány futhat egy időben."
 
-#: ../gwrite/config.py:110
+#: ../gwrite/config.py:115
 msgid "You need to restart gwrite for some options to take effect."
 msgstr "Újra kell indítani a gwrite-ot, hogy pár beállítás érvénybe léphessen."
 
-#: ../gwrite/config.py:119
+#: ../gwrite/config.py:124
 msgid "Run mode"
 msgstr "Futási mód"
+
+#: ../gwrite/config.py:139
+msgid "File Saving"
+msgstr ""
+
+#: ../gwrite/config.py:154
+msgid "Autosave files every:"
+msgstr ""
+
+#: ../gwrite/config.py:167
+msgid "minutes"
+msgstr ""
 
 #: ../gwrite/gtklatex.py:344
 msgid "LaTeX math expressions"
