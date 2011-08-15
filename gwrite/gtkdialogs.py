@@ -13,6 +13,9 @@ import gobject
 __all__ = ['error', 'info', 'inputbox', 'messagedialog', 'open', 'save', 'warning',
         'yesno']
 
+try: import gtksourceview2
+except: gtksourceview2 = None
+
 try: import i18n
 except: from gettext import gettext as _
 
@@ -38,7 +41,7 @@ def colorbox(title="Changing color", previous_color='', current_color=''):
     return htmlcolor
 
 def textbox(title='Text Box', label='Text',
-        parent=None, text=''):
+        parent=None, text='', lang=''):
     """display a text edit dialog
     
     return the text , or None
@@ -55,8 +58,21 @@ def textbox(title='Text Box', label='Text',
     gscw.set_shadow_type(gtk.SHADOW_IN)    
     #gscw.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
     gscw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-    textview=gtk.TextView(buffer=None)
-    buffer = textview.get_buffer()
+
+    if gtksourceview2:
+        textview = gtksourceview2.View()
+        lm = gtksourceview2.language_manager_get_default()
+        buffer = gtksourceview2.Buffer()
+        buffer.set_highlight_syntax(1)
+        if lang:
+            language = lm.get_language(lang)
+            buffer.set_language(language)
+            pass
+        textview.set_buffer(buffer)
+        pass
+    else:
+        textview=gtk.TextView(buffer=None)
+        buffer = textview.get_buffer()
     
     if text:buffer.set_text(text)    
     
