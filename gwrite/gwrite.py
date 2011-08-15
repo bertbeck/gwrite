@@ -16,6 +16,7 @@ import os, sys
 import thread
 import re
 import urllib2
+import time
 
 try: import i18n
 except: from gettext import gettext as _
@@ -1338,6 +1339,8 @@ class MainWindow:
 
         #self.edit.connect("popup-menu", self._populate_popup)
 
+        gobject.timeout_add(1000 * 60, self.do_autosave)
+
 
         if create:
             self.window.add(self.vbox1)
@@ -1657,6 +1660,33 @@ class MainWindow:
             edit.set_saved()
             pass
         pass
+
+    last_autosave_time = 0
+
+    def do_autosave(self, *args):
+        if not float(config.autosaveinterval) \
+           or time.time() - self.last_autosave_time < (float(config.autosaveinterval) - 1 ) * 1000 * 60:
+            return True
+        for editbox in self.notebox.get_children():
+            edit = editbox.edit
+            filename = edit.editfile
+            if filename and not edit.is_saved():
+                if filename and not '.' in os.path.basename(filename):
+                    filename = filename + '.html'
+                    pass
+                html = self.edit.get_html()
+                try:
+                    filedir = os.path.dirname(filename)
+                    if not os.path.exists(filedir): os.makedirs(filedir)
+                    file(filename, 'w').write(html)
+                    edit.set_saved()
+                    pass
+                except:
+                    pass
+                pass
+            pass
+        self.last_autosave_time = time.time()
+        return True
 
     def close_tab(self, widget=None, editbox=None, *args):
         notebox = self.notebox
