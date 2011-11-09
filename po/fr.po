@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GWrite\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-15 17:55+0800\n"
+"POT-Creation-Date: 2011-11-09 15:23+0800\n"
 "PO-Revision-Date: 2010-09-19 16:08+0100\n"
 "Last-Translator: Ludovic Troisi <astohan@gmx.fr>\n"
 "Language-Team: none\n"
@@ -18,138 +18,138 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../gwrite/gwrite.py:25
+#: ../gwrite/gwrite.py:26
 msgid "NewDocument"
 msgstr "Nouveau Document"
 
-#: ../gwrite/gwrite.py:60 ../gwrite/gwrite.py:2308 ../gwrite/gwrite.py:2309
+#: ../gwrite/gwrite.py:61 ../gwrite/gwrite.py:2338 ../gwrite/gwrite.py:2339
 msgid "GWrite"
 msgstr "GWrite"
 
-#: ../gwrite/gwrite.py:112
+#: ../gwrite/gwrite.py:113
 msgid "_File"
 msgstr "_Fichier"
 
-#: ../gwrite/gwrite.py:127
+#: ../gwrite/gwrite.py:128
 msgid "New _Window"
 msgstr "_Nouvelle Fenêtre"
 
-#: ../gwrite/gwrite.py:187
+#: ../gwrite/gwrite.py:188
 msgid "_Recently"
 msgstr "Documents _Récents"
 
-#: ../gwrite/gwrite.py:207
+#: ../gwrite/gwrite.py:208
 msgid "Close Win_dow"
 msgstr "_Fermer la Fenêtre"
 
-#: ../gwrite/gwrite.py:229
+#: ../gwrite/gwrite.py:230
 msgid "_Edit"
 msgstr "_Editer"
 
-#: ../gwrite/gwrite.py:270 ../gwrite/webkitedit.py:374
+#: ../gwrite/gwrite.py:271 ../gwrite/webkitedit.py:374
 msgid "Pa_ste Unformatted"
 msgstr "Coller sans Mise en Forme"
 
-#: ../gwrite/gwrite.py:327
+#: ../gwrite/gwrite.py:328
 msgid "_View"
 msgstr "_Affichage"
 
 #. # 更新目录
-#: ../gwrite/gwrite.py:362 ../gwrite/gwrite.py:1605
+#: ../gwrite/gwrite.py:363 ../gwrite/gwrite.py:1608
 msgid "Update _Contents"
 msgstr "Mettre à jour le _contenu"
 
-#: ../gwrite/gwrite.py:370 ../gwrite/gwrite.py:1613
+#: ../gwrite/gwrite.py:371 ../gwrite/gwrite.py:1616
 msgid "Toggle _Numbered Title"
 msgstr "Classer les _Titres"
 
-#: ../gwrite/gwrite.py:378
+#: ../gwrite/gwrite.py:379
 msgid "Update _Images"
 msgstr "Mettre à jour les _images"
 
-#: ../gwrite/gwrite.py:391
+#: ../gwrite/gwrite.py:392
 msgid "So_urce/Visual"
 msgstr "So_urce/Visuel"
 
-#: ../gwrite/gwrite.py:404
+#: ../gwrite/gwrite.py:405
 msgid "_Insert"
 msgstr "_Insérer"
 
-#: ../gwrite/gwrite.py:410
+#: ../gwrite/gwrite.py:411
 msgid "_Picture"
 msgstr "_Image"
 
-#: ../gwrite/gwrite.py:418
+#: ../gwrite/gwrite.py:419
 msgid "_Link"
 msgstr "_Lien"
 
-#: ../gwrite/gwrite.py:427
+#: ../gwrite/gwrite.py:428
 msgid "Horizontal_Rule"
 msgstr "Ligne _Horizontale"
 
-#: ../gwrite/gwrite.py:435
+#: ../gwrite/gwrite.py:436
 msgid "_Table"
 msgstr "_Tableau"
 
-#: ../gwrite/gwrite.py:443
+#: ../gwrite/gwrite.py:444
 msgid "_HTML"
 msgstr "_Code HTML"
 
 #. #
-#: ../gwrite/gwrite.py:457
+#: ../gwrite/gwrite.py:458
 msgid "LaTeX _Equation"
 msgstr "_Equation LaTex"
 
 #. #
-#: ../gwrite/gwrite.py:466
+#: ../gwrite/gwrite.py:467
 msgid "_Contents"
 msgstr "Table des _Matières"
 
-#: ../gwrite/gwrite.py:478
+#: ../gwrite/gwrite.py:479
 msgid "_Style"
 msgstr "_Style"
 
-#: ../gwrite/gwrite.py:484
+#: ../gwrite/gwrite.py:485
 msgid "_Normal"
 msgstr "_Normal"
 
-#: ../gwrite/gwrite.py:498
+#: ../gwrite/gwrite.py:499
 msgid "Heading _1"
 msgstr "Titre _1"
 
-#: ../gwrite/gwrite.py:507
+#: ../gwrite/gwrite.py:508
 msgid "Heading _2"
 msgstr "Titre _2"
 
-#: ../gwrite/gwrite.py:516
+#: ../gwrite/gwrite.py:517
 msgid "Heading _3"
 msgstr "Titre _3"
 
-#: ../gwrite/gwrite.py:525 ../gwrite/gwrite.py:1011
+#: ../gwrite/gwrite.py:526 ../gwrite/gwrite.py:1012
 msgid "Heading _4"
 msgstr "Titre _4"
 
-#: ../gwrite/gwrite.py:534 ../gwrite/gwrite.py:1019
+#: ../gwrite/gwrite.py:535 ../gwrite/gwrite.py:1020
 msgid "Heading _5"
 msgstr "Titre _5"
 
-#: ../gwrite/gwrite.py:543 ../gwrite/gwrite.py:1027
+#: ../gwrite/gwrite.py:544 ../gwrite/gwrite.py:1028
 msgid "Heading _6"
 msgstr "Titre _6"
 
-#: ../gwrite/gwrite.py:557 ../gwrite/gwrite.py:1040
+#: ../gwrite/gwrite.py:558 ../gwrite/gwrite.py:1041
 msgid "_Bulleted List"
 msgstr "Liste à _puces"
 
-#: ../gwrite/gwrite.py:565 ../gwrite/gwrite.py:1048
+#: ../gwrite/gwrite.py:566 ../gwrite/gwrite.py:1049
 msgid "Numbered _List"
 msgstr "Liste _Numérotée"
 
-#: ../gwrite/gwrite.py:578 ../gwrite/gwrite.py:1061
+#: ../gwrite/gwrite.py:579 ../gwrite/gwrite.py:1062
 msgid "Di_v"
 msgstr "Di_v"
 
-#: ../gwrite/gwrite.py:586 ../gwrite/gwrite.py:1069
+#: ../gwrite/gwrite.py:587 ../gwrite/gwrite.py:1070
 msgid "A_ddress"
 msgstr "A_dresse"
 
@@ -160,333 +160,333 @@ msgstr "A_dresse"
 #. img = gtk.image_new_from_icon_name('stock_text-monospaced', gtk.ICON_SIZE_MENU)
 #. menuitem_formatblock_code.set_image(img)
 #. menu_style.append(menuitem_formatblock_code)
-#: ../gwrite/gwrite.py:602 ../gwrite/gwrite.py:1085
+#: ../gwrite/gwrite.py:603 ../gwrite/gwrite.py:1086
 msgid "Block_quote"
 msgstr "Ci_tation"
 
-#: ../gwrite/gwrite.py:610 ../gwrite/gwrite.py:1093
+#: ../gwrite/gwrite.py:611 ../gwrite/gwrite.py:1094
 msgid "_Preformat"
 msgstr "_Preformat"
 
-#: ../gwrite/gwrite.py:623
+#: ../gwrite/gwrite.py:624
 msgid "For_mat"
 msgstr "_Mise en Forme"
 
-#: ../gwrite/gwrite.py:696
+#: ../gwrite/gwrite.py:697
 msgid "Font _Size"
 msgstr "Taille de la _Police"
 
-#: ../gwrite/gwrite.py:704
+#: ../gwrite/gwrite.py:705
 msgid "_1"
 msgstr "_1"
 
-#: ../gwrite/gwrite.py:710
+#: ../gwrite/gwrite.py:711
 msgid "_2"
 msgstr "_2"
 
-#: ../gwrite/gwrite.py:716
+#: ../gwrite/gwrite.py:717
 msgid "_3"
 msgstr "_3"
 
-#: ../gwrite/gwrite.py:722
+#: ../gwrite/gwrite.py:723
 msgid "_4"
 msgstr "_4"
 
-#: ../gwrite/gwrite.py:728
+#: ../gwrite/gwrite.py:729
 msgid "_5"
 msgstr "_5"
 
-#: ../gwrite/gwrite.py:734
+#: ../gwrite/gwrite.py:735
 msgid "_6"
 msgstr "_6"
 
-#: ../gwrite/gwrite.py:740
+#: ../gwrite/gwrite.py:741
 msgid "_7"
 msgstr "_7"
 
-#: ../gwrite/gwrite.py:756
+#: ../gwrite/gwrite.py:757
 msgid "_Highlight"
 msgstr "_Surligner"
 
-#: ../gwrite/gwrite.py:765
+#: ../gwrite/gwrite.py:766
 msgid "_HiliteColor"
 msgstr "_Couleur de Surlignage"
 
-#: ../gwrite/gwrite.py:773
+#: ../gwrite/gwrite.py:774
 msgid "_Clear format"
 msgstr "_Effacer la Mise en Forme"
 
-#: ../gwrite/gwrite.py:837
+#: ../gwrite/gwrite.py:838
 msgid "Su_perscript"
 msgstr "E_xposant"
 
-#: ../gwrite/gwrite.py:846
+#: ../gwrite/gwrite.py:847
 msgid "Subs_cript"
 msgstr "I_ndice"
 
 #. #
-#: ../gwrite/gwrite.py:859
+#: ../gwrite/gwrite.py:860
 msgid "_Tools"
 msgstr "_Outils"
 
-#: ../gwrite/gwrite.py:865
+#: ../gwrite/gwrite.py:866
 msgid "_Word Count"
 msgstr "Total des _Mots"
 
 #. #
-#: ../gwrite/gwrite.py:878
+#: ../gwrite/gwrite.py:879
 msgid "_Help"
 msgstr "_Aide"
 
-#: ../gwrite/gwrite.py:905
+#: ../gwrite/gwrite.py:906
 msgid "New"
 msgstr "Nouveau"
 
 #. -print 'on_open:'
-#: ../gwrite/gwrite.py:912 ../gwrite/gwrite.py:1793
+#: ../gwrite/gwrite.py:913 ../gwrite/gwrite.py:1823
 #: ../gwrite/gtkdialogs.py:390
 msgid "Open"
 msgstr "Ouvrir"
 
-#: ../gwrite/gwrite.py:920 ../gwrite/gwrite.py:1813
+#: ../gwrite/gwrite.py:921 ../gwrite/gwrite.py:1843
 #: ../gwrite/gtkdialogs.py:453
 msgid "Save"
 msgstr "Enregistrer"
 
-#: ../gwrite/gwrite.py:931
+#: ../gwrite/gwrite.py:932
 msgid "Undo"
 msgstr "Annuler"
 
-#: ../gwrite/gwrite.py:938
+#: ../gwrite/gwrite.py:939
 msgid "Redo"
 msgstr "Réitérer"
 
-#: ../gwrite/gwrite.py:949
+#: ../gwrite/gwrite.py:950
 msgid "Cut"
 msgstr "Couper"
 
-#: ../gwrite/gwrite.py:956
+#: ../gwrite/gwrite.py:957
 msgid "Copy"
 msgstr "Copier"
 
-#: ../gwrite/gwrite.py:963
+#: ../gwrite/gwrite.py:964
 msgid "Paste"
 msgstr "Coller"
 
-#: ../gwrite/gwrite.py:976 ../gwrite/gwrite.py:977
+#: ../gwrite/gwrite.py:977 ../gwrite/gwrite.py:978
 msgid "Paragraph"
 msgstr "Paragraphe"
 
-#: ../gwrite/gwrite.py:984 ../gwrite/gwrite.py:985
+#: ../gwrite/gwrite.py:985 ../gwrite/gwrite.py:986
 msgid "Heading 1"
 msgstr "Titre 1"
 
-#: ../gwrite/gwrite.py:992 ../gwrite/gwrite.py:993
+#: ../gwrite/gwrite.py:993 ../gwrite/gwrite.py:994
 msgid "Heading 2"
 msgstr "Titre 2"
 
-#: ../gwrite/gwrite.py:1002 ../gwrite/gwrite.py:1003
+#: ../gwrite/gwrite.py:1003 ../gwrite/gwrite.py:1004
 msgid "Heading 3"
 msgstr "Titre 3"
 
-#: ../gwrite/gwrite.py:1004
+#: ../gwrite/gwrite.py:1005
 msgid "Style"
 msgstr "Style"
 
-#: ../gwrite/gwrite.py:1132 ../gwrite/gwrite.py:1133
+#: ../gwrite/gwrite.py:1133 ../gwrite/gwrite.py:1134
 msgid "Bold"
 msgstr "Gras"
 
-#: ../gwrite/gwrite.py:1143 ../gwrite/gwrite.py:1144
+#: ../gwrite/gwrite.py:1144 ../gwrite/gwrite.py:1145
 msgid "Highlight"
 msgstr "Surligner"
 
-#: ../gwrite/gwrite.py:1145
+#: ../gwrite/gwrite.py:1146
 msgid "Select hilitecolor"
 msgstr "Choisir la Couleur de Surlignage"
 
-#: ../gwrite/gwrite.py:1158 ../gwrite/gwrite.py:1159
+#: ../gwrite/gwrite.py:1159 ../gwrite/gwrite.py:1160
 msgid "Clear format"
 msgstr "Effacer la Mise en Forme"
 
-#: ../gwrite/gwrite.py:1227
+#: ../gwrite/gwrite.py:1228
 msgid "Close Findbar"
 msgstr "Fermer la Barre de recherche"
 
-#: ../gwrite/gwrite.py:1247 ../gwrite/gwrite.py:1272
+#: ../gwrite/gwrite.py:1248 ../gwrite/gwrite.py:1273
 msgid "Find Next"
 msgstr "Chercher le suivant"
 
-#: ../gwrite/gwrite.py:1249 ../gwrite/gwrite.py:2339
+#: ../gwrite/gwrite.py:1250 ../gwrite/gwrite.py:2369
 msgid "Search text"
 msgstr "Chercher le texte"
 
-#: ../gwrite/gwrite.py:1255
+#: ../gwrite/gwrite.py:1256
 msgid "Find Previous"
 msgstr "Chercher le précédent"
 
-#: ../gwrite/gwrite.py:1267
+#: ../gwrite/gwrite.py:1268
 msgid "Find"
 msgstr "Chercher"
 
-#: ../gwrite/gwrite.py:1284
+#: ../gwrite/gwrite.py:1285
 msgid "Replace text"
 msgstr "Remplacer le texte"
 
-#: ../gwrite/gwrite.py:1286 ../gwrite/gwrite.py:1290 ../gwrite/gwrite.py:1307
+#: ../gwrite/gwrite.py:1287 ../gwrite/gwrite.py:1291 ../gwrite/gwrite.py:1308
 #: ../gwrite/gtkdialogs.py:514
 msgid "Replace"
 msgstr "Remplacer"
 
-#: ../gwrite/gwrite.py:1320
+#: ../gwrite/gwrite.py:1321
 msgid "Replace All"
 msgstr "Tout remplacer"
 
-#: ../gwrite/gwrite.py:1321
+#: ../gwrite/gwrite.py:1322
 msgid "ReplaceAll"
 msgstr "Tout remplacer"
 
-#: ../gwrite/gwrite.py:1489
+#: ../gwrite/gwrite.py:1492
 msgid "Navigation Pane"
 msgstr "Panneau de navigation"
 
-#: ../gwrite/gwrite.py:1540
+#: ../gwrite/gwrite.py:1543
 #, python-format
 msgid "[New Document] %s"
 msgstr "[Nouveau Document] %s"
 
-#: ../gwrite/gwrite.py:1544
+#: ../gwrite/gwrite.py:1547
 msgid "[New Document]"
 msgstr "[Nouveau Document]"
 
-#: ../gwrite/gwrite.py:1593
+#: ../gwrite/gwrite.py:1596
 msgid "_Select this"
 msgstr "_Sélectionner"
 
-#: ../gwrite/gwrite.py:1596
-msgid "您也可以直接<b>双击</b>以选择该章节文字"
-msgstr "您也可以直接<b>双击</b>以选择该章节文字"
+#: ../gwrite/gwrite.py:1599
+msgid "You can also <b>doubleclick</ b> to select the section of text"
+msgstr ""
 
 #. # r: 1, -1, 0 => yes, no, cancel
-#: ../gwrite/gwrite.py:1675
+#: ../gwrite/gwrite.py:1705
 #, python-format
 msgid "%s Save Changes?"
 msgstr "%s Enregistrer les Changements?"
 
-#: ../gwrite/gwrite.py:1795 ../gwrite/gwrite.py:1814 ../gwrite/gwrite.py:1845
+#: ../gwrite/gwrite.py:1825 ../gwrite/gwrite.py:1844 ../gwrite/gwrite.py:1875
 msgid "Html Document"
 msgstr "Document HTML"
 
-#: ../gwrite/gwrite.py:1796
+#: ../gwrite/gwrite.py:1826
 msgid "MS Doc Document"
 msgstr "Document MS Doc"
 
-#: ../gwrite/gwrite.py:1823 ../gwrite/gwrite.py:1854
+#: ../gwrite/gwrite.py:1853 ../gwrite/gwrite.py:1884
 msgid "Unable to write to file."
 msgstr "Incapable d'écrire le fichier"
 
-#: ../gwrite/gwrite.py:1844
+#: ../gwrite/gwrite.py:1874
 msgid "Save As"
 msgstr "Enregistrer Sous"
 
-#: ../gwrite/gwrite.py:1890
+#: ../gwrite/gwrite.py:1920
 msgid "Document"
 msgstr "Document"
 
-#: ../gwrite/gwrite.py:1890
+#: ../gwrite/gwrite.py:1920
 msgid "Selection"
 msgstr "Sélection"
 
-#: ../gwrite/gwrite.py:1891
+#: ../gwrite/gwrite.py:1921
 msgid "Words: "
 msgstr "Mots:"
 
-#: ../gwrite/gwrite.py:1892
+#: ../gwrite/gwrite.py:1922
 msgid "Characters (with spaces): "
 msgstr "Caractères (avec espaces):"
 
-#: ../gwrite/gwrite.py:1893
+#: ../gwrite/gwrite.py:1923
 msgid "Characters (no spaces): "
 msgstr "Caractères (sans espaces):"
 
-#: ../gwrite/gwrite.py:1894
+#: ../gwrite/gwrite.py:1924
 msgid "Paragraphs: "
 msgstr "Paragraphes: "
 
-#: ../gwrite/gwrite.py:1895
+#: ../gwrite/gwrite.py:1925
 msgid "Lines: "
 msgstr "Lignes:"
 
-#: ../gwrite/gwrite.py:1896
+#: ../gwrite/gwrite.py:1926
 msgid "English words: "
 msgstr "Mots en Anglais:"
 
-#: ../gwrite/gwrite.py:1897
+#: ../gwrite/gwrite.py:1927
 msgid "Chinese characters: "
 msgstr "Caractères Chinois:"
 
 #. -print info
-#: ../gwrite/gwrite.py:1900
+#: ../gwrite/gwrite.py:1930
 msgid "Word Counts"
 msgstr "Total des Mots"
 
 #. -print 'do_insertimage:'
-#: ../gwrite/gwrite.py:2000
+#: ../gwrite/gwrite.py:2030
 msgid "InsertImage"
 msgstr "Insérer une Image"
 
-#: ../gwrite/gwrite.py:2000
+#: ../gwrite/gwrite.py:2030
 msgid "Image Files"
 msgstr "Fichiers Image"
 
 #. -print 'do_createlink:'
 #. #print self.edit.get_link_message()
-#: ../gwrite/gwrite.py:2008
+#: ../gwrite/gwrite.py:2038
 msgid "Create Link"
 msgstr "Créer un Lien"
 
-#: ../gwrite/gwrite.py:2008
+#: ../gwrite/gwrite.py:2038
 msgid "URL:"
 msgstr "Adresse Internet:"
 
 #. -print 'do_insert_table:'
-#: ../gwrite/gwrite.py:2021
+#: ../gwrite/gwrite.py:2051
 msgid "Insert Table"
 msgstr "Insérer un Tableau"
 
-#: ../gwrite/gwrite.py:2021
+#: ../gwrite/gwrite.py:2051
 msgid "Rows:"
 msgstr "Lignes:"
 
-#: ../gwrite/gwrite.py:2021
+#: ../gwrite/gwrite.py:2051
 msgid "Cows:"
 msgstr "Colonnes:"
 
 #. -print 'do_insert_html:'
-#: ../gwrite/gwrite.py:2027
+#: ../gwrite/gwrite.py:2057
 msgid "Insert Html"
 msgstr "Insérer le code HTML"
 
-#: ../gwrite/gwrite.py:2312
+#: ../gwrite/gwrite.py:2342
 msgid "Copyright (C) 2009-2010 Jiahua Huang, Aron Xu"
 msgstr "Copyright (C) 2009-2010 Jiahua Huang, Aron Xu"
 
-#: ../gwrite/gwrite.py:2313
+#: ../gwrite/gwrite.py:2343
 msgid "Simple GTK+ HTML5 Rich Text Editor"
 msgstr "Simple Éditeur de texte et HTML5 en GTK+"
 
-#: ../gwrite/gwrite.py:2334
+#: ../gwrite/gwrite.py:2364
 #, python-format
 msgid "%s matches"
 msgstr "%s correspond"
 
-#: ../gwrite/gwrite.py:2377
+#: ../gwrite/gwrite.py:2407
 #, python-format
 msgid "(custom widget: %s)"
 msgstr "(widget personnalisé: %s)"
 
 #. #cmd test
-#: ../gwrite/gwrite.py:2383
+#: ../gwrite/gwrite.py:2413
 msgid ""
 "GWrite\n"
 "\n"
@@ -602,3 +602,6 @@ msgstr ""
 #: ../gwrite/gtklatex.py:344
 msgid "LaTeX math expressions"
 msgstr "Expressions mathématiques LaTex"
+
+#~ msgid "您也可以直接<b>双击</b>以选择该章节文字"
+#~ msgstr "您也可以直接<b>双击</b>以选择该章节文字"
