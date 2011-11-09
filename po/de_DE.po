@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gwrite 0.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-16 22:57+0800\n"
+"POT-Creation-Date: 2011-11-09 15:23+0800\n"
 "PO-Revision-Date: 2011-10-16 22:57+0800\n"
 "Last-Translator: Wolfgang Scheuing <scheuing@zhu.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -283,7 +283,7 @@ msgstr "Überschrift 1"
 
 #: ../gwrite/gwrite.py:993 ../gwrite/gwrite.py:994
 msgid "Heading 2"
-msgstr ""Überschrift 2
+msgstr "Überschrift 2"
 
 #: ../gwrite/gwrite.py:1003 ../gwrite/gwrite.py:1004
 msgid "Heading 3"
@@ -446,7 +446,8 @@ msgid "Create Link"
 msgstr "Link einfügen"
 
 #: ../gwrite/gwrite.py:2038
-msgid "URL: "
+#, fuzzy
+msgid "URL:"
 msgstr "URL: "
 
 #. -print 'do_insert_table:'
@@ -455,11 +456,13 @@ msgid "Insert Table"
 msgstr "Tabelle einfügen"
 
 #: ../gwrite/gwrite.py:2051
-msgid "Rows: "
+#, fuzzy
+msgid "Rows:"
 msgstr "Reihen: "
 
 #: ../gwrite/gwrite.py:2051
-msgid "Cows: "
+#, fuzzy
+msgid "Cows:"
 msgstr "Spalten: "
 
 #. -print 'do_insert_html:'
@@ -479,9 +482,6 @@ msgstr "Ein einfacher GTK+ HTML5 RichText-Editor"
 #, python-format
 msgid "%s matches"
 msgstr "%s Treffer"
-
-
-
 
 #: ../gwrite/gwrite.py:2407
 #, python-format
@@ -510,7 +510,8 @@ msgid "Info"
 msgstr "Info"
 
 #: ../gwrite/gtkdialogs.py:292
-msgid "Key: "
+#, fuzzy
+msgid "Key:"
 msgstr "Schlüssel: "
 
 #: ../gwrite/gtkdialogs.py:292
@@ -559,8 +560,12 @@ msgid "Use Tabs MDI interface"
 msgstr "Tabs / MDI-Interface verwenden"
 
 #: ../gwrite/config.py:94
-msgid "Supports editing multiple files in one window (known sometimes as tabs or MDI)"
-msgstr "Unterstützt das Bearbeiten mehrerer Dateien in einem Fenster (als Tabs / MDI)."
+msgid ""
+"Supports editing multiple files in one window (known sometimes as tabs or "
+"MDI)"
+msgstr ""
+"Unterstützt das Bearbeiten mehrerer Dateien in einem Fenster (als Tabs / "
+"MDI)."
 
 #: ../gwrite/config.py:103
 msgid "Single Instance mode"
@@ -572,7 +577,8 @@ msgstr "Nur 1 Anwendungs-Instanz kann aktiv sein."
 
 #: ../gwrite/config.py:115
 msgid "You need to restart gwrite for some options to take effect."
-msgstr "Eventuell muss GWrite neu gestartet werden, um die Änderungen zu aktivieren."
+msgstr ""
+"Eventuell muss GWrite neu gestartet werden, um die Änderungen zu aktivieren."
 
 #: ../gwrite/config.py:124
 msgid "Run mode"
@@ -583,7 +589,8 @@ msgid "File Saving"
 msgstr "Datei speichern"
 
 #: ../gwrite/config.py:154
-msgid "Autosave files every: "
+#, fuzzy
+msgid "Autosave files every:"
 msgstr "Autospeichern Zeitabstand"
 
 #: ../gwrite/config.py:167

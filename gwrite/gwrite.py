@@ -1596,7 +1596,7 @@ class MainWindow:
             menuitem_select = gtk.ImageMenuItem(_("_Select this"))
             menuitem_select.set_image(gtk.image_new_from_stock(gtk.STOCK_SELECT_ALL, gtk.ICON_SIZE_MENU))
             menuitem_select.show()
-            menuitem_select.set_tooltip_markup(_("您也可以直接<b>双击</b>以选择该章节文字"))
+            menuitem_select.set_tooltip_markup(_("You can also <b>doubleclick</ b> to select the section of text"))
             menuitem_select.connect("activate", self.edit.select_section, href)
 
             menu.append(menuitem_select)
@@ -2410,7 +2410,7 @@ class MainWindow:
 
 ##cmd test
 
-usage = _('''GWrite
+usage = _("""GWrite
 
 Usage:
   gwrite [OPTION...] [FILE...] - Edit html files
@@ -2418,7 +2418,7 @@ Usage:
 Options:
   -h, --help                     Show help options
   -v, --version                  Show version information
-''')
+""")
 
 def openedit(filename=""):
     '''MainWindow() 的包装
