@@ -914,6 +914,15 @@ class MainWindow:
         toolbutton_open.show()
         #toolbutton_open.set_stock_id(gtk.STOCK_OPEN)
         toolbutton_open.connect("clicked", self.on_open)
+
+        ########################################
+        menu_recent = gtk.RecentChooserMenu(self.recent)
+        menu_recent.set_limit(25)
+        #if editfile: self.add_recent(editfile) #改在 new_edit() 里统一添加
+        ##
+        menu_recent.set_filter(self.file_filter)
+        menu_recent.connect("item-activated", self.on_select_recent)
+
         toolbutton_open.set_menu(menu_recent)
         self.toolbar1.add(toolbutton_open)
 
