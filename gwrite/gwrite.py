@@ -1277,7 +1277,7 @@ class MainWindow:
         self.entry_searchtext.set_tooltip_text(_("Search text"))
         #self.entry_searchtext.set_flags(Gtk.CAN_DEFAULT)
         #self.entry_searchtext.grab_focus()
-        self.findbox.pack_start(self.entry_searchtext, False, False, 0)
+        self.findbox.pack_start(self.entry_searchtext, True, True, 0)
 
         button1 = Gtk.Button()
         button1.set_tooltip_text(_("Find Previous"))
@@ -1312,7 +1312,7 @@ class MainWindow:
         self.entry_replace_text.set_tooltip_text(_("Replace text"))
         self.entry_replace_text.set_property("primary-icon-stock", "gtk-find-and-replace")
         self.entry_replace_text.set_property("primary-icon-tooltip-text", _("Replace"))
-        self.findbox.pack_start(self.entry_replace_text, False, False, 0)
+        self.findbox.pack_start(self.entry_replace_text, True, True, 0)
 
         button_replace_text = Gtk.Button()
         button_replace_text.set_tooltip_text(_("Replace"))
