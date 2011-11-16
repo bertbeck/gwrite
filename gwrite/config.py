@@ -84,7 +84,7 @@ def show_preference_dlg(title=_("Preferences"), parent=None, *args):
     config = getconf()
     ##
     notebook1 = Gtk.Notebook()
-    notebook1.set_tab_pos(Gtk.POS_TOP)
+    notebook1.set_tab_pos(Gtk.PositionType.TOP)
     notebook1.set_scrollable(False)
     notebook1.show()
 
@@ -98,7 +98,7 @@ def show_preference_dlg(title=_("Preferences"), parent=None, *args):
     checkbutton_mdi_mode.set_tooltip_text(_("Supports editing multiple files in one window (known sometimes as tabs or MDI)"))
     checkbutton_mdi_mode.show()
     checkbutton_mdi_mode.set_border_width(10)
-    checkbutton_mdi_mode.set_relief(Gtk.RELIEF_NORMAL)
+    checkbutton_mdi_mode.set_relief(Gtk.ReliefStyle.NORMAL)
 
     vbox1.pack_start(checkbutton_mdi_mode, False, False, 0)
 
@@ -108,7 +108,7 @@ def show_preference_dlg(title=_("Preferences"), parent=None, *args):
     checkbutton_single_instance_mode.set_tooltip_text(_("Only one instance of the application will be running at a time."))
     checkbutton_single_instance_mode.show()
     checkbutton_single_instance_mode.set_border_width(10)
-    checkbutton_single_instance_mode.set_relief(Gtk.RELIEF_NORMAL)
+    checkbutton_single_instance_mode.set_relief(Gtk.ReliefStyle.NORMAL)
 
     vbox1.pack_start(checkbutton_single_instance_mode, False, False, 0)
 
@@ -123,7 +123,7 @@ def show_preference_dlg(title=_("Preferences"), parent=None, *args):
     label2.set_line_wrap(True)
     label2.set_width_chars(30)
     label2.show()
-    vbox1.pack_start(label2)
+    vbox1.pack_start(label2, False, False, 0)
 
     label1 = Gtk.Label(_("Run mode"))
     label1.set_angle(0)
@@ -162,7 +162,7 @@ def show_preference_dlg(title=_("Preferences"), parent=None, *args):
     label3.show()
     hbox1.pack_start(label3, False, False, 0)
 
-    spinbutton1 = Gtk.SpinButton(Gtk.Adjustment(value=0, lower=0, upper=180, step_incr=1, page_incr=10))
+    spinbutton1 = Gtk.SpinButton.new_with_range(0, 180, 5)
     spinbutton1.set_value(float(config['autosaveinterval']))
     spinbutton1.show()
 
