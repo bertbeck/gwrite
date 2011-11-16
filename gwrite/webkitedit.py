@@ -7,14 +7,21 @@
 
 __version__ = '0.5.1'
 
-import gtk, gobject
-import webkit
-import jswebkit
+from gi.repository import Gtk
+from gi.repository import GLib
+from gi.repository import GObject
+from gi.repository import Gdk
+from gi.repository import WebKit
+
 import gtklatex
 import urllib2
 import os, errno
 import re
 import docfilter
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 try: import i18n
 except: from gettext import gettext as _
@@ -58,18 +65,18 @@ def textbox(title='Text Box', label='Text',
     
     return the text , or None
     """
-    dlg = gtk.Dialog(title, parent, gtk.DIALOG_DESTROY_WITH_PARENT,
-            (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-            gtk.STOCK_OK, gtk.RESPONSE_OK    ))
+    dlg = Gtk.Dialog(title, parent, Gtk.DialogFlags.DESTROY_WITH_PARENT,
+            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OK, Gtk.ResponseType.OK    ))
     dlg.set_default_size(500,500)
-    #lbl = gtk.Label(label)
+    #lbl = Gtk.Label(label)
     #lbl.set_alignment(0, 0.5)
     #lbl.show()
     #dlg.vbox.pack_start(lbl,  False)
-    gscw = gtk.ScrolledWindow()
-    gscw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-    textview=gtk.TextView()
-    textview.set_wrap_mode(gtk.WRAP_WORD_CHAR)
+    gscw = Gtk.ScrolledWindow()
+    gscw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+    textview=Gtk.TextView()
+    textview.set_wrap_mode(Gtk.WrapMode.WORD_CHAR)
     buffer = textview.get_buffer()
     
     if text: buffer.set_text(text)    
@@ -83,7 +90,7 @@ def textbox(title='Text Box', label='Text',
     
     text=buffer.get_text(buffer.get_start_iter(),buffer.get_end_iter())
     dlg.destroy()
-    if resp == gtk.RESPONSE_OK:
+    if resp == Gtk.ResponseType.OK:
         return text
     return None
 
@@ -164,13 +171,13 @@ code{
 </html>
 '''
 
-class WebKitEdit(webkit.WebView):
+class WebKitEdit(WebKit.WebView):
     '''Html Edit Widget
     '''
     def __init__(self, editfile=''):
         '''WebKitEdit.__init__
         '''
-        webkit.WebView.__init__(self)
+        WebKit.WebView.__init__(self)
         self.set_property('can-focus', True)
         self.set_property('can-default', True)
         self.set_full_content_zoom(1)
@@ -190,7 +197,7 @@ class WebKitEdit(webkit.WebView):
         self.connect("navigation-requested", self.on_navigation_requested)
         self.connect("new-window-policy-decision-requested", self.on_new_window_policy_decision_requested)
         self.connect_after("populate-popup", self.populate_popup)
-        self.connect("script-prompt", self.on_script_prompt)
+        self.connect("console-message", self.on_console_message)
 
         ## 允许跨域 XMLHttpRequest，以便 base64 内联图片
         settings = self.get_settings()
@@ -220,19 +227,18 @@ class WebKitEdit(webkit.WebView):
         elif re.match('.*\.rtf', editfile, re.I):
             pass
         ## 打开 html
-        webkit.WebView.open(self, editfile)
+        WebKit.WebView.open(self, editfile)
         pass
 
-    def ctx(self, *args):
-        '''获取 javascript ctx 对象
-        '''
-        ctx = jswebkit.JSContext(self.get_main_frame().get_global_context())
-        return ctx
-
     def eval(self, js):
-        '''用 ctx 对象执行 javascript
+        '''执行 javascript
         '''
-        return self.ctx().EvaluateScript(js)
+        self.execute_script('''
+        document.cookie = 'jsvalue=' + encodeURIComponent(eval(decodeURIComponent('%s')));
+        ''' % urllib2.quote(js))
+        d = self.get_dom_document()
+        m = re.findall('jsvalue=([^;]*)', d.get_cookie())
+        return m and urllib2.unquote(m[0]) or ''
 
     def get_html(self, *args):
         '''获取 HTML 内容
@@ -240,7 +246,7 @@ class WebKitEdit(webkit.WebView):
         if not self.get_view_source_mode():
             self.execute_script('guesstitle();')
             self.do_image_base64()
-            html = self.ctx().EvaluateScript('document.documentElement.innerHTML')
+            html = self.eval('document.documentElement.innerHTML')
             html = format_html(html)
             return '<!DOCTYPE html>\n<html>\n%s\n</html>\n' % html
         else:
@@ -267,7 +273,7 @@ class WebKitEdit(webkit.WebView):
     def get_selection(self, *args):
         '''获取选中区域的文本
         '''
-        text = self.ctx().EvaluateScript('''
+        text = self.eval('''
             document.getSelection().toString();
         ''')
         return text
@@ -277,7 +283,7 @@ class WebKitEdit(webkit.WebView):
 
         处理过换行
         '''
-        text = self.ctx().EvaluateScript('''
+        text = self.eval('''
             //text = document.body.textContent;
             html = document.body.innerHTML;
             html = html.replace(/<h/g, '\\n<h');
@@ -295,7 +301,7 @@ class WebKitEdit(webkit.WebView):
     def set_saved(self, *args):
         '''设置为已经保存
         '''
-        self._html = self.ctx().EvaluateScript('document.documentElement.innerHTML')
+        self._html = self.eval('document.documentElement.innerHTML')
         pass
 
     def unset_saved(self, *args):
@@ -307,7 +313,7 @@ class WebKitEdit(webkit.WebView):
     def is_saved(self, *args):
         '''查询是否已经保存
         '''
-        return self._html == self.ctx().EvaluateScript('document.documentElement.innerHTML')
+        return self._html == self.eval('document.documentElement.innerHTML')
 
     def on_new_window_policy_decision_requested(self, widget,
             WebKitWebFrame, WebKitNetworkRequest, 
@@ -320,14 +326,10 @@ class WebKitEdit(webkit.WebView):
         os.spawnvp(os.P_NOWAIT, 'xdg-open', ['xdg-open', uri])
         return True
 
-    def on_script_prompt(self, view, WebKitWebFrame, key, value, gpointer):
-        '''处理 script-prompt 事件
-        '''
-        #-print key, value
-        ## 更新 LaTex 公式的情况
-        if key.startswith('_#uptex:'):
-            id = key[8:]
-            latex = value[8:].replace('\\\\', '\\')
+    def on_console_message(self, view, msg, *args):
+        if msg.startswith('_#uptex:'):
+            a, id, m, latex = msg.split(':', 3)
+            print id, latex
             latex = gtklatex.latex_dlg(latex)
             if latex:
                 img = gtklatex.tex2base64(latex)
@@ -339,8 +341,8 @@ class WebKitEdit(webkit.WebView):
                 """ % (id, stastr(latex), stastr(img)))
                 pass
             self.execute_script("""document.getElementById('%s').removeAttribute("id");""" % id)
-            return True
-        return
+            return False
+        return False
 
     def on_navigation_requested(self, widget, WebKitWebFrame, WebKitNetworkRequest):
         '''处理点击链接事件
@@ -369,9 +371,11 @@ class WebKitEdit(webkit.WebView):
         '''处理编辑区右键菜单
         '''
         # 无格式粘贴菜单
-        text = gtk.Clipboard().wait_for_text() or gtk.Clipboard(selection="PRIMARY").wait_for_text()
+        cb = self.get_clipboard(Gdk.Atom.intern_static_string('CLIPBOARD'))
+        cbp = self.get_clipboard(Gdk.Atom.intern_static_string('PRIMARY'))
+        text = cb.wait_for_text() or cbp.wait_for_text()
         if text:
-            menuitem_paste_unformatted = gtk.ImageMenuItem(_("Pa_ste Unformatted"))
+            menuitem_paste_unformatted = Gtk.ImageMenuItem(_("Pa_ste Unformatted"))
             menuitem_paste_unformatted.show()
             #menuitem_paste_unformatted.connect("activate", self.do_paste_unformatted)
             menuitem_paste_unformatted.connect("activate", 
@@ -661,7 +665,7 @@ class WebKitEdit(webkit.WebView):
 
             function uptex(img){
                 img.id = 'mimetex_' + randomChar(5);
-                prompt("_#uptex:"+img.id, img.alt);
+                console.log("_#uptex:" + img.id + ':' + img.alt);
             }
                         
             window.focus();
@@ -673,7 +677,7 @@ class WebKitEdit(webkit.WebView):
         '''convert images to base64 inline image
         see http://tools.ietf.org/html/rfc2397
         '''
-        gtk.gdk.threads_leave() # 修正线程问题
+        Gdk.threads_leave() # 修正线程问题
         self.execute_script(r'''
         var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
         function encode64(input) {
@@ -753,7 +757,7 @@ class WebKitEdit(webkit.WebView):
                 else:
                     self.__prev_source_html = ''
                 pass
-            gobject.idle_add(do_is_saved)
+            GObject.idle_add(do_is_saved)
             pass
         ## 从源码模式转到所见所得模式
         else:
@@ -762,7 +766,7 @@ class WebKitEdit(webkit.WebView):
             self.reload()
             if self.__prev_source_html == html:
                 self.update_html(self.__prev_visual_html)
-                gobject.idle_add(self.set_saved)
+                GObject.idle_add(self.set_saved)
                 pass
             else:
                 self.update_html(html)
@@ -812,7 +816,7 @@ class WebKitEdit(webkit.WebView):
         '''无格式粘贴
         '''
         #-print 'do_paste_unformatted:'
-        text = gtk.Clipboard().wait_for_text() or gtk.Clipboard(selection="PRIMARY").wait_for_text()
+        text = Gtk.Clipboard().wait_for_text() or Gtk.Clipboard(selection="PRIMARY").wait_for_text()
         if text:
             self.do_insert_text(text)
             return
@@ -1343,12 +1347,12 @@ class WebKitEdit(webkit.WebView):
 
 if __name__=="__main__":
     #print 'WebKitEdit.main'
-    w=gtk.Window()
-    w.connect("delete_event", gtk.main_quit)
+    w=Gtk.Window()
+    w.connect("delete_event", Gtk.main_quit)
     m=WebKitEdit()
     w.add(m)
     w.show_all()
-    gtk.main()
+    Gtk.main()
 
 
 

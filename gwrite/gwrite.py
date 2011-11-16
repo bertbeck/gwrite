@@ -7,7 +7,11 @@
 
 __version__ = '0.5.1'
 
-import gtk, gobject
+from gi.repository import Gtk
+from gi.repository import GLib
+from gi.repository import GObject
+from gi.repository import Gdk
+
 import gtkdialogs
 import gtklatex
 import config
@@ -30,8 +34,8 @@ def get_doctitle(html):
 def proc_webkit_color(*webviews):
     ## 设置样式，让 WebKit 背景色使用 Gtk 颜色
     style = webviews[0].get_style()
-    html_bg_color = str(style.base[gtk.STATE_NORMAL])
-    html_fg_color = str(style.text[gtk.STATE_NORMAL])
+    html_bg_color = str(style.base[Gtk.StateType.NORMAL])
+    html_fg_color = str(style.text[Gtk.StateType.NORMAL])
     user_stylesheet = ''' html {
         background-color: %s;
         color: %s;\n}''' % (html_bg_color, html_fg_color)
@@ -85,12 +89,12 @@ class MainWindow:
         import webkitedit # 推迟 import webkitedit
         ##
         if accel_group is None:
-            self.accel_group = gtk.AccelGroup()
+            self.accel_group = Gtk.AccelGroup()
         else:
             self.accel_group = accel_group
         if create:
-            self.window = gtk.Window()
-            gtk.window_set_default_icon_name("gtk-dnd")
+            self.window = Gtk.Window()
+            self.window.set_default_icon_name("gtk-dnd")
             self.window.set_icon_name("gtk-dnd")
             self.window.set_default_size(780, 550)
             self.window.set_title(Title)
@@ -99,126 +103,126 @@ class MainWindow:
             self.window.show()
             self.window.connect("delete_event", self.on_close)
 
-        ## 用 Alt-1, Alt-2... 来切换标签页，gtk.gdk.MOD1_MASK 是 Alt
+        ## 用 Alt-1, Alt-2... 来切换标签页，Gdk.ModifierType.MOD1_MASK 是 Alt
         for k in range(1, 10):
-            self.accel_group.connect_group(gtk.gdk.keyval_from_name(str(k)), gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE, self.on_accel_connect_group)
+            self.accel_group.connect(Gdk.keyval_from_name(str(k)), Gdk.ModifierType.MOD1_MASK, Gtk.AccelFlags.VISIBLE, self.on_accel_connect)
             pass
 
-        self.vbox1 = gtk.VBox(False, 0)
+        self.vbox1 = Gtk.VBox(False, 0)
         self.vbox1.show()
 
-        menubar1 = gtk.MenuBar()
+        menubar1 = Gtk.MenuBar()
         menubar1.show()
 
-        menuitem_file = gtk.MenuItem(_("_File"))
+        menuitem_file = Gtk.MenuItem.new_with_mnemonic(_("_File"))
         menuitem_file.show()
 
-        menu_file = gtk.Menu()
-        menu_file.append(gtk.TearoffMenuItem())
+        menu_file = Gtk.Menu()
+        menu_file.append(Gtk.TearoffMenuItem())
         self.menu_file = menu_file
 
-        menuitem_new = gtk.ImageMenuItem("gtk-new")
+        menuitem_new = Gtk.ImageMenuItem.new_from_stock("gtk-new", self.accel_group)
         menuitem_new.show()
         menuitem_new.connect("activate", self.on_new)
-        menuitem_new.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("n"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_new.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("n"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_file.append(menuitem_new)
 
         if config.mdi_mode:
-            menuitem_new_window = gtk.ImageMenuItem(_("New _Window"))
+            menuitem_new_window = Gtk.ImageMenuItem.new_with_mnemonic(_("New _Window"))
             menuitem_new_window.show()
-            img = gtk.image_new_from_stock(gtk.STOCK_NEW, gtk.ICON_SIZE_MENU)
+            img = Gtk.Image.new_from_stock(Gtk.STOCK_NEW, Gtk.IconSize.MENU)
             menuitem_new_window.set_image(img)
             menuitem_new_window.connect("activate", self.on_new_window)
-            menuitem_new_window.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("n"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
+            menuitem_new_window.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("n"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.SHIFT_MASK, Gtk.AccelFlags.VISIBLE)
 
             menu_file.append(menuitem_new_window)
             pass
 
-        menuitem_open = gtk.ImageMenuItem("gtk-open")
+        menuitem_open = Gtk.ImageMenuItem.new_from_stock("gtk-open", self.accel_group)
         menuitem_open.show()
         menuitem_open.connect("activate", self.on_open)
-        menuitem_open.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("o"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_open.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("o"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
 
         menu_file.append(menuitem_open)
 
-        menuitem_save = gtk.ImageMenuItem("gtk-save")
+        menuitem_save = Gtk.ImageMenuItem.new_from_stock("gtk-save", self.accel_group)
         menuitem_save.show()
         menuitem_save.connect("activate", self.on_save)
-        menuitem_save.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("s"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_save.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("s"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
 
         menu_file.append(menuitem_save)
 
-        menuitem_save_as = gtk.ImageMenuItem("gtk-save-as")
+        menuitem_save_as = Gtk.ImageMenuItem.new_from_stock("gtk-save-as", self.accel_group)
         menuitem_save_as.show()
         menuitem_save_as.connect("activate", self.on_save_as)
 
         menu_file.append(menuitem_save_as)
 
-        menu_file.append(gtk.MenuItem())
+        menu_file.append(Gtk.SeparatorMenuItem.new())
 
-        menuitem = gtk.ImageMenuItem("gtk-properties")
+        menuitem = Gtk.ImageMenuItem.new_from_stock("gtk-properties", self.accel_group)
         menuitem.show()
         menuitem.connect("activate", self.on_word_counts)
 
         menu_file.append(menuitem)
 
-        menuitem_print = gtk.ImageMenuItem("gtk-print")
+        menuitem_print = Gtk.ImageMenuItem.new_from_stock("gtk-print", self.accel_group)
         menuitem_print.show()
         menuitem_print.connect("activate", self.on_print)
-        menuitem_print.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("p"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_print.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("p"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
         
         menu_file.append(menuitem_print)
 
-        menu_file.append(gtk.MenuItem())
+        menu_file.append(Gtk.SeparatorMenuItem.new())
 
         ## 最近使用文件菜单 ################
-        self.recent = gtk.RecentManager()
-        menu_recent = gtk.RecentChooserMenu(self.recent)
+        self.recent = Gtk.RecentManager()
+        menu_recent = Gtk.RecentChooserMenu()
         menu_recent.set_limit(25)
         #if editfile: self.add_recent(editfile) #改在 new_edit() 里统一添加
         ##
-        self.file_filter = gtk.RecentFilter()
+        self.file_filter = Gtk.RecentFilter()
         self.file_filter.add_mime_type("text/html")
         menu_recent.set_filter(self.file_filter)
 
         menu_recent.connect("item-activated", self.on_select_recent)
-        menuitem_recent = gtk.ImageMenuItem(_("_Recently"))
-        menuitem_recent.set_image(gtk.image_new_from_icon_name("document-open-recent", gtk.ICON_SIZE_MENU))
+        menuitem_recent = Gtk.ImageMenuItem.new_with_mnemonic(_("_Recently"))
+        menuitem_recent.set_image(Gtk.Image.new_from_icon_name("document-open-recent", Gtk.IconSize.MENU))
 
         menuitem_recent.set_submenu(menu_recent)
         menu_file.append(menuitem_recent)
         #####################################
 
-        menuitem_separatormenuitem1 = gtk.MenuItem()
+        menuitem_separatormenuitem1 = Gtk.SeparatorMenuItem.new()
         menuitem_separatormenuitem1.show()
 
         menu_file.append(menuitem_separatormenuitem1)
 
-        menuitem_close = gtk.ImageMenuItem("gtk-close")
+        menuitem_close = Gtk.ImageMenuItem.new_from_stock("gtk-close", self.accel_group)
         menuitem_close.show()
         menuitem_close.connect("activate", self.close_tab)
-        menuitem_close.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("w"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_close.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("w"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_file.append(menuitem_close)
         
         if config.mdi_mode:
-            menuitem_close_window = gtk.ImageMenuItem(_("Close Win_dow"))
+            menuitem_close_window = Gtk.ImageMenuItem.new_with_mnemonic(_("Close Win_dow"))
             menuitem_close_window.show()
-            img = gtk.image_new_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+            img = Gtk.Image.new_from_stock(Gtk.STOCK_CLOSE, Gtk.IconSize.MENU)
             menuitem_close_window.set_image(img)
             menuitem_close_window.connect("activate", self.on_close)
-            menuitem_close_window.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("w"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
+            menuitem_close_window.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("w"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.SHIFT_MASK, Gtk.AccelFlags.VISIBLE)
 
             menu_file.append(menuitem_close_window)
             pass
 
-        menuitem_quit = gtk.ImageMenuItem("gtk-quit")
+        menuitem_quit = Gtk.ImageMenuItem.new_from_stock("gtk-quit", self.accel_group)
         menuitem_quit.show()
         menuitem_quit.connect("activate", self.on_quit)
-        menuitem_quit.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("q"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_quit.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("q"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
 
         menu_file.append(menuitem_quit)
@@ -227,94 +231,94 @@ class MainWindow:
 
         menubar1.append(menuitem_file)
 
-        menuitem_edit = gtk.MenuItem(_("_Edit"))
+        menuitem_edit = Gtk.MenuItem.new_with_mnemonic(_("_Edit"))
         menuitem_edit.show()
 
-        menu_edit = gtk.Menu()
-        menu_edit.append(gtk.TearoffMenuItem())
+        menu_edit = Gtk.Menu()
+        menu_edit.append(Gtk.TearoffMenuItem())
 
-        menuitem_undo = gtk.ImageMenuItem("gtk-undo")
+        menuitem_undo = Gtk.ImageMenuItem.new_from_stock("gtk-undo", self.accel_group)
         menuitem_undo.show()
         menuitem_undo.connect("activate", self.do_undo)
 
         menu_edit.append(menuitem_undo)
 
-        menuitem_redo = gtk.ImageMenuItem("gtk-redo")
+        menuitem_redo = Gtk.ImageMenuItem.new_from_stock("gtk-redo", self.accel_group)
         menuitem_redo.show()
         menuitem_redo.connect("activate", self.do_redo)
 
         menu_edit.append(menuitem_redo)
 
-        menuitem_separator2 = gtk.MenuItem()
+        menuitem_separator2 = Gtk.SeparatorMenuItem.new()
         menuitem_separator2.show()
 
         menu_edit.append(menuitem_separator2)
 
-        menuitem_cut = gtk.ImageMenuItem("gtk-cut")
+        menuitem_cut = Gtk.ImageMenuItem.new_from_stock("gtk-cut", self.accel_group)
         menuitem_cut.show()
         menuitem_cut.connect("activate", self.do_cut)
 
         menu_edit.append(menuitem_cut)
 
-        menuitem_copy = gtk.ImageMenuItem("gtk-copy")
+        menuitem_copy = Gtk.ImageMenuItem.new_from_stock("gtk-copy", self.accel_group)
         menuitem_copy.show()
         menuitem_copy.connect("activate", self.do_copy)
 
         menu_edit.append(menuitem_copy)
 
-        menuitem_paste = gtk.ImageMenuItem("gtk-paste")
+        menuitem_paste = Gtk.ImageMenuItem.new_from_stock("gtk-paste", self.accel_group)
         menuitem_paste.show()
         menuitem_paste.connect("activate", self.do_paste)
 
         menu_edit.append(menuitem_paste)
 
-        menuitem_paste_unformatted = gtk.ImageMenuItem(_("Pa_ste Unformatted"))
+        menuitem_paste_unformatted = Gtk.ImageMenuItem.new_with_mnemonic(_("Pa_ste Unformatted"))
         menuitem_paste_unformatted.show()
         menuitem_paste_unformatted.connect("activate", self.do_paste_unformatted)
         menuitem_paste_unformatted.add_accelerator("activate", 
-                self.accel_group, gtk.gdk.keyval_from_name("v"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
+                self.accel_group, Gdk.keyval_from_name("v"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.SHIFT_MASK, Gtk.AccelFlags.VISIBLE)
         menu_edit.append(menuitem_paste_unformatted)
 
-        menuitem_delete = gtk.ImageMenuItem("gtk-delete")
+        menuitem_delete = Gtk.ImageMenuItem.new_from_stock("gtk-delete", self.accel_group)
         menuitem_delete.show()
         menuitem_delete.connect("activate", self.do_delete)
 
         menu_edit.append(menuitem_delete)
 
-        menuitem_separator3 = gtk.MenuItem()
+        menuitem_separator3 = Gtk.SeparatorMenuItem.new()
         menuitem_separator3.show()
 
         menu_edit.append(menuitem_separator3)
 
-        menuitem_select_all = gtk.ImageMenuItem("gtk-select-all")
+        menuitem_select_all = Gtk.ImageMenuItem.new_from_stock("gtk-select-all", self.accel_group)
         menuitem_select_all.show()
         menuitem_select_all.connect("activate", self.do_selectall)
 
         menu_edit.append(menuitem_select_all)
 
-        menuitem_separator12 = gtk.MenuItem()
+        menuitem_separator12 = Gtk.SeparatorMenuItem.new()
         menuitem_separator12.show()
 
         menu_edit.append(menuitem_separator12)
 
-        menuitem_find = gtk.ImageMenuItem("gtk-find")
+        menuitem_find = Gtk.ImageMenuItem.new_from_stock("gtk-find", self.accel_group)
         menuitem_find.show()
         menuitem_find.connect("activate", self.show_findbar)
-        menuitem_find.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("f"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_find.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("f"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
 
         menu_edit.append(menuitem_find)
 
-        menuitem_find_and_replace = gtk.ImageMenuItem("gtk-find-and-replace")
+        menuitem_find_and_replace = Gtk.ImageMenuItem.new_from_stock("gtk-find-and-replace", self.accel_group)
         menuitem_find_and_replace.show()
         menuitem_find_and_replace.connect("activate", self.show_findbar)
 
         menu_edit.append(menuitem_find_and_replace)
         ##
 
-        menu_edit.append(gtk.MenuItem())
+        menu_edit.append(Gtk.SeparatorMenuItem.new())
 
-        menuitem = gtk.ImageMenuItem("gtk-preferences")
+        menuitem = Gtk.ImageMenuItem.new_from_stock("gtk-preferences", self.accel_group)
         menuitem.show()
         menuitem.connect("activate", lambda *i: (config.show_preference_dlg(), config.write()))
 
@@ -325,76 +329,76 @@ class MainWindow:
 
         menubar1.append(menuitem_edit)
 
-        menuitem_view = gtk.MenuItem(_("_View"))
+        menuitem_view = Gtk.MenuItem.new_with_mnemonic(_("_View"))
         menuitem_view.show()
 
-        menu_view = gtk.Menu()
-        menu_view.append(gtk.TearoffMenuItem())
+        menu_view = Gtk.Menu()
+        menu_view.append(Gtk.TearoffMenuItem())
 
         ## 缩放菜单
-        menuitem_zoom_in = gtk.ImageMenuItem(gtk.STOCK_ZOOM_IN)
+        menuitem_zoom_in = Gtk.ImageMenuItem.new_from_stock(Gtk.STOCK_ZOOM_IN, self.accel_group)
         menuitem_zoom_in.connect("activate", self.zoom_in)
         # Ctrl++
-        menuitem_zoom_in.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("equal"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-        menuitem_zoom_in.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("plus"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_zoom_in.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("equal"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
+        menuitem_zoom_in.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("plus"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
         menuitem_zoom_in.show()
         menu_view.append(menuitem_zoom_in)
 
-        menuitem_zoom_out = gtk.ImageMenuItem(gtk.STOCK_ZOOM_OUT)
+        menuitem_zoom_out = Gtk.ImageMenuItem.new_from_stock(Gtk.STOCK_ZOOM_OUT, self.accel_group)
         menuitem_zoom_out.connect("activate", self.zoom_out)
         # Ctrl+-
-        menuitem_zoom_out.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("minus"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-        menuitem_zoom_out.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("underscore"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_zoom_out.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("minus"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
+        menuitem_zoom_out.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("underscore"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
         menuitem_zoom_out.show()
         menu_view.append(menuitem_zoom_out)
 
-        menuitem_zoom_100 = gtk.ImageMenuItem(gtk.STOCK_ZOOM_100)
+        menuitem_zoom_100 = Gtk.ImageMenuItem.new_from_stock(Gtk.STOCK_ZOOM_100, self.accel_group)
         menuitem_zoom_100.connect("activate", self.zoom_100)
         # Ctrl+0
-        menuitem_zoom_100.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("0"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_zoom_100.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("0"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
         menuitem_zoom_100.show()
         menu_view.append(menuitem_zoom_100)
 
         ##
-        menuitem_separator10 = gtk.MenuItem()
+        menuitem_separator10 = Gtk.SeparatorMenuItem.new()
         menuitem_separator10.show()
         menu_view.append(menuitem_separator10)
 
-        menuitem_update_contents = gtk.ImageMenuItem(_("Update _Contents"))
+        menuitem_update_contents = Gtk.ImageMenuItem.new_with_mnemonic(_("Update _Contents"))
         menuitem_update_contents.show()
         menuitem_update_contents.connect("activate", self.view_update_contents)
 
-        img = gtk.image_new_from_stock(gtk.STOCK_INDEX, gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_stock(Gtk.STOCK_INDEX, Gtk.IconSize.MENU)
         menuitem_update_contents.set_image(img)
         menu_view.append(menuitem_update_contents)
 
-        menuitem_toggle_numbered_title = gtk.ImageMenuItem(_("Toggle _Numbered Title"))
+        menuitem_toggle_numbered_title = Gtk.ImageMenuItem.new_with_mnemonic(_("Toggle _Numbered Title"))
         menuitem_toggle_numbered_title.show()
         menuitem_toggle_numbered_title.connect("activate", self.view_toggle_autonumber)
 
-        img = gtk.image_new_from_stock(gtk.STOCK_SORT_DESCENDING, gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_stock(Gtk.STOCK_SORT_DESCENDING, Gtk.IconSize.MENU)
         menuitem_toggle_numbered_title.set_image(img)
         menu_view.append(menuitem_toggle_numbered_title)
 
-        menuitem_update_images = gtk.ImageMenuItem(_("Update _Images"))
+        menuitem_update_images = Gtk.ImageMenuItem.new_with_mnemonic(_("Update _Images"))
         menuitem_update_images.show()
         menuitem_update_images.connect("activate", self.do_update_images)
 
-        img = gtk.image_new_from_icon_name('stock_insert_image', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_insert_image', Gtk.IconSize.MENU)
         menuitem_update_images.set_image(img)
         menu_view.append(menuitem_update_images)
 
-        menuitem_separator10 = gtk.MenuItem()
+        menuitem_separator10 = Gtk.SeparatorMenuItem.new()
         menuitem_separator10.show()
 
         menu_view.append(menuitem_separator10)
 
-        menuitem_view_source = gtk.ImageMenuItem(_("So_urce/Visual"))
+        menuitem_view_source = Gtk.ImageMenuItem.new_with_mnemonic(_("So_urce/Visual"))
         menuitem_view_source.show()
         menuitem_view_source.connect("activate", self.view_sourceview)
-        menuitem_view_source.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("u"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_view_source.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("u"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_view-html-source', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_view-html-source', Gtk.IconSize.MENU)
         menuitem_view_source.set_image(img)
         menu_view.append(menuitem_view_source)
 
@@ -402,73 +406,73 @@ class MainWindow:
 
         menubar1.append(menuitem_view)
 
-        menuitem_insert = gtk.MenuItem(_("_Insert"))
+        menuitem_insert = Gtk.MenuItem.new_with_mnemonic(_("_Insert"))
         menuitem_insert.show()
 
-        menu_insert = gtk.Menu()
-        menu_insert.append(gtk.TearoffMenuItem())
+        menu_insert = Gtk.Menu()
+        menu_insert.append(Gtk.TearoffMenuItem())
 
-        menuitem_picture = gtk.ImageMenuItem(_("_Picture"))
+        menuitem_picture = Gtk.ImageMenuItem.new_with_mnemonic(_("_Picture"))
         menuitem_picture.show()
         menuitem_picture.connect("activate", self.do_insertimage)
 
-        img = gtk.image_new_from_icon_name('stock_insert_image', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_insert_image', Gtk.IconSize.MENU)
         menuitem_picture.set_image(img)
         menu_insert.append(menuitem_picture)
 
-        menuitem_link = gtk.ImageMenuItem(_("_Link"))
+        menuitem_link = Gtk.ImageMenuItem.new_with_mnemonic(_("_Link"))
         menuitem_link.show()
         menuitem_link.connect("activate", self.do_createlink)
-        menuitem_link.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("k"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_link.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("k"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_link', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_link', Gtk.IconSize.MENU)
         menuitem_link.set_image(img)
         menu_insert.append(menuitem_link)
 
-        menuitem_horizontalrule = gtk.ImageMenuItem(_("Horizontal_Rule"))
+        menuitem_horizontalrule = Gtk.ImageMenuItem.new_with_mnemonic(_("Horizontal_Rule"))
         menuitem_horizontalrule.show()
         menuitem_horizontalrule.connect("activate", self.do_inserthorizontalrule)
 
-        img = gtk.image_new_from_icon_name('stock_insert-rule', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_insert-rule', Gtk.IconSize.MENU)
         menuitem_horizontalrule.set_image(img)
         menu_insert.append(menuitem_horizontalrule)
 
-        menuitem_insert_table = gtk.ImageMenuItem(_("_Table"))
+        menuitem_insert_table = Gtk.ImageMenuItem.new_with_mnemonic(_("_Table"))
         menuitem_insert_table.show()
         menuitem_insert_table.connect("activate", self.do_insert_table)
 
-        img = gtk.image_new_from_icon_name('stock_insert-table', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_insert-table', Gtk.IconSize.MENU)
         menuitem_insert_table.set_image(img)
         menu_insert.append(menuitem_insert_table)
 
-        menuitem_insert_html = gtk.ImageMenuItem(_("_HTML"))
+        menuitem_insert_html = Gtk.ImageMenuItem.new_with_mnemonic(_("_HTML"))
         menuitem_insert_html.show()
         menuitem_insert_html.connect("activate", self.do_insert_html)
 
-        img = gtk.image_new_from_icon_name('stock_view-html-source', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_view-html-source', Gtk.IconSize.MENU)
         menuitem_insert_html.set_image(img)
         menu_insert.append(menuitem_insert_html)
 
-        menuitem_separator9 = gtk.MenuItem()
+        menuitem_separator9 = Gtk.SeparatorMenuItem.new()
         menuitem_separator9.show()
 
         menu_insert.append(menuitem_separator9)
 
         ##
-        menuitem_latex_math_equation = gtk.ImageMenuItem(_("LaTeX _Equation"))
+        menuitem_latex_math_equation = Gtk.ImageMenuItem.new_with_mnemonic(_("LaTeX _Equation"))
         menuitem_latex_math_equation.show()
         menuitem_latex_math_equation.connect("activate", self.do_insert_latex_math_equation)
 
         menu_insert.append(menuitem_latex_math_equation)
         
-        menu_insert.append(gtk.MenuItem())
+        menu_insert.append(Gtk.SeparatorMenuItem.new())
         ##
 
-        menuitem_insert_contents = gtk.ImageMenuItem(_("_Contents"))
+        menuitem_insert_contents = Gtk.ImageMenuItem.new_with_mnemonic(_("_Contents"))
         menuitem_insert_contents.show()
         menuitem_insert_contents.connect("activate", self.do_insert_contents)
 
-        img = gtk.image_new_from_stock(gtk.STOCK_INDEX, gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_stock(Gtk.STOCK_INDEX, Gtk.IconSize.MENU)
         menuitem_insert_contents.set_image(img)
         menu_insert.append(menuitem_insert_contents)
 
@@ -476,144 +480,144 @@ class MainWindow:
 
         menubar1.append(menuitem_insert)
 
-        menuitem_style = gtk.MenuItem(_("_Style"))
+        menuitem_style = Gtk.MenuItem.new_with_mnemonic(_("_Style"))
         menuitem_style.show()
 
-        menu_style = gtk.Menu()
-        menu_style.append(gtk.TearoffMenuItem())
+        menu_style = Gtk.Menu()
+        menu_style.append(Gtk.TearoffMenuItem())
 
-        menuitem_normal = gtk.ImageMenuItem(_("_Normal"))
+        menuitem_normal = Gtk.ImageMenuItem.new_with_mnemonic(_("_Normal"))
         menuitem_normal.show()
         menuitem_normal.connect("activate", self.do_formatblock_p)
-        menuitem_normal.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("0"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_normal.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("0"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.MOD1_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_insert_section', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_insert_section', Gtk.IconSize.MENU)
         menuitem_normal.set_image(img)
         menu_style.append(menuitem_normal)
 
-        menuitem_separator4 = gtk.MenuItem()
+        menuitem_separator4 = Gtk.SeparatorMenuItem.new()
         menuitem_separator4.show()
 
         menu_style.append(menuitem_separator4)
 
-        menuitem_heading_1 = gtk.ImageMenuItem(_("Heading _1"))
+        menuitem_heading_1 = Gtk.ImageMenuItem.new_with_mnemonic(_("Heading _1"))
         menuitem_heading_1.show()
         menuitem_heading_1.connect("activate", self.do_formatblock_h1)
-        menuitem_heading_1.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("1"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_1.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("1"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.MOD1_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_insert-header', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_insert-header', Gtk.IconSize.MENU)
         menuitem_heading_1.set_image(img)
         menu_style.append(menuitem_heading_1)
 
-        menuitem_heading_2 = gtk.ImageMenuItem(_("Heading _2"))
+        menuitem_heading_2 = Gtk.ImageMenuItem.new_with_mnemonic(_("Heading _2"))
         menuitem_heading_2.show()
         menuitem_heading_2.connect("activate", self.do_formatblock_h2)
-        menuitem_heading_2.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("2"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_2.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("2"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.MOD1_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_line-spacing-2', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_line-spacing-2', Gtk.IconSize.MENU)
         menuitem_heading_2.set_image(img)
         menu_style.append(menuitem_heading_2)
 
-        menuitem_heading_3 = gtk.ImageMenuItem(_("Heading _3"))
+        menuitem_heading_3 = Gtk.ImageMenuItem.new_with_mnemonic(_("Heading _3"))
         menuitem_heading_3.show()
         menuitem_heading_3.connect("activate", self.do_formatblock_h3)
-        menuitem_heading_3.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("3"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_3.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("3"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.MOD1_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_line-spacing-1', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_line-spacing-1', Gtk.IconSize.MENU)
         menuitem_heading_3.set_image(img)
         menu_style.append(menuitem_heading_3)
 
-        menuitem_heading_4 = gtk.ImageMenuItem(_("Heading _4"))
+        menuitem_heading_4 = Gtk.ImageMenuItem.new_with_mnemonic(_("Heading _4"))
         menuitem_heading_4.show()
         menuitem_heading_4.connect("activate", self.do_formatblock_h4)
-        menuitem_heading_4.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("4"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_4.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("4"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.MOD1_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_line-spacing-1.5', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_line-spacing-1.5', Gtk.IconSize.MENU)
         menuitem_heading_4.set_image(img)
         menu_style.append(menuitem_heading_4)
 
-        menuitem_heading_5 = gtk.ImageMenuItem(_("Heading _5"))
+        menuitem_heading_5 = Gtk.ImageMenuItem.new_with_mnemonic(_("Heading _5"))
         menuitem_heading_5.show()
         menuitem_heading_5.connect("activate", self.do_formatblock_h5)
-        menuitem_heading_5.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("5"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_5.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("5"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.MOD1_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_list_enum-off', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_list_enum-off', Gtk.IconSize.MENU)
         menuitem_heading_5.set_image(img)
         menu_style.append(menuitem_heading_5)
 
-        menuitem_heading_6 = gtk.ImageMenuItem(_("Heading _6"))
+        menuitem_heading_6 = Gtk.ImageMenuItem.new_with_mnemonic(_("Heading _6"))
         menuitem_heading_6.show()
         menuitem_heading_6.connect("activate", self.do_formatblock_h6)
-        menuitem_heading_6.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("6"), gtk.gdk.CONTROL_MASK | gtk.gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_heading_6.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("6"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.MOD1_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_list_enum-off', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_list_enum-off', Gtk.IconSize.MENU)
         menuitem_heading_6.set_image(img)
         menu_style.append(menuitem_heading_6)
 
-        menuitem_separator5 = gtk.MenuItem()
+        menuitem_separator5 = Gtk.SeparatorMenuItem.new()
         menuitem_separator5.show()
 
         menu_style.append(menuitem_separator5)
 
-        menuitem_bulleted_list = gtk.ImageMenuItem(_("_Bulleted List"))
+        menuitem_bulleted_list = Gtk.ImageMenuItem.new_with_mnemonic(_("_Bulleted List"))
         menuitem_bulleted_list.show()
         menuitem_bulleted_list.connect("activate", self.do_insertunorderedlist)
 
-        img = gtk.image_new_from_icon_name('stock_list_bullet', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_list_bullet', Gtk.IconSize.MENU)
         menuitem_bulleted_list.set_image(img)
         menu_style.append(menuitem_bulleted_list)
 
-        menuitem_numbered_list = gtk.ImageMenuItem(_("Numbered _List"))
+        menuitem_numbered_list = Gtk.ImageMenuItem.new_with_mnemonic(_("Numbered _List"))
         menuitem_numbered_list.show()
         menuitem_numbered_list.connect("activate", self.do_insertorderedlist)
 
-        img = gtk.image_new_from_icon_name('stock_list_enum', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_list_enum', Gtk.IconSize.MENU)
         menuitem_numbered_list.set_image(img)
         menu_style.append(menuitem_numbered_list)
 
-        menuitem_separator6 = gtk.MenuItem()
+        menuitem_separator6 = Gtk.SeparatorMenuItem.new()
         menuitem_separator6.show()
 
         menu_style.append(menuitem_separator6)
 
-        div1 = gtk.ImageMenuItem(_("Di_v"))
+        div1 = Gtk.ImageMenuItem.new_with_mnemonic(_("Di_v"))
         div1.show()
         div1.connect("activate", self.do_formatblock_div)
 
-        img = gtk.image_new_from_icon_name('stock_tools-hyphenation', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_tools-hyphenation', Gtk.IconSize.MENU)
         div1.set_image(img)
         menu_style.append(div1)
 
-        address1 = gtk.ImageMenuItem(_("A_ddress"))
+        address1 = Gtk.ImageMenuItem.new_with_mnemonic(_("A_ddress"))
         address1.show()
         address1.connect("activate", self.do_formatblock_address)
 
-        img = gtk.image_new_from_icon_name('stock_tools-hyphenation', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_tools-hyphenation', Gtk.IconSize.MENU)
         address1.set_image(img)
         menu_style.append(address1)
 
-        #menuitem_formatblock_code = gtk.ImageMenuItem(_("_Code"))
+        #menuitem_formatblock_code = Gtk.ImageMenuItem.new_with_mnemonic(_("_Code"))
         #menuitem_formatblock_code.show()
         #menuitem_formatblock_code.connect("activate", self.do_formatblock_code)
         #
-        #img = gtk.image_new_from_icon_name('stock_text-monospaced', gtk.ICON_SIZE_MENU)
+        #img = Gtk.Image.new_from_icon_name('stock_text-monospaced', Gtk.IconSize.MENU)
         #menuitem_formatblock_code.set_image(img)
         #menu_style.append(menuitem_formatblock_code)
 
-        menuitem_formatblock_blockquote = gtk.ImageMenuItem(_("Block_quote"))
+        menuitem_formatblock_blockquote = Gtk.ImageMenuItem.new_with_mnemonic(_("Block_quote"))
         menuitem_formatblock_blockquote.show()
         menuitem_formatblock_blockquote.connect("activate", self.do_formatblock_blockquote)
 
-        img = gtk.image_new_from_icon_name('stock_list-insert-unnumbered', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_list-insert-unnumbered', Gtk.IconSize.MENU)
         menuitem_formatblock_blockquote.set_image(img)
         menu_style.append(menuitem_formatblock_blockquote)
 
-        menuitem_formatblock_pre = gtk.ImageMenuItem(_("_Preformat"))
+        menuitem_formatblock_pre = Gtk.ImageMenuItem.new_with_mnemonic(_("_Preformat"))
         menuitem_formatblock_pre.show()
         menuitem_formatblock_pre.connect("activate", self.do_formatblock_pre)
-        menuitem_formatblock_pre.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("t"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_formatblock_pre.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("t"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_text-quickedit', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_text-quickedit', Gtk.IconSize.MENU)
         menuitem_formatblock_pre.set_image(img)
         menu_style.append(menuitem_formatblock_pre)
 
@@ -621,52 +625,52 @@ class MainWindow:
 
         menubar1.append(menuitem_style)
 
-        menuitem_format = gtk.MenuItem(_("For_mat"))
+        menuitem_format = Gtk.MenuItem.new_with_mnemonic(_("For_mat"))
         menuitem_format.show()
 
-        menu_format = gtk.Menu()
-        menu_format.append(gtk.TearoffMenuItem())
+        menu_format = Gtk.Menu()
+        menu_format.append(Gtk.TearoffMenuItem())
 
-        menuitem_bold = gtk.ImageMenuItem("gtk-bold")
+        menuitem_bold = Gtk.ImageMenuItem.new_from_stock("gtk-bold", self.accel_group)
         menuitem_bold.show()
         menuitem_bold.connect("activate", self.on_bold)
-        menuitem_bold.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("b"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_bold.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("b"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_format.append(menuitem_bold)
 
-        menuitem_italic = gtk.ImageMenuItem("gtk-italic")
+        menuitem_italic = Gtk.ImageMenuItem.new_from_stock("gtk-italic", self.accel_group)
         menuitem_italic.show()
         menuitem_italic.connect("activate", self.do_italic)
-        menuitem_italic.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("i"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_italic.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("i"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_format.append(menuitem_italic)
 
-        menuitem_underline = gtk.ImageMenuItem("gtk-underline")
+        menuitem_underline = Gtk.ImageMenuItem.new_from_stock("gtk-underline", self.accel_group)
         menuitem_underline.show()
         menuitem_underline.connect("activate", self.do_underline)
-        menuitem_underline.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("u"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_underline.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("u"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_format.append(menuitem_underline)
 
-        menuitem_strikethrough = gtk.ImageMenuItem("gtk-strikethrough")
+        menuitem_strikethrough = Gtk.ImageMenuItem.new_from_stock("gtk-strikethrough", self.accel_group)
         menuitem_strikethrough.show()
         menuitem_strikethrough.connect("activate", self.do_strikethrough)
 
         menu_format.append(menuitem_strikethrough)
 
-        self.separator7 = gtk.MenuItem()
+        self.separator7 = Gtk.SeparatorMenuItem.new()
         self.separator7.show()
 
         menu_format.append(self.separator7)
 
-        menuitem_font_fontname = gtk.ImageMenuItem("gtk-select-font")
+        menuitem_font_fontname = Gtk.ImageMenuItem.new_from_stock("gtk-select-font", self.accel_group)
         menuitem_font_fontname.show()
         #menuitem_font_fontname.connect("activate", self.do_font_fontname)
 
         ## 字体列表菜单 #########################################
-        self.fontname_menu = gtk.Menu()
-        self.fontname_menu.append(gtk.TearoffMenuItem())
-        fontnames = sorted(( familie.get_name() for familie in gtk.Label().get_pango_context().list_families() ))
+        self.fontname_menu = Gtk.Menu()
+        self.fontname_menu.append(Gtk.TearoffMenuItem())
+        fontnames = sorted(( familie.get_name() for familie in Gtk.Label().get_pango_context().list_families() ))
         ## 调整字体列表顺序，将中文字体提至前列
         for fontname in fontnames:
             try:
@@ -679,11 +683,11 @@ class MainWindow:
             pass
         for fontname in ['Serif', 'Sans', 'Sans-serif', 'Monospace', ''] + fontnames:
             if fontname:
-                menu = gtk.MenuItem(fontname)
+                menu = Gtk.MenuItem(fontname)
                 menu.connect("activate", self.do_font_fontname, fontname)
                 pass
             else:
-                menu = gtk.MenuItem()
+                menu = Gtk.SeparatorMenuItem.new()
                 pass
             menu.show()
             self.fontname_menu.append(menu)
@@ -694,51 +698,51 @@ class MainWindow:
 
         menu_format.append(menuitem_font_fontname)
 
-        menuitem_font_size = gtk.ImageMenuItem(_("Font _Size"))
+        menuitem_font_size = Gtk.ImageMenuItem.new_with_mnemonic(_("Font _Size"))
         menuitem_font_size.show()
 
-        img = gtk.image_new_from_icon_name('stock_font-size', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_font-size', Gtk.IconSize.MENU)
         menuitem_font_size.set_image(img)
-        self.font_size1_menu = gtk.Menu()
-        self.font_size1_menu.append(gtk.TearoffMenuItem())
+        self.font_size1_menu = Gtk.Menu()
+        self.font_size1_menu.append(Gtk.TearoffMenuItem())
 
-        menuitem_fontsize_1 = gtk.MenuItem(_("_1"))
+        menuitem_fontsize_1 = Gtk.MenuItem.new_with_mnemonic(_("_1"))
         menuitem_fontsize_1.show()
         menuitem_fontsize_1.connect("activate", self.do_fontsize_1)
 
         self.font_size1_menu.append(menuitem_fontsize_1)
 
-        menuitem_fontsize_2 = gtk.MenuItem(_("_2"))
+        menuitem_fontsize_2 = Gtk.MenuItem.new_with_mnemonic(_("_2"))
         menuitem_fontsize_2.show()
         menuitem_fontsize_2.connect("activate", self.do_fontsize_2)
 
         self.font_size1_menu.append(menuitem_fontsize_2)
 
-        menuitem_fontsize_3 = gtk.MenuItem(_("_3"))
+        menuitem_fontsize_3 = Gtk.MenuItem.new_with_mnemonic(_("_3"))
         menuitem_fontsize_3.show()
         menuitem_fontsize_3.connect("activate", self.do_fontsize_3)
 
         self.font_size1_menu.append(menuitem_fontsize_3)
 
-        menuitem_fontsize_4 = gtk.MenuItem(_("_4"))
+        menuitem_fontsize_4 = Gtk.MenuItem.new_with_mnemonic(_("_4"))
         menuitem_fontsize_4.show()
         menuitem_fontsize_4.connect("activate", self.do_fontsize_4)
 
         self.font_size1_menu.append(menuitem_fontsize_4)
 
-        menuitem_fontsize_5 = gtk.MenuItem(_("_5"))
+        menuitem_fontsize_5 = Gtk.MenuItem.new_with_mnemonic(_("_5"))
         menuitem_fontsize_5.show()
         menuitem_fontsize_5.connect("activate", self.do_fontsize_5)
 
         self.font_size1_menu.append(menuitem_fontsize_5)
 
-        menuitem_fontsize_6 = gtk.MenuItem(_("_6"))
+        menuitem_fontsize_6 = Gtk.MenuItem.new_with_mnemonic(_("_6"))
         menuitem_fontsize_6.show()
         menuitem_fontsize_6.connect("activate", self.do_fontsize_6)
 
         self.font_size1_menu.append(menuitem_fontsize_6)
 
-        menuitem_fontsize_7 = gtk.MenuItem(_("_7"))
+        menuitem_fontsize_7 = Gtk.MenuItem.new_with_mnemonic(_("_7"))
         menuitem_fontsize_7.show()
         menuitem_fontsize_7.connect("activate", self.do_fontsize_7)
 
@@ -748,108 +752,108 @@ class MainWindow:
 
         menu_format.append(menuitem_font_size)
 
-        menuitem_color = gtk.ImageMenuItem("gtk-select-color")
+        menuitem_color = Gtk.ImageMenuItem.new_from_stock("gtk-select-color", self.accel_group)
         menuitem_color.show()
         menuitem_color.connect("activate", self.on_color_select_forecolor)
 
         menu_format.append(menuitem_color)
 
-        menuitem_bg_color = gtk.ImageMenuItem(_("_Highlight"))
+        menuitem_bg_color = Gtk.ImageMenuItem.new_with_mnemonic(_("_Highlight"))
         menuitem_bg_color.show()
         menuitem_bg_color.connect("activate", self.do_color_hilitecolor)
-        menuitem_bg_color.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("h"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_bg_color.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("h"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_text_color_hilight', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_text_color_hilight', Gtk.IconSize.MENU)
         menuitem_bg_color.set_image(img)
         menu_format.append(menuitem_bg_color)
 
-        menuitem_bg_color_select = gtk.ImageMenuItem(_("_HiliteColor"))
+        menuitem_bg_color_select = Gtk.ImageMenuItem.new_with_mnemonic(_("_HiliteColor"))
         menuitem_bg_color_select.show()
         menuitem_bg_color_select.connect("activate", self.on_color_select_hilitecolor)
 
-        img = gtk.image_new_from_stock(gtk.STOCK_SELECT_COLOR, gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_stock(Gtk.STOCK_SELECT_COLOR, Gtk.IconSize.MENU)
         menuitem_bg_color_select.set_image(img)
         menu_format.append(menuitem_bg_color_select)
 
-        menuitem_clearformat = gtk.ImageMenuItem(_("_Clear format"))
-        img = gtk.image_new_from_icon_name("gtk-clear", gtk.ICON_SIZE_MENU)
+        menuitem_clearformat = Gtk.ImageMenuItem.new_with_mnemonic(_("_Clear format"))
+        img = Gtk.Image.new_from_icon_name("gtk-clear", Gtk.IconSize.MENU)
         menuitem_clearformat.set_image(img)
         menuitem_clearformat.show()
         menuitem_clearformat.connect("activate", self.do_removeformat)
-        menuitem_clearformat.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("backslash"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_clearformat.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("backslash"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_format.append(menuitem_clearformat)
 
-        self.separator8 = gtk.MenuItem()
+        self.separator8 = Gtk.SeparatorMenuItem.new()
         self.separator8.show()
 
         menu_format.append(self.separator8)
 
-        menuitem_justifyleft = gtk.ImageMenuItem("gtk-justify-left")
+        menuitem_justifyleft = Gtk.ImageMenuItem.new_from_stock("gtk-justify-left", self.accel_group)
         menuitem_justifyleft.show()
         menuitem_justifyleft.connect("activate", self.do_justifyleft)
-        menuitem_justifyleft.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("l"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_justifyleft.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("l"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.SHIFT_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_format.append(menuitem_justifyleft)
 
-        menuitem_justifycenter = gtk.ImageMenuItem("gtk-justify-center")
+        menuitem_justifycenter = Gtk.ImageMenuItem.new_from_stock("gtk-justify-center", self.accel_group)
         menuitem_justifycenter.show()
         menuitem_justifycenter.connect("activate", self.do_justifycenter)
-        menuitem_justifycenter.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("e"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_justifycenter.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("e"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.SHIFT_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_format.append(menuitem_justifycenter)
 
-        menuitem_justifyright = gtk.ImageMenuItem("gtk-justify-right")
+        menuitem_justifyright = Gtk.ImageMenuItem.new_from_stock("gtk-justify-right", self.accel_group)
         menuitem_justifyright.show()
         menuitem_justifyright.connect("activate", self.do_justifyright)
-        menuitem_justifyright.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("r"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_justifyright.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("r"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.SHIFT_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_format.append(menuitem_justifyright)
 
-        menuitem_justifyfull = gtk.ImageMenuItem("gtk-justify-fill")
+        menuitem_justifyfull = Gtk.ImageMenuItem.new_from_stock("gtk-justify-fill", self.accel_group)
         menuitem_justifyfull.show()
         menuitem_justifyfull.connect("activate", self.do_justifyfull)
-        menuitem_justifyfull.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("j"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_justifyfull.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("j"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.SHIFT_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_format.append(menuitem_justifyfull)
 
-        self.separator11 = gtk.MenuItem()
+        self.separator11 = Gtk.SeparatorMenuItem.new()
         self.separator11.show()
 
         menu_format.append(self.separator11)
 
-        menuitem_increase_indent = gtk.ImageMenuItem("gtk-indent")
+        menuitem_increase_indent = Gtk.ImageMenuItem.new_from_stock("gtk-indent", self.accel_group)
         menuitem_increase_indent.show()
         menuitem_increase_indent.connect("activate", self.do_indent)
 
         menu_format.append(menuitem_increase_indent)
 
-        menuitem_decrease_indent = gtk.ImageMenuItem("gtk-unindent")
+        menuitem_decrease_indent = Gtk.ImageMenuItem.new_from_stock("gtk-unindent", self.accel_group)
         menuitem_decrease_indent.show()
         menuitem_decrease_indent.connect("activate", self.do_outdent)
 
         menu_format.append(menuitem_decrease_indent)
 
-        self.separator16 = gtk.MenuItem()
+        self.separator16 = Gtk.SeparatorMenuItem.new()
         self.separator16.show()
 
         menu_format.append(self.separator16)
 
-        menuitem_superscript = gtk.ImageMenuItem(_("Su_perscript"))
+        menuitem_superscript = Gtk.ImageMenuItem.new_with_mnemonic(_("Su_perscript"))
         menuitem_superscript.show()
         menuitem_superscript.connect("activate", self.do_superscript)
-        menuitem_superscript.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("period"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_superscript.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("period"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_superscript', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_superscript', Gtk.IconSize.MENU)
         menuitem_superscript.set_image(img)
         menu_format.append(menuitem_superscript)
 
-        menuitem_subscript = gtk.ImageMenuItem(_("Subs_cript"))
+        menuitem_subscript = Gtk.ImageMenuItem.new_with_mnemonic(_("Subs_cript"))
         menuitem_subscript.show()
         menuitem_subscript.connect("activate", self.do_subscript)
-        menuitem_subscript.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("comma"), gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_subscript.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("comma"), Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE)
 
-        img = gtk.image_new_from_icon_name('stock_subscript', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_subscript', Gtk.IconSize.MENU)
         menuitem_subscript.set_image(img)
         menu_format.append(menuitem_subscript)
 
@@ -857,18 +861,18 @@ class MainWindow:
 
         menubar1.append(menuitem_format)
         ##
-        menuitem_tools = gtk.MenuItem(_("_Tools"))
+        menuitem_tools = Gtk.MenuItem.new_with_mnemonic(_("_Tools"))
         menuitem_tools.show()
 
-        menu_tools = gtk.Menu()
-        menu_tools.append(gtk.TearoffMenuItem())
+        menu_tools = Gtk.Menu()
+        menu_tools.append(Gtk.TearoffMenuItem())
 
-        menuitem_word_count = gtk.ImageMenuItem(_("_Word Count"))
-        img = gtk.image_new_from_icon_name('gtk-index', gtk.ICON_SIZE_MENU)
+        menuitem_word_count = Gtk.ImageMenuItem.new_with_mnemonic(_("_Word Count"))
+        img = Gtk.Image.new_from_icon_name('gtk-index', Gtk.IconSize.MENU)
         menuitem_word_count.set_image(img)
         menuitem_word_count.show()
         menuitem_word_count.connect("activate", self.on_word_counts)
-        menuitem_word_count.add_accelerator("activate", self.accel_group, gtk.gdk.keyval_from_name("c"), gtk.gdk.CONTROL_MASK | gtk.gdk.SHIFT_MASK, gtk.ACCEL_VISIBLE)
+        menuitem_word_count.add_accelerator("activate", self.accel_group, Gdk.keyval_from_name("c"), Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.SHIFT_MASK, Gtk.AccelFlags.VISIBLE)
 
         menu_tools.append(menuitem_word_count)
 
@@ -876,13 +880,13 @@ class MainWindow:
 
         menubar1.append(menuitem_tools)
         ##
-        menuitem_help = gtk.MenuItem(_("_Help"))
+        menuitem_help = Gtk.MenuItem.new_with_mnemonic(_("_Help"))
         menuitem_help.show()
 
-        menu_help = gtk.Menu()
-        menu_help.append(gtk.TearoffMenuItem())
+        menu_help = Gtk.Menu()
+        menu_help.append(Gtk.TearoffMenuItem())
 
-        menuitem_about = gtk.ImageMenuItem("gtk-about")
+        menuitem_about = Gtk.ImageMenuItem.new_from_stock("gtk-about", self.accel_group)
         menuitem_about.show()
         menuitem_about.connect("activate", self.on_about)
 
@@ -899,107 +903,115 @@ class MainWindow:
         ## 工具栏
 
 
-        self.toolbar1 = gtk.Toolbar()
+        self.toolbar1 = Gtk.Toolbar()
         self.toolbar1.show()
 
-        toolbutton_new = gtk.ToolButton()
+        toolbutton_new = Gtk.ToolButton()
         toolbutton_new.set_tooltip_text(_("New"))
         toolbutton_new.show()
-        toolbutton_new.set_stock_id(gtk.STOCK_NEW)
+        toolbutton_new.set_stock_id(Gtk.STOCK_NEW)
         toolbutton_new.connect("clicked", self.on_new)
         self.toolbar1.add(toolbutton_new)
 
-        toolbutton_open = gtk.MenuToolButton(gtk.STOCK_OPEN)
+        toolbutton_open = Gtk.MenuToolButton()
+        toolbutton_open.set_stock_id(Gtk.STOCK_OPEN)
         toolbutton_open.set_tooltip_text(_("Open"))
         toolbutton_open.show()
-        #toolbutton_open.set_stock_id(gtk.STOCK_OPEN)
+        #toolbutton_open.set_stock_id(Gtk.STOCK_OPEN)
         toolbutton_open.connect("clicked", self.on_open)
 
         ########################################
-        menu_recent = gtk.RecentChooserMenu(self.recent)
+        menu_recent = Gtk.RecentChooserMenu()
         menu_recent.set_limit(25)
         #if editfile: self.add_recent(editfile) #改在 new_edit() 里统一添加
         ##
         menu_recent.set_filter(self.file_filter)
-        menu_recent.connect("item-activated", self.on_select_recent)
 
+        menu_recent.connect("item-activated", self.on_select_recent)
         toolbutton_open.set_menu(menu_recent)
         self.toolbar1.add(toolbutton_open)
+        ########################################
 
-        toolbutton_save = gtk.ToolButton()
+        toolbutton_save = Gtk.ToolButton()
         toolbutton_save.set_tooltip_text(_("Save"))
         toolbutton_save.show()
-        toolbutton_save.set_stock_id(gtk.STOCK_SAVE)
+        toolbutton_save.set_stock_id(Gtk.STOCK_SAVE)
         toolbutton_save.connect("clicked", self.on_save)
         self.toolbar1.add(toolbutton_save)
 
-        separatortoolitem1 = gtk.SeparatorToolItem()
+        separatortoolitem1 = Gtk.SeparatorToolItem()
         separatortoolitem1.show()
         self.toolbar1.add(separatortoolitem1)
 
-        toolbutton_undo = gtk.ToolButton()
+        toolbutton_undo = Gtk.ToolButton()
         toolbutton_undo.set_tooltip_text(_("Undo"))
         toolbutton_undo.show()
-        toolbutton_undo.set_stock_id(gtk.STOCK_UNDO)
+        toolbutton_undo.set_stock_id(Gtk.STOCK_UNDO)
         toolbutton_undo.connect("clicked", self.do_undo)
         self.toolbar1.add(toolbutton_undo)
 
-        toolbutton_redo = gtk.ToolButton()
+        toolbutton_redo = Gtk.ToolButton()
         toolbutton_redo.set_tooltip_text(_("Redo"))
         toolbutton_redo.show()
-        toolbutton_redo.set_stock_id(gtk.STOCK_REDO)
+        toolbutton_redo.set_stock_id(Gtk.STOCK_REDO)
         toolbutton_redo.connect("clicked", self.do_redo)
         self.toolbar1.add(toolbutton_redo)
 
-        separatortoolitem3 = gtk.SeparatorToolItem()
+        separatortoolitem3 = Gtk.SeparatorToolItem()
         separatortoolitem3.show()
         self.toolbar1.add(separatortoolitem3)
 
-        toolbutton_cut = gtk.ToolButton()
+        toolbutton_cut = Gtk.ToolButton()
         toolbutton_cut.set_tooltip_text(_("Cut"))
         toolbutton_cut.show()
-        toolbutton_cut.set_stock_id(gtk.STOCK_CUT)
+        toolbutton_cut.set_stock_id(Gtk.STOCK_CUT)
         toolbutton_cut.connect("clicked", self.do_cut)
         self.toolbar1.add(toolbutton_cut)
 
-        toolbutton_copy = gtk.ToolButton()
+        toolbutton_copy = Gtk.ToolButton()
         toolbutton_copy.set_tooltip_text(_("Copy"))
         toolbutton_copy.show()
-        toolbutton_copy.set_stock_id(gtk.STOCK_COPY)
+        toolbutton_copy.set_stock_id(Gtk.STOCK_COPY)
         toolbutton_copy.connect("clicked", self.do_copy)
         self.toolbar1.add(toolbutton_copy)
 
-        toolbutton_paste = gtk.ToolButton()
+        toolbutton_paste = Gtk.ToolButton()
         toolbutton_paste.set_tooltip_text(_("Paste"))
         toolbutton_paste.show()
-        toolbutton_paste.set_stock_id(gtk.STOCK_PASTE)
+        toolbutton_paste.set_stock_id(Gtk.STOCK_PASTE)
         toolbutton_paste.connect("clicked", self.do_paste)
         self.toolbar1.add(toolbutton_paste)
 
-        separatortoolitem2 = gtk.SeparatorToolItem()
+        separatortoolitem2 = Gtk.SeparatorToolItem()
         separatortoolitem2.show()
         self.toolbar1.add(separatortoolitem2)
 
         ## p, h1, h2 样式
-        label1 = gtk.Label("")
+        label1 = Gtk.Label("")
         label1.set_markup("<b>P</b>")
-        button1 = gtk.ToolButton(label1, _("Paragraph"))
+        button1 = Gtk.ToolButton()
+        button1.set_icon_widget(label1)
+        button1.set_label(_("Paragraph"))
         button1.set_tooltip_text(_("Paragraph"))
         button1.connect("clicked", self.do_formatblock_p)
         button1.show()
         self.toolbar1.add( button1)
 
-        label1 = gtk.Label("")
+        label1 = Gtk.Label("")
         label1.set_markup("<big><big><b>H1</b></big></big>")
-        button1 = gtk.ToolButton(label1, _("Heading 1"))
+        button1 = Gtk.ToolButton()
+        button1.set_icon_widget(label1)
+        button1.set_label(_("Heading 1"))
         button1.set_tooltip_text(_("Heading 1"))
         button1.connect("clicked", self.do_formatblock_h1)
         button1.show()
         self.toolbar1.add( button1)
 
-        label1 = gtk.Label("")
+        label1 = Gtk.Label("")
         label1.set_markup("<big><b>H2</b></big>")
-        button1 = gtk.ToolButton(label1, _("Heading 2"))
+        button1 = Gtk.ToolButton()
+        button1.set_icon_widget(label1)
+        button1.set_label(_("Heading 2"))
         button1.set_tooltip_text(_("Heading 2"))
         button1.connect("clicked", self.do_formatblock_h2)
         button1.show()
@@ -1007,104 +1019,106 @@ class MainWindow:
 
         ## h3 样式
 
-        label1 = gtk.Label("")
+        label1 = Gtk.Label("")
         label1.set_markup("<b>H3</b>")
-        button1 = gtk.MenuToolButton(label1, _("Heading 3"))
+        button1 = Gtk.MenuToolButton()
+        button1.set_icon_widget(label1)
+        button1.set_label(_("Heading 3"))
         button1.set_tooltip_text(_("Heading 3"))
         button1.set_arrow_tooltip_markup(_("Style"))
         button1.connect("clicked", self.do_formatblock_h3)
         button1.show()
         self.toolbar1.add( button1)
 
-        menu_style = gtk.Menu()
+        menu_style = Gtk.Menu()
 
-        menuitem_heading_4 = gtk.ImageMenuItem(_("Heading _4"))
+        menuitem_heading_4 = Gtk.ImageMenuItem.new_with_mnemonic(_("Heading _4"))
         menuitem_heading_4.show()
         menuitem_heading_4.connect("activate", self.do_formatblock_h4)
 
-        img = gtk.image_new_from_icon_name('stock_line-spacing-1.5', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_line-spacing-1.5', Gtk.IconSize.MENU)
         menuitem_heading_4.set_image(img)
         menu_style.append(menuitem_heading_4)
 
-        menuitem_heading_5 = gtk.ImageMenuItem(_("Heading _5"))
+        menuitem_heading_5 = Gtk.ImageMenuItem.new_with_mnemonic(_("Heading _5"))
         menuitem_heading_5.show()
         menuitem_heading_5.connect("activate", self.do_formatblock_h5)
 
-        img = gtk.image_new_from_icon_name('stock_list_enum-off', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_list_enum-off', Gtk.IconSize.MENU)
         menuitem_heading_5.set_image(img)
         menu_style.append(menuitem_heading_5)
 
-        menuitem_heading_6 = gtk.ImageMenuItem(_("Heading _6"))
+        menuitem_heading_6 = Gtk.ImageMenuItem.new_with_mnemonic(_("Heading _6"))
         menuitem_heading_6.show()
         menuitem_heading_6.connect("activate", self.do_formatblock_h6)
 
-        img = gtk.image_new_from_icon_name('stock_list_enum-off', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_list_enum-off', Gtk.IconSize.MENU)
         menuitem_heading_6.set_image(img)
         menu_style.append(menuitem_heading_6)
 
-        menuitem_separator5 = gtk.MenuItem()
+        menuitem_separator5 = Gtk.SeparatorMenuItem.new()
         menuitem_separator5.show()
 
         menu_style.append(menuitem_separator5)
 
-        menuitem_bulleted_list = gtk.ImageMenuItem(_("_Bulleted List"))
+        menuitem_bulleted_list = Gtk.ImageMenuItem.new_with_mnemonic(_("_Bulleted List"))
         menuitem_bulleted_list.show()
         menuitem_bulleted_list.connect("activate", self.do_insertunorderedlist)
 
-        img = gtk.image_new_from_icon_name('stock_list_bullet', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_list_bullet', Gtk.IconSize.MENU)
         menuitem_bulleted_list.set_image(img)
         menu_style.append(menuitem_bulleted_list)
 
-        menuitem_numbered_list = gtk.ImageMenuItem(_("Numbered _List"))
+        menuitem_numbered_list = Gtk.ImageMenuItem.new_with_mnemonic(_("Numbered _List"))
         menuitem_numbered_list.show()
         menuitem_numbered_list.connect("activate", self.do_insertorderedlist)
 
-        img = gtk.image_new_from_icon_name('stock_list_enum', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_list_enum', Gtk.IconSize.MENU)
         menuitem_numbered_list.set_image(img)
         menu_style.append(menuitem_numbered_list)
 
-        menuitem_separator6 = gtk.MenuItem()
+        menuitem_separator6 = Gtk.SeparatorMenuItem.new()
         menuitem_separator6.show()
 
         menu_style.append(menuitem_separator6)
 
-        div1 = gtk.ImageMenuItem(_("Di_v"))
+        div1 = Gtk.ImageMenuItem.new_with_mnemonic(_("Di_v"))
         div1.show()
         div1.connect("activate", self.do_formatblock_div)
 
-        img = gtk.image_new_from_icon_name('stock_tools-hyphenation', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_tools-hyphenation', Gtk.IconSize.MENU)
         div1.set_image(img)
         menu_style.append(div1)
 
-        address1 = gtk.ImageMenuItem(_("A_ddress"))
+        address1 = Gtk.ImageMenuItem.new_with_mnemonic(_("A_ddress"))
         address1.show()
         address1.connect("activate", self.do_formatblock_address)
 
-        img = gtk.image_new_from_icon_name('stock_tools-hyphenation', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_tools-hyphenation', Gtk.IconSize.MENU)
         address1.set_image(img)
         menu_style.append(address1)
 
-        #menuitem_formatblock_code = gtk.ImageMenuItem(_("_Code"))
+        #menuitem_formatblock_code = Gtk.ImageMenuItem.new_with_mnemonic(_("_Code"))
         #menuitem_formatblock_code.show()
         #menuitem_formatblock_code.connect("activate", self.do_formatblock_code)
         #
-        #img = gtk.image_new_from_icon_name('stock_text-monospaced', gtk.ICON_SIZE_MENU)
+        #img = Gtk.Image.new_from_icon_name('stock_text-monospaced', Gtk.IconSize.MENU)
         #menuitem_formatblock_code.set_image(img)
         #menu_style.append(menuitem_formatblock_code)
 
-        menuitem_formatblock_blockquote = gtk.ImageMenuItem(_("Block_quote"))
+        menuitem_formatblock_blockquote = Gtk.ImageMenuItem.new_with_mnemonic(_("Block_quote"))
         menuitem_formatblock_blockquote.show()
         menuitem_formatblock_blockquote.connect("activate", self.do_formatblock_blockquote)
 
-        img = gtk.image_new_from_icon_name('stock_list-insert-unnumbered', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_list-insert-unnumbered', Gtk.IconSize.MENU)
         menuitem_formatblock_blockquote.set_image(img)
         menu_style.append(menuitem_formatblock_blockquote)
 
-        menuitem_formatblock_pre = gtk.ImageMenuItem(_("_Preformat"))
+        menuitem_formatblock_pre = Gtk.ImageMenuItem.new_with_mnemonic(_("_Preformat"))
         menuitem_formatblock_pre.show()
         menuitem_formatblock_pre.connect("activate", self.do_formatblock_pre)
 
-        img = gtk.image_new_from_icon_name('stock_text-quickedit', gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_icon_name('stock_text-quickedit', Gtk.IconSize.MENU)
         menuitem_formatblock_pre.set_image(img)
         menu_style.append(menuitem_formatblock_pre)
 
@@ -1113,47 +1127,48 @@ class MainWindow:
         ########################
 
         ## 粗体按钮菜单
-        menu_format = gtk.Menu()
-        menu_format.append(gtk.TearoffMenuItem())
+        menu_format = Gtk.Menu()
+        menu_format.append(Gtk.TearoffMenuItem())
 
-        menuitem_italic = gtk.ImageMenuItem("gtk-italic")
+        menuitem_italic = Gtk.ImageMenuItem.new_from_stock("gtk-italic", self.accel_group)
         menuitem_italic.show()
         menuitem_italic.connect("activate", self.do_italic)
 
         menu_format.append(menuitem_italic)
 
-        menuitem_underline = gtk.ImageMenuItem("gtk-underline")
+        menuitem_underline = Gtk.ImageMenuItem.new_from_stock("gtk-underline", self.accel_group)
         menuitem_underline.show()
         menuitem_underline.connect("activate", self.do_underline)
 
         menu_format.append(menuitem_underline)
 
-        menuitem_strikethrough = gtk.ImageMenuItem("gtk-strikethrough")
+        menuitem_strikethrough = Gtk.ImageMenuItem.new_from_stock("gtk-strikethrough", self.accel_group)
         menuitem_strikethrough.show()
         menuitem_strikethrough.connect("activate", self.do_strikethrough)
 
         menu_format.append(menuitem_strikethrough)
 
-        separatortoolitem4 = gtk.SeparatorToolItem()
+        separatortoolitem4 = Gtk.SeparatorToolItem()
         separatortoolitem4.show()
         self.toolbar1.add(separatortoolitem4)
 
-        toolbutton_bold = gtk.MenuToolButton(gtk.STOCK_BOLD)
+        toolbutton_bold = Gtk.MenuToolButton()
+        toolbutton_bold.set_stock_id(Gtk.STOCK_BOLD)
         toolbutton_bold.set_label(_("Bold"))
         toolbutton_bold.set_tooltip_text(_("Bold"))
         toolbutton_bold.show()
-        toolbutton_bold.set_stock_id(gtk.STOCK_BOLD)
+        toolbutton_bold.set_stock_id(Gtk.STOCK_BOLD)
         toolbutton_bold.connect("clicked", self.on_bold)
         toolbutton_bold.set_menu(menu_format)
         self.toolbar1.add(toolbutton_bold)
 
         ## 高亮颜色
-        toolbutton_hilitecolor = gtk.MenuToolButton("")
+        toolbutton_hilitecolor = Gtk.MenuToolButton()
         toolbutton_hilitecolor.set_icon_name("stock_text_color_hilight")
         toolbutton_hilitecolor.set_label(_("Highlight"))
         toolbutton_hilitecolor.set_tooltip_text(_("Highlight"))
         toolbutton_hilitecolor.set_arrow_tooltip_markup(_("Select hilitecolor"))
-        toolbutton_hilitecolor.set_menu(gtk.Menu())
+        toolbutton_hilitecolor.set_menu(Gtk.Menu())
         toolbutton_hilitecolor.show()
         toolbutton_hilitecolor.connect("clicked", self.do_color_hilitecolor)
         ### 处理 ToolButton 箭头
@@ -1163,7 +1178,7 @@ class MainWindow:
         self.toolbar1.add(toolbutton_hilitecolor)
 
         ## 清除格式
-        button1 = gtk.ToolButton()
+        button1 = Gtk.ToolButton()
         button1.set_icon_name("gtk-clear")
         button1.set_label(_("Clear format"))
         button1.set_tooltip_text(_("Clear format"))
@@ -1172,13 +1187,13 @@ class MainWindow:
         self.toolbar1.add(button1)
 
         ### 字体菜单按钮
-        #toolbutton_font = gtk.MenuToolButton("gtk-select-font")
+        #toolbutton_font = Gtk.MenuToolButton("gtk-select-font")
         #toolbutton_font.set_label(_("Font"))
         #toolbutton_font.set_tooltip_text(_("Font"))
         #toolbutton_font.show()
         #toolbutton_font.set_menu(self.fontname_menu)
 
-        ### 处理 gtk.MenuToolButton 按钮
+        ### 处理 Gtk.MenuToolButton 按钮
         #m =  toolbutton_font
         #ib, mb = m.child.children()
         #mb.remove(mb.child)
@@ -1191,7 +1206,7 @@ class MainWindow:
 
         ###############
 
-        self.toolbar = gtk.HandleBox()
+        self.toolbar = Gtk.HandleBox()
 
         self.toolbar.add(self.toolbar1)
 
@@ -1201,19 +1216,19 @@ class MainWindow:
         
 
         ## 编辑区
-        #self.editport = gtk.Viewport()
+        #self.editport = Gtk.Viewport()
         #self.editport.show()
-        #self.editport.set_shadow_type(gtk.SHADOW_NONE)
+        #self.editport.set_shadow_type(Gtk.SHADOW_NONE)
         #
         #self.vbox1.pack_start(self.editport)
 
         ##
-        self.notebox = gtk.Notebook()
+        self.notebox = Gtk.Notebook()
         self.notebox.set_tab_pos(2) # 0, 1, 2, 3 -> left, top, right, bottom
         self.notebox.set_border_width(0)
-        #self.notebox.popup_enable()
-        self.notebox.set_property('homogeneous', 0)
-        self.notebox.unset_flags(gtk.CAN_FOCUS)
+        self.notebox.popup_enable()
+        #self.notebox.set_property('homogeneous', 0)
+        self.notebox.props.can_focus = 0
         self.notebox.set_scrollable(True)
         self.notebox.connect("switch-page", self.on_mdi_switch_page)
         self.notebox.connect("button-press-event", self.on_mdi_menu) # 用 "button-release-event" 会不能中止事件向上传递
@@ -1223,30 +1238,30 @@ class MainWindow:
         self.notebox_insert_page(editbox)
         self.notebox.set_tab_reorderable(editbox, True)
         self.notebox.show_all()
-        self.vbox1.pack_start(self.notebox)
+        self.vbox1.pack_start(self.notebox, True, True, 0)
 
         ## 搜索栏
 
-        self.findbar = gtk.HandleBox()
-        self.findbar.set_shadow_type(gtk.SHADOW_OUT)
+        self.findbar = Gtk.HandleBox()
+        self.findbar.set_shadow_type(Gtk.ShadowType.OUT)
 
-        self.findbox = gtk.HBox(False, 0)
+        self.findbox = Gtk.HBox(False, 0)
         self.findbox.show()
 
-        button_hidefindbar = gtk.Button()
+        button_hidefindbar = Gtk.Button()
         button_hidefindbar.set_tooltip_text(_("Close Findbar"))
         button_hidefindbar.show()
-        button_hidefindbar.set_relief(gtk.RELIEF_NONE)
+        button_hidefindbar.set_relief(Gtk.ReliefStyle.NONE)
         button_hidefindbar.connect("clicked", self.hide_findbar)
 
-        image113 = gtk.Image()
-        image113.set_from_stock(gtk.STOCK_CLOSE, 1)
+        image113 = Gtk.Image()
+        image113.set_from_stock(Gtk.STOCK_CLOSE, 1)
         image113.show()
         button_hidefindbar.add(image113)
 
         self.findbox.pack_start(button_hidefindbar, False, False, 0)
 
-        self.entry_searchtext = gtk.Entry()
+        self.entry_searchtext = Gtk.Entry()
         self.entry_searchtext.show()
         self.entry_searchtext.connect("changed", self.do_highlight_text_matches)
         #self.entry_searchtext.set_property("primary-icon-stock", "gtk-go-back")
@@ -1257,64 +1272,64 @@ class MainWindow:
         self.entry_searchtext.set_property("primary-icon-tooltip-text", _("Find Next"))
         self.entry_searchtext.connect("icon-release", self.do_find_text)
         self.entry_searchtext.set_tooltip_text(_("Search text"))
-        #self.entry_searchtext.set_flags(gtk.CAN_DEFAULT)
+        #self.entry_searchtext.set_flags(Gtk.CAN_DEFAULT)
         #self.entry_searchtext.grab_focus()
-        self.findbox.pack_start(self.entry_searchtext)
+        self.findbox.pack_start(self.entry_searchtext, False, False, 0)
 
-        button1 = gtk.Button()
+        button1 = Gtk.Button()
         button1.set_tooltip_text(_("Find Previous"))
         button1.show()
-        button1.set_relief(gtk.RELIEF_NONE)
+        button1.set_relief(Gtk.ReliefStyle.NONE)
         button1.connect("clicked", self.do_find_text_backward)
 
-        image1 = gtk.Image()
-        image1.set_from_stock(gtk.STOCK_GO_BACK, 4)
+        image1 = Gtk.Image()
+        image1.set_from_stock(Gtk.STOCK_GO_BACK, 4)
         image1.show()
         button1.add(image1)
 
         self.findbox.pack_start(button1, False, False, 0)
 
-        button_search_text = gtk.Button(_("Find"))
-        img = gtk.Image()
+        button_search_text = Gtk.Button(_("Find"))
+        img = Gtk.Image()
         img.set_from_stock("gtk-find", 4)
         img.show()
         button_search_text.set_image(img)
         button_search_text.set_tooltip_text(_("Find Next"))
         button_search_text.show()
-        button_search_text.set_relief(gtk.RELIEF_NONE)
+        button_search_text.set_relief(Gtk.ReliefStyle.NONE)
         button_search_text.connect("clicked", self.do_find_text)
-        button_search_text.add_accelerator("clicked", self.accel_group, gtk.gdk.keyval_from_name("F3"), 0, gtk.ACCEL_VISIBLE)
+        button_search_text.add_accelerator("clicked", self.accel_group, Gdk.keyval_from_name("F3"), 0, Gtk.AccelFlags.VISIBLE)
 
         self.findbox.pack_start(button_search_text, False, False, 0)
 
-        self.findbox.pack_start(gtk.VSeparator(), False, False, 3)
+        self.findbox.pack_start(Gtk.VSeparator(), False, False, 3)
 
-        self.entry_replace_text = gtk.Entry()
+        self.entry_replace_text = Gtk.Entry()
         self.entry_replace_text.show()
         self.entry_replace_text.set_tooltip_text(_("Replace text"))
         self.entry_replace_text.set_property("primary-icon-stock", "gtk-find-and-replace")
         self.entry_replace_text.set_property("primary-icon-tooltip-text", _("Replace"))
-        self.findbox.pack_start(self.entry_replace_text)
+        self.findbox.pack_start(self.entry_replace_text, False, False, 0)
 
-        button_replace_text = gtk.Button()
+        button_replace_text = Gtk.Button()
         button_replace_text.set_tooltip_text(_("Replace"))
         button_replace_text.show()
-        button_replace_text.set_relief(gtk.RELIEF_NONE)
+        button_replace_text.set_relief(Gtk.ReliefStyle.NONE)
         button_replace_text.connect("clicked", self.do_replace_text)
 
-        alignment1 = gtk.Alignment(0.5, 0.5, 0, 0)
+        alignment1 = Gtk.Alignment()
         alignment1.show()
 
-        hbox2 = gtk.HBox(False, 0)
+        hbox2 = Gtk.HBox(False, 0)
         hbox2.show()
         hbox2.set_spacing(2)
 
-        image136 = gtk.Image()
-        image136.set_from_stock(gtk.STOCK_FIND_AND_REPLACE, 4)
+        image136 = Gtk.Image()
+        image136.set_from_stock(Gtk.STOCK_FIND_AND_REPLACE, 4)
         image136.show()
         hbox2.pack_start(image136, False, False, 0)
 
-        label1 = gtk.Label(_("Replace"))
+        label1 = Gtk.Label(_("Replace"))
         label1.show()
         hbox2.pack_start(label1, False, False, 0)
 
@@ -1324,15 +1339,15 @@ class MainWindow:
 
         self.findbox.pack_start(button_replace_text, False, False, 0)
 
-        #self.findbox.pack_start(gtk.VSeparator(), False, False, 0)
+        #self.findbox.pack_start(Gtk.VSeparator(), False, False, 0)
 
-        button2 = gtk.Button()
+        button2 = Gtk.Button()
         button2.set_tooltip_text(_("Replace All"))
         button2.set_label(_("ReplaceAll"))
         button2.show()
-        button2.set_relief(gtk.RELIEF_NONE)
+        button2.set_relief(Gtk.ReliefStyle.NONE)
 
-        img = gtk.Image()
+        img = Gtk.Image()
         img.set_from_stock("gtk-convert", 4)
         img.show()
         button2.set_image(img)
@@ -1348,7 +1363,7 @@ class MainWindow:
 
         #self.edit.connect("popup-menu", self._populate_popup)
 
-        gobject.timeout_add(1000 * 60, self.do_autosave)
+        GObject.timeout_add(1000 * 60, self.do_autosave)
 
 
         if create:
@@ -1357,24 +1372,24 @@ class MainWindow:
         pass
 
     def mdi_get_tab_menu(self, editbox=None, windowslist=0):
-        menu = gtk.Menu()
+        menu = Gtk.Menu()
 
-        menuitem_new = gtk.ImageMenuItem("gtk-new")
+        menuitem_new = Gtk.ImageMenuItem.new_from_stock("gtk-new", self.accel_group)
         menuitem_new.show()
         menuitem_new.connect("activate", self.on_new)
         menu.append(menuitem_new)
 
-        menuitem_close = gtk.ImageMenuItem("gtk-close")
+        menuitem_close = Gtk.ImageMenuItem.new_from_stock("gtk-close", self.accel_group)
         menuitem_close.show()
         menuitem_close.connect("activate", self.close_tab, editbox)
         menu.append(menuitem_close)
 
-        menu.append(gtk.MenuItem())
+        menu.append(Gtk.SeparatorMenuItem.new())
 
         notebox = self.notebox
         for box in notebox.get_children():
-            menuitem = gtk.ImageMenuItem(box.edit.title)
-            menuitem.set_image(gtk.image_new_from_stock("gtk-dnd", gtk.ICON_SIZE_MENU))
+            menuitem = Gtk.ImageMenuItem(box.edit.title)
+            menuitem.set_image(Gtk.Image.new_from_stock("gtk-dnd", Gtk.IconSize.MENU))
             menuitem.connect("activate", self.notebox_set_current, box)
             menuitem.show()
             menu.append(menuitem)
@@ -1384,9 +1399,9 @@ class MainWindow:
         menu.show_all()
         return menu
 
-    def on_accel_connect_group(self, accel_group, acceleratable, keyval, modifier):
+    def on_accel_connect(self, accel_group, acceleratable, keyval, modifier):
         ## 按 Alt-1, Alt-2... 切换标签页
-        ## gtk.gdk.keyval_from_name('1') 为 49
+        ## Gdk.keyval_from_name('1') 为 49
         num = keyval - 49
         self.notebox.set_current_page(num)
         return
@@ -1394,10 +1409,13 @@ class MainWindow:
     def on_mdi_menu(self, widget, event, editbox=None, *args):
         #-print self, widget, event, editbox, args
         if event.button == 3:
+            return False
             #menu = self.menu_file
-            menu = self.mdi_get_tab_menu(editbox)
-            menu.popup(None, None, None, event.button, event.time)
-            return True
+            def popup_menu():
+                menu = self.mdi_get_tab_menu(editbox)
+                menu.popup(None, None, None, None, 0, 0)
+            GLib.idle_add(popup_menu)
+            return False
         elif (
                 ( event.type.value_name == "GDK_BUTTON_PRESS" and event.button == 2 ) or
                 ( event.type.value_name == "GDK_2BUTTON_PRESS" and event.button == 1 ) 
@@ -1417,7 +1435,7 @@ class MainWindow:
     def on_mdi_switch_page(self, notebook, page, page_num, *user_param):
         #-print 'on_mdi_switch_page:', notebook, page, page_num
         ## show/hide tabbar
-        self.notebox.unset_flags(gtk.CAN_FOCUS)
+        self.notebox.props.can_focus = 0
         if self.notebox.get_n_pages() > 1:
             self.notebox.set_show_tabs(True)
             pass
@@ -1430,7 +1448,7 @@ class MainWindow:
         self.edit = editbox.edit
         self.linkview = editbox.linkview
         ##
-        #self.edit.set_flags(gtk.CAN_DEFAULT)
+        #self.edit.set_flags(Gtk.CAN_DEFAULT)
         #if self.edit.editfile: self.window.set_title(os.path.basename(self.editfile) + ' - ' + Title)
         self.window.set_title(self.edit.title + ' - ' + Title)
         ##
@@ -1460,9 +1478,9 @@ class MainWindow:
     def notebox_set_label_text(self, editbox, text):
         #self.notebox.set_tab_label_text(editbox, text)
         self.notebox.set_menu_label_text(editbox, text)
-        label = gtk.Label(text)
+        label = Gtk.Label(text)
         label.show()
-        box = gtk.EventBox()
+        box = Gtk.EventBox()
         box.set_visible_window(0)
         box.connect("button-press-event", self.on_mdi_menu, editbox)
         box.add(label)
@@ -1482,29 +1500,29 @@ class MainWindow:
 
     def new_edit(self, editfile):
         global new_num
-        editbox = gtk.VBox()
+        editbox = Gtk.VBox()
         editbox.show()
 
-        separator = gtk.HSeparator()
+        separator = Gtk.HSeparator()
         separator.show()
-        editbox.pack_start(separator, False, False)
+        editbox.pack_start(separator, False, False, 0)
 
-        hpaned = gtk.HPaned()
+        hpaned = Gtk.HPaned()
         hpaned.set_border_width(0)
         hpaned.set_position(170)
         hpaned.show()
 
-        editbox.pack_start(hpaned, True, True)
+        editbox.pack_start(hpaned, True, True, 0)
         
         ## 导航栏
-        vbox1 = gtk.VBox()
-        label1 = gtk.Label(_("Navigation Pane"))
+        vbox1 = Gtk.VBox()
+        label1 = Gtk.Label(_("Navigation Pane"))
         label1.set_alignment(0, 0)
-        vbox1.pack_start(label1, False, False)
-        scrolledwindow1 = gtk.ScrolledWindow()
-        scrolledwindow1.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        vbox1.pack_start(label1, False, False, 0)
+        scrolledwindow1 = Gtk.ScrolledWindow()
+        scrolledwindow1.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         scrolledwindow1.show()
-        scrolledwindow1.set_shadow_type(gtk.SHADOW_IN)
+        scrolledwindow1.set_shadow_type(Gtk.ShadowType.IN)
 
         import webkitlinkview
         linkview = webkitlinkview.LinkTextView()
@@ -1515,7 +1533,7 @@ class MainWindow:
 
         editbox.linkview = linkview
 
-        vbox1.pack_start(scrolledwindow1)
+        vbox1.pack_start(scrolledwindow1, True, True, 0)
         vbox1.show_all()
 
         hpaned.pack1(vbox1, False, True)
@@ -1524,17 +1542,17 @@ class MainWindow:
 
         ## 编辑区
         import webkitedit
-        scrolledwindow2 = gtk.ScrolledWindow()
-        scrolledwindow2.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        scrolledwindow2 = Gtk.ScrolledWindow()
+        scrolledwindow2.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         scrolledwindow2.show()
-        scrolledwindow2.set_shadow_type(gtk.SHADOW_IN)
+        scrolledwindow2.set_shadow_type(Gtk.ShadowType.IN)
 
         edit = webkitedit.WebKitEdit(editfile)
         edit.show()
         edit.connect("load-finished", self.on_load_finished)
         edit.connect("hovering-over-link", self.on_over_link)
-        edit.set_flags(gtk.CAN_FOCUS)
-        edit.set_flags(gtk.CAN_DEFAULT)
+        edit.props.can_focus = 1
+        edit.props.can_default = 1
         self.window.present()
         scrolledwindow2.add(edit)
 
@@ -1558,7 +1576,7 @@ class MainWindow:
 
         editbox.connect("button-press-event", lambda *i: True) ## 中止鼠标按钮事件向上传递
 
-        gobject.idle_add(proc_webkit_color, edit, linkview)
+        GObject.idle_add(proc_webkit_color, edit, linkview)
 
         return editbox
 
@@ -1590,63 +1608,63 @@ class MainWindow:
             pass
         ## 取消原先的菜单
         #menu.destroy()
-        #menu = gtk.Menu()
+        #menu = Gtk.Menu()
         for i in menu.get_children():
             menu.remove(i)
             pass
 
         ## 跳转到
         if href:
-            menuitem_jump_to = gtk.ImageMenuItem("gtk-jump-to")
+            menuitem_jump_to = Gtk.ImageMenuItem.new_from_stock("gtk-jump-to", self.accel_group)
             menuitem_jump_to.show()
             menuitem_jump_to.connect("activate", self.edit.go_anchor, href)
             menu.append(menuitem_jump_to)
 
-            menuitem_select = gtk.ImageMenuItem(_("_Select this"))
-            menuitem_select.set_image(gtk.image_new_from_stock(gtk.STOCK_SELECT_ALL, gtk.ICON_SIZE_MENU))
+            menuitem_select = Gtk.ImageMenuItem.new_with_mnemonic(_("_Select this"))
+            menuitem_select.set_image(Gtk.Image.new_from_stock(Gtk.STOCK_SELECT_ALL, Gtk.IconSize.MENU))
             menuitem_select.show()
             menuitem_select.set_tooltip_markup(_("You can also <b>doubleclick</ b> to select the section of text"))
             menuitem_select.connect("activate", self.edit.select_section, href)
 
             menu.append(menuitem_select)
 
-            menu.append(gtk.MenuItem())
+            menu.append(Gtk.SeparatorMenuItem.new())
             pass
 
         ## 更新目录
-        menuitem_update_contents = gtk.ImageMenuItem(_("Update _Contents"))
+        menuitem_update_contents = Gtk.ImageMenuItem.new_with_mnemonic(_("Update _Contents"))
         menuitem_update_contents.show()
         menuitem_update_contents.connect("activate", self.view_update_contents)
 
-        img = gtk.image_new_from_stock(gtk.STOCK_INDEX, gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_stock(Gtk.STOCK_INDEX, Gtk.IconSize.MENU)
         menuitem_update_contents.set_image(img)
         menu.append(menuitem_update_contents)
 
-        menuitem_toggle_numbered_title = gtk.ImageMenuItem(_("Toggle _Numbered Title"))
+        menuitem_toggle_numbered_title = Gtk.ImageMenuItem.new_with_mnemonic(_("Toggle _Numbered Title"))
         menuitem_toggle_numbered_title.show()
         menuitem_toggle_numbered_title.connect("activate", self.view_toggle_autonumber)
 
-        img = gtk.image_new_from_stock(gtk.STOCK_SORT_DESCENDING, gtk.ICON_SIZE_MENU)
+        img = Gtk.Image.new_from_stock(Gtk.STOCK_SORT_DESCENDING, Gtk.IconSize.MENU)
         menuitem_toggle_numbered_title.set_image(img)
         menu.append(menuitem_toggle_numbered_title)
 
         ## 缩放菜单
         linkview = self.linkview
-        menuitem_separator10 = gtk.MenuItem()
+        menuitem_separator10 = Gtk.SeparatorMenuItem.new()
         menuitem_separator10.show()
         menu.append(menuitem_separator10)
 
-        menuitem_zoom_in = gtk.ImageMenuItem(gtk.STOCK_ZOOM_IN)
+        menuitem_zoom_in = Gtk.ImageMenuItem.new_from_stock(Gtk.STOCK_ZOOM_IN, self.accel_group)
         menuitem_zoom_in.connect("activate", lambda *i: linkview.zoom_in())
         menuitem_zoom_in.show()
         menu.append(menuitem_zoom_in)
 
-        menuitem_zoom_out = gtk.ImageMenuItem(gtk.STOCK_ZOOM_OUT)
+        menuitem_zoom_out = Gtk.ImageMenuItem.new_from_stock(Gtk.STOCK_ZOOM_OUT, self.accel_group)
         menuitem_zoom_out.connect("activate", lambda *i: linkview.zoom_out())
         menuitem_zoom_out.show()
         menu.append(menuitem_zoom_out)
 
-        menuitem_zoom_100 = gtk.ImageMenuItem(gtk.STOCK_ZOOM_100)
+        menuitem_zoom_100 = Gtk.ImageMenuItem.new_from_stock(Gtk.STOCK_ZOOM_100, self.accel_group)
         menuitem_zoom_100.connect("activate", lambda *i: linkview.set_zoom_level(1.0))
         menuitem_zoom_100.show()
         menu.append(menuitem_zoom_100)
@@ -1729,10 +1747,10 @@ class MainWindow:
         if self.notebox.get_n_pages():
             return True
         Windows.remove(self)
-        gtk.gdk.threads_leave()
+        Gdk.threads_leave()
         self.window.destroy()
         if not Windows:
-            gtk.main_quit() 
+            Gtk.main_quit() 
         return
 
     def on_close(self, *args):
@@ -1750,10 +1768,10 @@ class MainWindow:
             pass
         except: 
             pass
-        gtk.gdk.threads_leave()
+        Gdk.threads_leave()
         self.window.destroy()
         if not Windows:
-            gtk.main_quit() 
+            Gtk.main_quit() 
         pass
 
     def on_quit(self, *args):
@@ -1762,7 +1780,7 @@ class MainWindow:
         for window in windows:
             window.on_close()
             pass
-        gtk.main_quit()
+        Gtk.main_quit()
         pass
 
     def on_new(self, *args):
@@ -1781,7 +1799,8 @@ class MainWindow:
 
     def add_recent(self, filename):
         uri = 'file://' + filename
-        self.recent.add_full(uri, {'mime_type':'text/html', 'app_name':'gwrite', 'app_exec':'gwrite', 'group':'gwrite'})
+        # @TODO add_recent
+        #self.recent.add_full(uri, {'mime_type':'text/html', 'app_name':'gwrite', 'app_exec':'gwrite', 'group':'gwrite'})
 
     def open(self, filename=""):
         self.window.present()
@@ -1837,7 +1856,7 @@ class MainWindow:
         if filename and os.access(filename, os.R_OK):
             self.open(filename)
             pass
-        gtk.gdk.threads_leave()
+        Gdk.threads_leave()
         pass
 
     def on_save(self, *args):
@@ -1871,7 +1890,7 @@ class MainWindow:
             self.edit.title = os.path.basename(filename)
             self.notebox_set_label_text(self.editbox, self.edit.title)
             pass
-        gtk.gdk.threads_leave()
+        Gdk.threads_leave()
         return filename
 
     def on_save_as(self, *args):
@@ -1895,7 +1914,7 @@ class MainWindow:
             self.add_recent(filename) #添加到最近文件
             self.edit.lastDir = os.path.dirname(filename)
             pass
-        gtk.gdk.threads_leave()
+        Gdk.threads_leave()
         pass
 
     def on_word_counts(self, *args):
@@ -2018,12 +2037,12 @@ class MainWindow:
         if not self.edit.get_view_source_mode():
             ## 先转到源码模式，再 idle_add 隐藏导航条，以便显示变化平滑
             self.edit.toggle_html_view()
-            gobject.idle_add( self.editbox.navigation_pane.hide )
+            GObject.idle_add( self.editbox.navigation_pane.hide )
             pass
         else:
             ## 先显示导航条，再 idle_add 转为所见所得模式，以便显示变化平滑
             self.editbox.navigation_pane.show_all()
-            gobject.idle_add( self.edit.toggle_html_view )
+            GObject.idle_add( self.edit.toggle_html_view )
             pass
         #self.edit.do_bodyhtml_view()
         pass
@@ -2273,7 +2292,7 @@ class MainWindow:
 
     def on_color_select_hilitecolor(self, *args):
         #-print 'on_color_select_hilitecolor:', args
-        # 处理 gtk.MenuToolButton 箭头重复事件
+        # 处理 Gtk.MenuToolButton 箭头重复事件
         if self.__dict__.get('_on_color_select_hilitecolor'): 
             return True
         self._on_color_select_hilitecolor = 1
@@ -2343,7 +2362,7 @@ class MainWindow:
             "Jiahua Huang <jhuangjiahua@gmail.com>",
             "Aron Xu <happyaron.xu@gmail.com>",
             ]
-        about = gobject.new(gtk.AboutDialog, 
+        about = GObject.new(Gtk.AboutDialog, 
                 name=_("GWrite"), 
                 program_name=_("GWrite"),
                 logo_icon_name="gwrite",
@@ -2413,7 +2432,7 @@ class MainWindow:
         pass
 
     def get_custom_widget(self, id, string1, string2, int1, int2):
-        w = gtk.Label(_("(custom widget: %s)") % id)
+        w = Gtk.Label(_("(custom widget: %s)") % id)
         return w
 
 
@@ -2431,7 +2450,7 @@ Options:
 
 def openedit(filename=""):
     '''MainWindow() 的包装
-    要 return False 以免 gtk.idle_add, gtk.timeout_add 重复执行
+    要 return False 以免 Gtk.idle_add, Gtk.timeout_add 重复执行
     '''
     Windows[0].open(filename)
     return False
@@ -2445,7 +2464,7 @@ def _listen(s):
         rev = conn.recv(102400)
         for i in rev.split('\n'):
             #-print 'Open:', i
-            gobject.idle_add(openedit, i)
+            GObject.idle_add(openedit, i)
             pass
         pass
     pass
@@ -2458,7 +2477,7 @@ def main():
     ## 处理命令行参数
     import getopt
     config.load()
-    gtk.gdk.threads_init()
+    GObject.threads_init()
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'vh', ['version', 'help'])
         pass
@@ -2506,18 +2525,18 @@ def main():
         edit.open(i)
         pass
     ## 处理 Gtk 图标主题
-    settings = gtk.settings_get_default( )
+    settings = Gtk.Settings.get_default()
     if settings.get_property( 'gtk-icon-theme-name' ) == 'hicolor':
         settings.set_property( 'gtk-icon-theme-name', 'Tango')
         pass
     ## 处理额外图标路径
-    icon_theme = gtk.icon_theme_get_default()
+    icon_theme = Gtk.IconTheme.get_default()
     icon_dir = os.path.dirname(__file__) + '/icons'
     icon_theme.append_search_path(icon_dir)
     ##
-    gtk.gdk.threads_enter()
-    gtk.main()
-    gtk.gdk.threads_leave()
+    Gdk.threads_enter()
+    Gtk.main()
+    Gdk.threads_leave()
 
 if __name__ == '__main__':
     main()

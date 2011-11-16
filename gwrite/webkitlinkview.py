@@ -5,9 +5,12 @@
 @license: LGPLv3+
 '''
 
-import gobject
-import gtk
-import webkit
+from gi.repository import Gtk
+from gi.repository import GLib
+from gi.repository import GObject
+from gi.repository import Gdk
+from gi.repository import WebKit
+
 import re
 
 def proc(html):
@@ -25,13 +28,13 @@ def stastr(stri):
     '''
     return stri.replace("\\","\\\\").replace(r'"',r'\"').replace(r"'",r"\'").replace('\n',r'\n')
 
-class LinkTextView(webkit.WebView):
+class LinkTextView(WebKit.WebView):
     #__gtype_name__ = 'LinkTextView'
     __gsignals__ = {
-        'url-clicked': (gobject.SIGNAL_RUN_LAST, None, (str, str)), # href, type
+        'url-clicked': (GObject.SIGNAL_RUN_LAST, None, (str, str)), # href, type
     }    
     def __init__(self):
-        webkit.WebView.__init__(self)
+        WebKit.WebView.__init__(self)
         self.connect("navigation-requested", self.on_navigation_requested)
         #self.connect_after("populate-popup", lambda view, menu: menu.destroy()) # 暂时禁止右键菜单
         self.set_property('can-focus', False)
