@@ -5,7 +5,11 @@
 @license: LGPLv3+
 '''
 
-import gtk, gobject
+from gi.repository import Gtk
+from gi.repository import GLib
+from gi.repository import GObject
+from gi.repository import Gdk
+
 import os, sys
 
 try: import cPickle as pickle
@@ -72,47 +76,47 @@ def write():
 def show_preference_dlg(title=_("Preferences"), parent=None, *args):
     '''首选项对话框
     '''
-    dlg = gtk.Dialog(title, parent, gtk.DIALOG_DESTROY_WITH_PARENT,
-            (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-            gtk.STOCK_OK, gtk.RESPONSE_OK    ))
+    dlg = Gtk.Dialog(title, parent, Gtk.DialogFlags.DESTROY_WITH_PARENT,
+            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OK, Gtk.ResponseType.OK    ))
     dlg.set_default_size(200, 300)
     ##
     config = getconf()
     ##
-    notebook1 = gtk.Notebook()
-    notebook1.set_tab_pos(gtk.POS_TOP)
+    notebook1 = Gtk.Notebook()
+    notebook1.set_tab_pos(Gtk.POS_TOP)
     notebook1.set_scrollable(False)
     notebook1.show()
 
-    vbox1 = gtk.VBox(False, 0)
+    vbox1 = Gtk.VBox(False, 0)
     vbox1.show()
     vbox1.set_spacing(0)
 
-    checkbutton_mdi_mode = gtk.CheckButton()
+    checkbutton_mdi_mode = Gtk.CheckButton()
     checkbutton_mdi_mode.set_active(False)
     checkbutton_mdi_mode.set_label(_("Use Tabs MDI interface"))
     checkbutton_mdi_mode.set_tooltip_text(_("Supports editing multiple files in one window (known sometimes as tabs or MDI)"))
     checkbutton_mdi_mode.show()
     checkbutton_mdi_mode.set_border_width(10)
-    checkbutton_mdi_mode.set_relief(gtk.RELIEF_NORMAL)
+    checkbutton_mdi_mode.set_relief(Gtk.RELIEF_NORMAL)
 
     vbox1.pack_start(checkbutton_mdi_mode, False, False, 0)
 
-    checkbutton_single_instance_mode = gtk.CheckButton()
+    checkbutton_single_instance_mode = Gtk.CheckButton()
     checkbutton_single_instance_mode.set_active(False)
     checkbutton_single_instance_mode.set_label(_("Single Instance mode"))
     checkbutton_single_instance_mode.set_tooltip_text(_("Only one instance of the application will be running at a time."))
     checkbutton_single_instance_mode.show()
     checkbutton_single_instance_mode.set_border_width(10)
-    checkbutton_single_instance_mode.set_relief(gtk.RELIEF_NORMAL)
+    checkbutton_single_instance_mode.set_relief(Gtk.RELIEF_NORMAL)
 
     vbox1.pack_start(checkbutton_single_instance_mode, False, False, 0)
 
-    hseparator1 = gtk.HSeparator()
+    hseparator1 = Gtk.HSeparator()
     hseparator1.show()
     vbox1.pack_start(hseparator1, False, False, 0)
 
-    label2 = gtk.Label(_("You need to restart gwrite for some options to take effect."))
+    label2 = Gtk.Label(_("You need to restart gwrite for some options to take effect."))
     label2.set_alignment(0, 0)
     label2.set_angle(0)
     label2.set_padding(20, 20)
@@ -121,7 +125,7 @@ def show_preference_dlg(title=_("Preferences"), parent=None, *args):
     label2.show()
     vbox1.pack_start(label2)
 
-    label1 = gtk.Label(_("Run mode"))
+    label1 = Gtk.Label(_("Run mode"))
     label1.set_angle(0)
     label1.set_padding(0, 0)
     label1.set_line_wrap(False)
@@ -132,39 +136,39 @@ def show_preference_dlg(title=_("Preferences"), parent=None, *args):
     checkbutton_single_instance_mode.set_active(config.get("single_instance_mode", 0))
 
     ##
-    vbox2 = gtk.VBox(False, 0)
+    vbox2 = Gtk.VBox(False, 0)
     vbox2.show()
     vbox2.set_spacing(10)
 
-    label2 = gtk.Label(_("File Saving"))
+    label2 = Gtk.Label(_("File Saving"))
     label2.set_angle(0)
     label2.set_padding(0, 0)
     label2.set_line_wrap(False)
     label2.show()
     notebook1.append_page(vbox2, label2)
 
-    vbox1 = gtk.VBox(False, 0)
+    vbox1 = Gtk.VBox(False, 0)
     vbox1.show()
     vbox1.set_spacing(0)
 
-    hbox1 = gtk.HBox(False, 0)
+    hbox1 = Gtk.HBox(False, 0)
     hbox1.show()
     hbox1.set_spacing(0)
 
-    label3 = gtk.Label(_("Autosave files every:"))
+    label3 = Gtk.Label(_("Autosave files every:"))
     label3.set_angle(0)
     label3.set_padding(10, 10)
     label3.set_line_wrap(False)
     label3.show()
     hbox1.pack_start(label3, False, False, 0)
 
-    spinbutton1 = gtk.SpinButton(gtk.Adjustment(value=0, lower=0, upper=180, step_incr=1, page_incr=10))
+    spinbutton1 = Gtk.SpinButton(Gtk.Adjustment(value=0, lower=0, upper=180, step_incr=1, page_incr=10))
     spinbutton1.set_value(float(config['autosaveinterval']))
     spinbutton1.show()
 
     hbox1.pack_start(spinbutton1, False, False, 0)
 
-    label2 = gtk.Label(_("minutes"))
+    label2 = Gtk.Label(_("minutes"))
     label2.set_angle(0)
     label2.set_padding(0, 0)
     label2.set_line_wrap(False)
@@ -183,7 +187,7 @@ def show_preference_dlg(title=_("Preferences"), parent=None, *args):
     config['autosaveinterval'] = spinbutton1.get_value()
     ##
     dlg.destroy()
-    if resp == gtk.RESPONSE_CANCEL:
+    if resp == Gtk.ResponseType.CANCEL:
         return {}    
     globals().update(config)
     return config
