@@ -197,7 +197,7 @@ class WebKitEdit(WebKit.WebView):
         self.connect("navigation-requested", self.on_navigation_requested)
         self.connect("new-window-policy-decision-requested", self.on_new_window_policy_decision_requested)
         self.connect_after("populate-popup", self.populate_popup)
-        self.connect("console-message", self.on_console_message)
+        self.connect("script-alert", self.on_script_alert)
 
         ## 允许跨域 XMLHttpRequest，以便 base64 内联图片
         settings = self.get_settings()
@@ -326,10 +326,11 @@ class WebKitEdit(WebKit.WebView):
         os.spawnvp(os.P_NOWAIT, 'xdg-open', ['xdg-open', uri])
         return True
 
-    def on_console_message(self, view, msg, *args):
+    def on_script_alert(self, view, frame, msg, *args):
         if msg.startswith('_#uptex:'):
             a, id, m, latex = msg.split(':', 3)
             print id, latex
+            latex = latex.replace('\\n', '\n').replace('\\\\', '\\')
             latex = gtklatex.latex_dlg(latex)
             if latex:
                 img = gtklatex.tex2base64(latex)
@@ -337,11 +338,11 @@ class WebKitEdit(WebKit.WebView):
                     window.focus();
                     img = document.getElementById('%s');
                     img.alt = "mimetex:"+"%s";
-                    img.src='%s';
+                    img.src = '%s';
                 """ % (id, stastr(latex), stastr(img)))
                 pass
             self.execute_script("""document.getElementById('%s').removeAttribute("id");""" % id)
-            return False
+            return True
         return False
 
     def on_navigation_requested(self, widget, WebKitWebFrame, WebKitNetworkRequest):
@@ -665,7 +666,7 @@ class WebKitEdit(WebKit.WebView):
 
             function uptex(img){
                 img.id = 'mimetex_' + randomChar(5);
-                console.log("_#uptex:" + img.id + ':' + img.alt);
+                alert("_#uptex:" + img.id + ':' + img.alt);
             }
                         
             window.focus();
