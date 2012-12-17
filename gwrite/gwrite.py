@@ -34,12 +34,15 @@ def get_doctitle(html):
 def proc_webkit_color(*webviews):
     ## 设置样式，让 WebKit 背景色使用 Gtk 颜色
     style = webviews[0].get_style()
-    html_bg_color = style.base[Gtk.StateType.NORMAL]
+    v = Gtk.TextView()
+    v.show()
+    html_bg_color = v.get_style_context().get_background_color(Gtk.StateFlags.NORMAL).to_string()
+    v.destroy()
     html_fg_color = style.text[Gtk.StateType.NORMAL]
     user_stylesheet = ''' html {
-        background-color: rgb(%s, %s, %s);
+        background-color: %s;
         color: rgb(%s, %s, %s);\n}\n''' % (
-            html_bg_color.red  / 257, html_bg_color.green  / 257, html_bg_color.blue  / 257,
+            html_bg_color,
             html_fg_color.red  / 257, html_fg_color.green  / 257, html_fg_color.blue  / 257,
         )
     user_stylesheet_file = config.user_stylesheet_file
