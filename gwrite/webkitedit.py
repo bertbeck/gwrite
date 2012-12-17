@@ -18,6 +18,9 @@ import urllib2
 import os, errno
 import re
 import docfilter
+import highlight
+
+import json
 
 import sys
 reload(sys)
@@ -234,11 +237,11 @@ class WebKitEdit(WebKit.WebView):
         '''执行 javascript
         '''
         self.execute_script('''
-        document.cookie = 'jsvalue=' + encodeURIComponent(eval(decodeURIComponent('%s')));
+        document.cookie = 'jsvalue=' + encodeURIComponent(JSON.stringify(eval(decodeURIComponent('%s'))));
         ''' % urllib2.quote(js))
         d = self.get_dom_document()
         m = re.findall('jsvalue=([^;]*)', d.get_cookie())
-        return m and urllib2.unquote(m[0]) or ''
+        return m and json.loads(urllib2.unquote(m[0])) or ''
 
     def get_html(self, *args):
         '''获取 HTML 内容
@@ -284,17 +287,7 @@ class WebKitEdit(WebKit.WebView):
         处理过换行
         '''
         text = self.eval('''
-            //text = document.body.textContent;
-            html = document.body.innerHTML;
-            html = html.replace(/<h/g, '\\n<h');
-            html = html.replace(/<p/g, '\\n<p');
-            html = html.replace(/<t/g, '\\n<t');
-            html = html.replace(/<br/g, '\\n<br');
-            html = html.replace(/<bl/g, '\\n<bl');
-            html = html.replace(/<div/g, '\\n<div');
-            i = document.createElement("div");
-            i.innerHTML = html;
-            text = i.textContent;
+            text = document.body.innerText;
             text;''')
         return text
 
@@ -655,17 +648,12 @@ class WebKitEdit(WebKit.WebView):
                 return dirhtml;
             };
 
-            function  randomChar(l)  {
-                var  x="0123456789qwertyuioplkjhgfdsazxcvbnm";
-                var  tmp="";
-                for(var  i=0;i<  l;i++)  {
-                    tmp  +=  x.charAt(Math.ceil(Math.random()*100000000)%x.length);
-                }
-                return  tmp;
+            function  randomChars()  {
+                return Math.random().toString(16).slice(2);
             }
 
             function uptex(img){
-                img.id = 'mimetex_' + randomChar(5);
+                img.id = 'mimetex_' + randomChars();
                 alert("_#uptex:" + img.id + ':' + img.alt);
             }
                         
@@ -1341,6 +1329,52 @@ class WebKitEdit(WebKit.WebView):
         while self.search_text(findtext, case_sensitive=0, forward=1, wrap=0):
             self.do_insert_text(replacetext)
             pass
+        return
+
+    def do_highlight_pre(self, *args):
+        self.eval(r'''
+        var mergePreElements = function(){
+            var es = document.getElementsByTagName('pre');
+            var first = es.length ?  es[0] : null;
+            var ces = [first];
+            var jces = []
+            for (var i=1; i<es.length; i++){
+                e = es[i];
+                prev = es[i-1];
+                if (e.previousSibling && e.previousSibling.textContent == '\n' && e.previousSibling.previousSibling == prev){
+                    ces.push(e);
+                } else {
+                    first = e;
+                    jces.push(ces);
+                    ces = [first];
+                }
+            }
+            for (var i=0; i<jces.length; i++){
+                ces = jces[i];
+                var first = ces[0];
+                var txt = '';
+                txt += first.innerText;
+                for (var t=1; t<ces.length; t++){
+                    var e = ces[t];
+                    txt += '\n' + e.innerText;
+                    e.parentElement.removeChild(e);
+                }
+                first.innerText = txt;
+            }
+        };
+        mergePreElements();
+        var getPres = function(){
+            var preIds=[];
+            var es = document.getElementsByTagName('pre');
+            for (var i=1; i<es.length; i++){
+                e = es[i];
+                e.id = Math.random().toString(16).slice(2);
+                preIds.push([e.id, e.inerText]);
+            }
+            return preIds;
+        };
+        getPres();
+        ''')
         return
 
     
