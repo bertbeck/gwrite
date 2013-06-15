@@ -38,12 +38,11 @@ def proc_webkit_color(*webviews):
     v.show()
     html_bg_color = v.get_style_context().get_background_color(Gtk.StateFlags.NORMAL).to_string()
     v.destroy()
-    html_fg_color = style.text[Gtk.StateType.NORMAL]
+    #html_fg_color = style.text[Gtk.StateType.NORMAL]
     user_stylesheet = ''' html {
         background-color: %s;
-        color: rgb(%s, %s, %s);\n}\n''' % (
+        }\n''' % (
             html_bg_color,
-            html_fg_color.red  / 257, html_fg_color.green  / 257, html_fg_color.blue  / 257,
         )
     user_stylesheet_file = config.user_stylesheet_file
     file(user_stylesheet_file, 'w').write(user_stylesheet)
