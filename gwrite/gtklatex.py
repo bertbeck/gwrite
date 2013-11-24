@@ -187,7 +187,8 @@ class GtkToolBoxView(Gtk.TextView):
         iter = buffer.get_end_iter()
         anchor = buffer.create_child_anchor(iter)
         buffer.insert(iter, "")
-        widget.set_data('buffer_anchor', anchor)
+        #widget.set_data('buffer_anchor', anchor)
+        widget.buffer_anchor = anchor
         self.add_child_at_anchor(widget, anchor)
         pass
 
