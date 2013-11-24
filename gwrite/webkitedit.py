@@ -236,12 +236,14 @@ class WebKitEdit(WebKit.WebView):
     def eval(self, js):
         '''执行 javascript
         '''
-        self.execute_script('''
-        document.cookie = 'jsvalue=' + encodeURIComponent(JSON.stringify(eval(decodeURIComponent('%s'))));
-        ''' % urllib2.quote(js))
         d = self.get_dom_document()
-        m = re.findall('jsvalue=([^;]*)', d.get_cookie())
-        return m and json.loads(urllib2.unquote(m[0])) or ''
+        ddw = d.get_default_view()
+        ddw.set_status(js)
+        self.execute_script('''
+            window.status = JSON.stringify( eval(window.status) );
+        ''')
+        m = ddw.get_status()
+        return m and json.loads(m) or ''
 
     def get_html(self, *args):
         '''获取 HTML 内容
@@ -249,9 +251,10 @@ class WebKitEdit(WebKit.WebView):
         if not self.get_view_source_mode():
             self.execute_script('guesstitle();')
             self.do_image_base64()
-            html = self.eval('document.documentElement.innerHTML')
+            domdocument = self.get_dom_document()
+            html = domdocument.get_document_element().get_outer_html()
             html = format_html(html)
-            return '<!DOCTYPE html>\n<html>\n%s\n</html>\n' % html
+            return '<!DOCTYPE html>\n' + html
         else:
             text = self.eval('''
                 html = document.body.innerHTML;
@@ -451,9 +454,9 @@ class WebKitEdit(WebKit.WebView):
         '''更新正文 html
         '''
         #print 'WebKitEdit.update_bodyhtml:'
-        self.execute_script(r''' 
-                document.body.innerHTML="%s";
-                '''%stastr(html))
+        d = self.get_dom_document()
+        body = d.get_body()
+        body.set_innerHTML(html)
         pass
 
     def do_editable(self, *args):
