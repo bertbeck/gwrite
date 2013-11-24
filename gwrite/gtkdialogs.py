@@ -363,7 +363,7 @@ def messagedialog(dialog_type, short, long=None, parent=None,
     
 def error(short, long=None, parent=None):
     """Displays an error message."""
-    return messagedialog(Gtk.MESSAGE_ERROR, short, long, parent)
+    return messagedialog(Gtk.MessageType.ERROR, short, long, parent)
 
 def info(short, long=None, parent=None):
     """Displays an info message."""
@@ -371,14 +371,14 @@ def info(short, long=None, parent=None):
 
 def warning(short, long=None, parent=None):
     """Displays a warning message."""
-    return messagedialog(Gtk.MESSAGE_WARNING, short, long, parent)
+    return messagedialog(Gtk.MessageType.WARNING, short, long, parent)
 
 def yesno(text="OK ?", parent=None):
     """
     
     return 1 or 0 . ( yes/no )
     """
-##    return messagedialog(Gtk.MESSAGE_WARNING, text, None, parent,
+##    return messagedialog(Gtk.MessageType.WARNING, text, None, parent,
 ##        buttons=Gtk.ButtonsType.YES_NO)
     i = messagedialog(Gtk.MessageType.INFO, text, None, parent,
         buttons=Gtk.ButtonsType.YES_NO)
@@ -509,7 +509,7 @@ def save(title='', parent=None, current_name='',
         submsg2 = _('Do you which to replace it with the current project?')
         text = '<span weight="bold" size="larger">%s</span>\n\n%s\n' % \
             (submsg1, submsg2)
-        result = messagedialog(Gtk.MESSAGE_ERROR,
+        result = messagedialog(Gtk.MessageType.ERROR,
                     text,
                     parent=parent,
                     buttons=Gtk.ButtonsType.NONE,
