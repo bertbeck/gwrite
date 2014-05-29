@@ -36,7 +36,7 @@ def format_html(html):
     html = re.sub('</(address|blockquote|center|dir|div|dl|fieldset|form|h1|h2|h3|h4|h5|h6|hr|isindex|menu|noframes|noscript|ol|p|pre|table|ul|dd|dt|frameset|li|tbody|td|tfoot|th|thead|tr)([^>]*?)>\ ?\n?', '</\\1\\2>\n', html)
     html = re.sub('\n?<(img|hr|br)([^>]*?)>\n?', '\n<\\1\\2>\n', html)
     ## 对于 pre，合并相邻 <pre>，将 <pre> 内的 <br> 转为 "\n"
-    html = re.sub('\n?</pre>\s*<pre>\n?', '', html)
+    html = re.sub('\n?</pre>\s*<pre>\n?', '\n', html)
     html = re.sub('<pre>[^\0]*?</pre>', lambda m: re.sub('\n?<br>\n?', '\\n', m.group()), html)
     return html
 
@@ -516,7 +516,7 @@ class WebKitEdit(WebKit.WebView):
                 return document.querySelectorAll('h1, h2, h3, h4, h5, h6');
             };
             
-            autonu = 0;
+            var autonu = 0;
             if( i = document.body.getAttribute("orderedheadings")){
                 autonu = i;
             }
@@ -540,22 +540,24 @@ class WebKitEdit(WebKit.WebView):
             }
             
             function getdir(){
-                heads = getheads();
-                tt = '';
-                tdir = '';
-                h1 = 0;
-                h2 = 0;
-                h3 = 0;
-                h4 = 0;
-                h5 = 0;
-                h6 = 0;
-                startHeader = 0;
-                startHeader = 1;
+                var heads = getheads();
+                var tt = '';
+                var tdir = '';
+                var h1 = 0;
+                var h2 = 0;
+                var h3 = 0;
+                var h4 = 0;
+                var h5 = 0;
+                var h6 = 0;
+                var startHeader = 0;
+                var startHeader = 1;
+                var g = '';
                 
                 for (var i=startHeader ; i<heads.length; i++){
-                    inode = heads[i];
+                    var inode = heads[i];
                     iname = inode.textContent.replace(/^\s*[.\d]*\s+/, ''); /*把标题前边的数字识别为序号*/
                     iname = iname.replace('\n',' ');
+                    g = (inode.id.replace(/[.0-9]/g,'') || g.replace(/[.0-9]/g,'') || Math.random().toString(36).replace(/[.0-9]/g,'')) + '.';
                     switch(heads[i].nodeName){
                         case "H1":
                         tt = '';
@@ -566,7 +568,7 @@ class WebKitEdit(WebKit.WebView):
                         h5 = 0;
                         h6 = 0;
                         tt += String(h1);
-                        inode.id = "g" + tt;
+                        inode.id = g + tt;
                         inode.textContent = getiname(tt, name);   
                         tdir += '';
                         tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
@@ -580,7 +582,7 @@ class WebKitEdit(WebKit.WebView):
                         h5 = 0;
                         h6 = 0;
                         tt += String(h1) + '.' + h2;
-                        inode.id = "g" + tt;
+                        inode.id = g + tt;
                         inode.textContent = getiname(tt, name);           
                         tdir += ' ';
                         tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
@@ -593,7 +595,7 @@ class WebKitEdit(WebKit.WebView):
                         h5 = 0;
                         h6 = 0;
                         tt += String(h1) + '.' + h2 + '.' + h3;
-                        inode.id = "g" + tt;
+                        inode.id = g + tt;
                         inode.textContent = getiname(tt, name);           
                         tdir += '  ';
                         tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
@@ -605,7 +607,7 @@ class WebKitEdit(WebKit.WebView):
                         h5 = 0;
                         h6 = 0;
                         tt += String(h1) + '.' + h2 + '.' + h3 + '.' +h4;
-                        inode.id = "g" + tt;
+                        inode.id = g + tt;
                         inode.textContent = getiname(tt, name);           
                         tdir += '   ';
                         tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
@@ -616,7 +618,7 @@ class WebKitEdit(WebKit.WebView):
                         h5 += 1;
                         h6 = 0;
                         tt += String(h1) + '.' + h2 + '.' + h3 + '.' + h4 + '.' + h5;
-                        inode.id = "g" + tt;
+                        inode.id = g + tt;
                         inode.textContent = getiname(tt, name);           
                         tdir += '    ';
                         tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
@@ -626,7 +628,7 @@ class WebKitEdit(WebKit.WebView):
                         tt = '';
                         h6 += 1;
                         tt += String(h1) + '.' + h2 + '.' + h3 + '.' + h4 + '.' + h5 + '.' + h6;
-                        inode.id = "g" + tt;
+                        inode.id = g + tt;
                         inode.textContent = getiname(tt, name);           
                         tdir += '     ';
                         tdir += '<a href="#g' + tt + '">' + getiname(tt, name) + '</a>\n';
@@ -1092,8 +1094,9 @@ class WebKitEdit(WebKit.WebView):
         '''预格式化样式
         '''
         #print 'WebKitEdit.do_do_formatblock_pre:'
-        return self.eval(''' 
+        self.eval('''
                 document.execCommand("formatblock", false, "pre"); ''')
+        #return self.do_highlight_pre(*args)
         pass
 
     def do_bold(self, *args):
