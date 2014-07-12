@@ -673,6 +673,43 @@ class WebKitEdit(WebKit.WebView):
         '''
         Gdk.threads_leave() # 修正线程问题
         self.execute_script(r'''
+    var make_images_inline = function(doc){
+        doc = doc || document.body;
+        var image2dataurl = function(img) {
+            if (img.src.match(/^data:/)) { return img.src }
+            //img.crossOrigin = "Anonymous";
+            var canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+            var dataURL = canvas.toDataURL("image/jpeg", 0.8);
+            return dataURL;
+        }
+        var make_image_inline = function(img) {
+            if (img.src.match(/^data:/)) { return 0; }
+            if (img.complete) {
+                img.setAttribute('data-src', img.src);
+                img.src = image2dataurl(img);
+            } else {
+                img.onload = function() {
+                    make_image_inline(img);
+                };
+            }
+        }
+        var images = doc.querySelectorAll('img');
+        for (var i=images.length-1; i+1; i--){
+            img = images[i];
+            try {
+              make_image_inline(img);
+            } catch(e){
+            }
+        }
+    };
+    make_images_inline();
+        ''')
+        return
+        self.execute_script(r'''
         var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
         function encode64(input) {
            var output = "";
