@@ -667,12 +667,14 @@ class WebKitEdit(WebKit.WebView):
         self.execute_script(cmd)
         pass
 
-    def do_image_base64(self, *args):
+    def do_image_base64(self, use_canvas=False):
         '''convert images to base64 inline image
         see http://tools.ietf.org/html/rfc2397
+        当 use_canvas=True 时会使用异步操作，图片会用 jpeg 80% 减小体积
         '''
         Gdk.threads_leave() # 修正线程问题
-        self.execute_script(r'''
+        if use_canvas:
+            self.execute_script(r'''
     var make_images_inline = function(doc){
         doc = doc || document.body;
         var image2dataurl = function(img) {
@@ -708,8 +710,8 @@ class WebKitEdit(WebKit.WebView):
     };
     make_images_inline();
         ''')
-        return
-        self.execute_script(r'''
+        else:
+            self.execute_script(r'''
         var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
         function encode64(input) {
            var output = "";
