@@ -1,0 +1,605 @@
+# Serbian translations for gwrite package.
+# Copyright (C) 2010 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gwrite package.
+# Ludovic Troisi <astohan@gmx.fr>, 2010.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2015.
+#: ../gwrite/i18n.py:19
+msgid ""
+msgstr ""
+"Project-Id-Version: GWrite\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-16 17:13+0800\n"
+"PO-Revision-Date: 2015-02-12 09:56+0200\n"
+"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"Language-Team: Serbian <gnom@prevod.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../gwrite/gwrite.py:26
+msgid "NewDocument"
+msgstr "Нови документ"
+
+#: ../gwrite/gwrite.py:61 ../gwrite/gwrite.py:2347 ../gwrite/gwrite.py:2348
+msgid "GWrite"
+msgstr "Гписац"
+
+#: ../gwrite/gwrite.py:113
+msgid "_File"
+msgstr "_Датотека"
+
+#: ../gwrite/gwrite.py:128
+msgid "New _Window"
+msgstr "_Нови прозор"
+
+#: ../gwrite/gwrite.py:188
+msgid "_Recently"
+msgstr "_Скорашњи"
+
+#: ../gwrite/gwrite.py:208
+msgid "Close Win_dow"
+msgstr "_Затвори прозор"
+
+#: ../gwrite/gwrite.py:230
+msgid "_Edit"
+msgstr "_Уреди"
+
+#: ../gwrite/gwrite.py:271 ../gwrite/webkitedit.py:374
+msgid "Pa_ste Unformatted"
+msgstr "Убаци _необликовано"
+
+#: ../gwrite/gwrite.py:328
+msgid "_View"
+msgstr "_Преглед"
+
+#. # 更新目录
+#: ../gwrite/gwrite.py:363 ../gwrite/gwrite.py:1617
+msgid "Update _Contents"
+msgstr "Освежи _садржај"
+
+#: ../gwrite/gwrite.py:371 ../gwrite/gwrite.py:1625
+msgid "Toggle _Numbered Title"
+msgstr "Пребаци _набројани наслов"
+
+#: ../gwrite/gwrite.py:379
+msgid "Update _Images"
+msgstr "Освежи _слике"
+
+#: ../gwrite/gwrite.py:392
+msgid "So_urce/Visual"
+msgstr "Прикажи _извор"
+
+#: ../gwrite/gwrite.py:405
+msgid "_Insert"
+msgstr "_Уметни"
+
+#: ../gwrite/gwrite.py:411
+msgid "_Picture"
+msgstr "_Слику"
+
+#: ../gwrite/gwrite.py:419
+msgid "_Link"
+msgstr "_Везу"
+
+#: ../gwrite/gwrite.py:428
+msgid "Horizontal_Rule"
+msgstr "Водораван _лењир"
+
+#: ../gwrite/gwrite.py:436
+msgid "_Table"
+msgstr "_Табелу"
+
+#: ../gwrite/gwrite.py:444
+msgid "_HTML"
+msgstr "_ХТМЛ"
+
+#. #
+#: ../gwrite/gwrite.py:458
+msgid "LaTeX _Equation"
+msgstr "ЛаТеКс _једначину"
+
+#. #
+#: ../gwrite/gwrite.py:467
+msgid "_Contents"
+msgstr "_Садржај"
+
+#: ../gwrite/gwrite.py:479
+msgid "_Style"
+msgstr "_Изглед"
+
+#: ../gwrite/gwrite.py:485
+msgid "_Normal"
+msgstr "_Обично"
+
+#: ../gwrite/gwrite.py:499
+msgid "Heading _1"
+msgstr "Заглавље _1"
+
+#: ../gwrite/gwrite.py:508
+msgid "Heading _2"
+msgstr "Заглавље _2"
+
+#: ../gwrite/gwrite.py:517
+msgid "Heading _3"
+msgstr "Заглавље _3"
+
+#: ../gwrite/gwrite.py:526 ../gwrite/gwrite.py:1021
+msgid "Heading _4"
+msgstr "Заглавље _4"
+
+#: ../gwrite/gwrite.py:535 ../gwrite/gwrite.py:1029
+msgid "Heading _5"
+msgstr "Заглавље _5"
+
+#: ../gwrite/gwrite.py:544 ../gwrite/gwrite.py:1037
+msgid "Heading _6"
+msgstr "Заглавље _6"
+
+#: ../gwrite/gwrite.py:558 ../gwrite/gwrite.py:1050
+msgid "_Bulleted List"
+msgstr "Списак _тачкама"
+
+#: ../gwrite/gwrite.py:566 ../gwrite/gwrite.py:1058
+msgid "Numbered _List"
+msgstr "Списак _бројевима"
+
+#: ../gwrite/gwrite.py:579 ../gwrite/gwrite.py:1071
+msgid "Di_v"
+msgstr "_Искошено"
+
+#: ../gwrite/gwrite.py:587 ../gwrite/gwrite.py:1079
+msgid "A_ddress"
+msgstr "_Адреса"
+
+#. menuitem_formatblock_code = gtk.ImageMenuItem(_("_Code"))
+#. menuitem_formatblock_code.show()
+#. menuitem_formatblock_code.connect("activate", self.do_formatblock_code)
+#.
+#. img = gtk.image_new_from_icon_name('stock_text-monospaced', gtk.ICON_SIZE_MENU)
+#. menuitem_formatblock_code.set_image(img)
+#. menu_style.append(menuitem_formatblock_code)
+#: ../gwrite/gwrite.py:603 ../gwrite/gwrite.py:1095
+msgid "Block_quote"
+msgstr "Цитат _блока"
+
+#: ../gwrite/gwrite.py:611 ../gwrite/gwrite.py:1103
+msgid "_Preformat"
+msgstr "_Предодређено"
+
+#: ../gwrite/gwrite.py:624
+msgid "For_mat"
+msgstr "_Запис"
+
+#: ../gwrite/gwrite.py:697
+msgid "Font _Size"
+msgstr "Величина _слова"
+
+#: ../gwrite/gwrite.py:705
+msgid "_1"
+msgstr "_1"
+
+#: ../gwrite/gwrite.py:711
+msgid "_2"
+msgstr "_2"
+
+#: ../gwrite/gwrite.py:717
+msgid "_3"
+msgstr "_3"
+
+#: ../gwrite/gwrite.py:723
+msgid "_4"
+msgstr "_4"
+
+#: ../gwrite/gwrite.py:729
+msgid "_5"
+msgstr "_5"
+
+#: ../gwrite/gwrite.py:735
+msgid "_6"
+msgstr "_6"
+
+#: ../gwrite/gwrite.py:741
+msgid "_7"
+msgstr "_7"
+
+#: ../gwrite/gwrite.py:757
+msgid "_Highlight"
+msgstr "_Истакни"
+
+#: ../gwrite/gwrite.py:766
+msgid "_HiliteColor"
+msgstr "_Боја истицања"
+
+#: ../gwrite/gwrite.py:774
+msgid "_Clear format"
+msgstr "_Чист запис"
+
+#: ../gwrite/gwrite.py:838
+msgid "Su_perscript"
+msgstr "_Изложилац"
+
+#: ../gwrite/gwrite.py:847
+msgid "Subs_cript"
+msgstr "_Садржалац"
+
+#. #
+#: ../gwrite/gwrite.py:860
+msgid "_Tools"
+msgstr "_Алати"
+
+#: ../gwrite/gwrite.py:866
+msgid "_Word Count"
+msgstr "_Укупно речи"
+
+#. #
+#: ../gwrite/gwrite.py:879
+msgid "_Help"
+msgstr "По_моћ"
+
+#: ../gwrite/gwrite.py:906
+msgid "New"
+msgstr "Ново"
+
+#. -print 'on_open:'
+#: ../gwrite/gwrite.py:913 ../gwrite/gwrite.py:1832
+#: ../gwrite/gtkdialogs.py:390
+msgid "Open"
+msgstr "Отворите"
+
+#: ../gwrite/gwrite.py:930 ../gwrite/gwrite.py:1852
+#: ../gwrite/gtkdialogs.py:453
+msgid "Save"
+msgstr "Сачувајте"
+
+#: ../gwrite/gwrite.py:941
+msgid "Undo"
+msgstr "Опозовите"
+
+#: ../gwrite/gwrite.py:948
+msgid "Redo"
+msgstr "Повратите"
+
+#: ../gwrite/gwrite.py:959
+msgid "Cut"
+msgstr "Исеците"
+
+#: ../gwrite/gwrite.py:966
+msgid "Copy"
+msgstr "Умножите"
+
+#: ../gwrite/gwrite.py:973
+msgid "Paste"
+msgstr "Убаците"
+
+#: ../gwrite/gwrite.py:986 ../gwrite/gwrite.py:987
+msgid "Paragraph"
+msgstr "Пасус"
+
+#: ../gwrite/gwrite.py:994 ../gwrite/gwrite.py:995
+msgid "Heading 1"
+msgstr "Заглавље 1"
+
+#: ../gwrite/gwrite.py:1002 ../gwrite/gwrite.py:1003
+msgid "Heading 2"
+msgstr "Заглавље 2"
+
+#: ../gwrite/gwrite.py:1012 ../gwrite/gwrite.py:1013
+msgid "Heading 3"
+msgstr "Заглавље 3"
+
+#: ../gwrite/gwrite.py:1014
+msgid "Style"
+msgstr "Изглед"
+
+#: ../gwrite/gwrite.py:1142 ../gwrite/gwrite.py:1143
+msgid "Bold"
+msgstr "Подебљано"
+
+#: ../gwrite/gwrite.py:1153 ../gwrite/gwrite.py:1154
+msgid "Highlight"
+msgstr "Истакнуто"
+
+#: ../gwrite/gwrite.py:1155
+msgid "Select hilitecolor"
+msgstr "Изаберите боју истицања"
+
+#: ../gwrite/gwrite.py:1168 ../gwrite/gwrite.py:1169
+msgid "Clear format"
+msgstr "Очистите запис"
+
+#: ../gwrite/gwrite.py:1237
+msgid "Close Findbar"
+msgstr "Затворите траку за претрагу"
+
+#: ../gwrite/gwrite.py:1257 ../gwrite/gwrite.py:1282
+msgid "Find Next"
+msgstr "Нађи следеће"
+
+#: ../gwrite/gwrite.py:1259 ../gwrite/gwrite.py:2378
+msgid "Search text"
+msgstr "Текст претраге"
+
+#: ../gwrite/gwrite.py:1265
+msgid "Find Previous"
+msgstr "Нађи претходно"
+
+#: ../gwrite/gwrite.py:1277
+msgid "Find"
+msgstr "Нађи"
+
+#: ../gwrite/gwrite.py:1294
+msgid "Replace text"
+msgstr "Замени текст"
+
+#: ../gwrite/gwrite.py:1296 ../gwrite/gwrite.py:1300 ../gwrite/gwrite.py:1317
+#: ../gwrite/gtkdialogs.py:514
+msgid "Replace"
+msgstr "Замени"
+
+#: ../gwrite/gwrite.py:1330
+msgid "Replace All"
+msgstr "Замени све"
+
+#: ../gwrite/gwrite.py:1331
+msgid "ReplaceAll"
+msgstr "Замени све"
+
+#: ../gwrite/gwrite.py:1501
+msgid "Navigation Pane"
+msgstr "Површ бирања"
+
+#: ../gwrite/gwrite.py:1552
+#, python-format
+msgid "[New Document] %s"
+msgstr "[Нови документ] %s"
+
+#: ../gwrite/gwrite.py:1556
+msgid "[New Document]"
+msgstr "[Нови документ]"
+
+#: ../gwrite/gwrite.py:1605
+msgid "_Select this"
+msgstr "_Изабери ово"
+
+#: ../gwrite/gwrite.py:1608
+msgid "You can also <b>doubleclick</ b> to select the section of text"
+msgstr "Можете такође да <b>два пута притиснете</b> да изаберете одељак текста"
+
+#. # r: 1, -1, 0 => yes, no, cancel
+#: ../gwrite/gwrite.py:1714
+#, python-format
+msgid "%s Save Changes?"
+msgstr "Да сачувам измене у „%s“?"
+
+#: ../gwrite/gwrite.py:1834 ../gwrite/gwrite.py:1853 ../gwrite/gwrite.py:1884
+msgid "Html Document"
+msgstr "Хтмл документ"
+
+#: ../gwrite/gwrite.py:1835
+msgid "MS Doc Document"
+msgstr "МС Док документ"
+
+#: ../gwrite/gwrite.py:1862 ../gwrite/gwrite.py:1893
+msgid "Unable to write to file."
+msgstr "Не могу да пишем у датотеку."
+
+#: ../gwrite/gwrite.py:1883
+msgid "Save As"
+msgstr "Сачувај као"
+
+#: ../gwrite/gwrite.py:1929
+msgid "Document"
+msgstr "Документ"
+
+#: ../gwrite/gwrite.py:1929
+msgid "Selection"
+msgstr "Избор"
+
+#: ../gwrite/gwrite.py:1930
+msgid "Words: "
+msgstr "Укупно речи: "
+
+#: ../gwrite/gwrite.py:1931
+msgid "Characters (with spaces): "
+msgstr "Укупно знакова (са размаком): "
+
+#: ../gwrite/gwrite.py:1932
+msgid "Characters (no spaces): "
+msgstr "Укупно знакова (без размака): "
+
+#: ../gwrite/gwrite.py:1933
+msgid "Paragraphs: "
+msgstr "Укупно пасуса: "
+
+#: ../gwrite/gwrite.py:1934
+msgid "Lines: "
+msgstr "Укупно редова: "
+
+#: ../gwrite/gwrite.py:1935
+msgid "English words: "
+msgstr "Укупно енглеских речи: "
+
+#: ../gwrite/gwrite.py:1936
+msgid "Chinese characters: "
+msgstr "Укупно кинеских знакова: "
+
+#. -print info
+#: ../gwrite/gwrite.py:1939
+msgid "Word Counts"
+msgstr "Укупно речи"
+
+#. -print 'do_insertimage:'
+#: ../gwrite/gwrite.py:2039
+msgid "InsertImage"
+msgstr "Уметните слику"
+
+#: ../gwrite/gwrite.py:2039
+msgid "Image Files"
+msgstr "Датотеке слике"
+
+#. -print 'do_createlink:'
+#. #print self.edit.get_link_message()
+#: ../gwrite/gwrite.py:2047
+msgid "Create Link"
+msgstr "Направите везу"
+
+#: ../gwrite/gwrite.py:2047
+msgid "URL:"
+msgstr "Адреса:"
+
+#. -print 'do_insert_table:'
+#: ../gwrite/gwrite.py:2060
+msgid "Insert Table"
+msgstr "Уметните табелу"
+
+#: ../gwrite/gwrite.py:2060
+msgid "Rows:"
+msgstr "Редова:"
+
+#: ../gwrite/gwrite.py:2060
+msgid "Cows:"
+msgstr "Колона:"
+
+#. -print 'do_insert_html:'
+#: ../gwrite/gwrite.py:2066
+msgid "Insert Html"
+msgstr "Уметните Хтмл"
+
+#: ../gwrite/gwrite.py:2351
+msgid "Copyright (C) 2009-2010 Jiahua Huang, Aron Xu"
+msgstr "Ауторска права (C) 2009-2010 Jiahua Huang, Aron Xu"
+
+#: ../gwrite/gwrite.py:2352
+msgid "Simple GTK+ HTML5 Rich Text Editor"
+msgstr "Једноставан богати уређивач ХТМЛ5 текста у ГТК+"
+
+#: ../gwrite/gwrite.py:2373
+#, python-format
+msgid "%s matches"
+msgstr "%s поклапања"
+
+#: ../gwrite/gwrite.py:2416
+#, python-format
+msgid "(custom widget: %s)"
+msgstr "(произвољни елемент: %s)"
+
+#. #cmd test
+#: ../gwrite/gwrite.py:2422
+msgid ""
+"GWrite\n"
+"\n"
+"Usage:\n"
+"  gwrite [OPTION...] [FILE...] - Edit html files\n"
+"\n"
+"Options:\n"
+"  -h, --help                     Show help options\n"
+"  -v, --version                  Show version information\n"
+msgstr ""
+"Гписац\n"
+"\n"
+"Употреба:\n"
+"  gwrite [ОПЦИЈА...] [ДАТОТЕКА...] — Уређујте хтмл датотеке\n"
+"\n"
+"Опције:\n"
+"  -h, --help                         Приказује опције помоћи\n"
+"  -v, --version                      Приказује податке о издању\n"
+
+#: ../gwrite/gtkdialogs.py:279
+msgid "Save Changes?"
+msgstr "Да сачувам измене?"
+
+#: ../gwrite/gtkdialogs.py:292
+msgid "Info"
+msgstr "Подаци"
+
+#: ../gwrite/gtkdialogs.py:292
+msgid "Key:"
+msgstr "Кључ:"
+
+#: ../gwrite/gtkdialogs.py:292
+msgid "Value"
+msgstr "Вредност"
+
+#: ../gwrite/gtkdialogs.py:350
+msgid "Click here for details"
+msgstr "Притисните овде за појединости"
+
+#: ../gwrite/gtkdialogs.py:415 ../gwrite/gtkdialogs.py:478
+msgid "All Files"
+msgstr "Све датотеке"
+
+#: ../gwrite/gtkdialogs.py:440
+#, python-format
+msgid "Could not open file \"%s\""
+msgstr "Не могу да отворим датотеку „%s“"
+
+#: ../gwrite/gtkdialogs.py:441
+#, python-format
+msgid "The file \"%s\" could not be opened. Permission denied."
+msgstr "Не могу да отворим датотеку „%s“. Овлашћења су одбијена."
+
+#: ../gwrite/gtkdialogs.py:504
+#, python-format
+msgid "A file named \"%s\" already exists"
+msgstr "Већ постоји датотека под називом „%s“"
+
+#: ../gwrite/gtkdialogs.py:505
+msgid "Do you which to replace it with the current project?"
+msgstr "Да ли желите да је замените текућим пројектом?"
+
+#. print 'WebKitEdit.do_insert_contents:'
+#. @FIXME: 无法删除现存目录表格
+#: ../gwrite/webkitedit.py:972
+msgid "Table of contents"
+msgstr "Табела садржаја"
+
+#: ../gwrite/config.py:72
+msgid "Preferences"
+msgstr "Поставке"
+
+#: ../gwrite/config.py:93
+msgid "Use Tabs MDI interface"
+msgstr "Користи сучеље МДИ језичака"
+
+#: ../gwrite/config.py:94
+msgid ""
+"Supports editing multiple files in one window (known sometimes as tabs or "
+"MDI)"
+msgstr ""
+"Подржава уређивање више датотека у једном прозору (познато понекад као "
+"језичци или МДИ)"
+
+#: ../gwrite/config.py:103
+msgid "Single Instance mode"
+msgstr "Режим једног примерка"
+
+#: ../gwrite/config.py:104
+msgid "Only one instance of the application will be running at a time."
+msgstr "Само један примерак програма ће бити покренут одједном."
+
+#: ../gwrite/config.py:115
+msgid "You need to restart gwrite for some options to take effect."
+msgstr "Морате поново покренути гписца да би неке опције деловале."
+
+#: ../gwrite/config.py:124
+msgid "Run mode"
+msgstr "Режим покретања"
+
+#: ../gwrite/config.py:139
+msgid "File Saving"
+msgstr "Чување датотеке"
+
+#: ../gwrite/config.py:154
+msgid "Autosave files every:"
+msgstr "Сам сачувај датотеке свака:"
+
+#: ../gwrite/config.py:167
+msgid "minutes"
+msgstr "минута"
+
+#: ../gwrite/gtklatex.py:344
+msgid "LaTeX math expressions"
+msgstr "Математички изрази ЛаТеКс-а"
